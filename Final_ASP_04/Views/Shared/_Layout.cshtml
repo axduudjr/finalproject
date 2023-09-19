@@ -1,15 +1,17 @@
 ﻿<!DOCTYPE html>
-<html>
+<html lang="zh-TW">
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>@ViewBag.Title - 我的 ASP.NET 應用程式</title>
+    <title>@ViewBag.Title - 住宿趣</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.2/font/bootstrap-icons.css" rel="stylesheet" />    
     @Styles.Render("~/Content/css")
     @Scripts.Render("~/bundles/modernizr")
+    @RenderSection("css", required: false)
 </head>
 <body>
-    <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-dark bg-dark">
+    @*<nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-dark bg-dark">
         <div class="container">
             @Html.ActionLink("應用程式名稱", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
             <button type="button" class="navbar-toggler" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" title="切換導覽" aria-controls="navbarSupportedContent"
@@ -24,17 +26,77 @@
                 </ul>
             </div>
         </div>
-    </nav>
+    </nav>*@
+    <!-- 導覽列 -->
+    <div>
+        <nav class="navbar navbar-expand-md fixed-top" style="background-color: rgb(167, 192, 199);">
+            <div class="container">
+                @Html.ActionLink("住宿趣", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                    <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                        <li class="nav-item">
+                            @Html.ActionLink("首頁", "Index", "Home", new { area = "" }, new { @class = "nav-link" })
+                        </li>
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                分店一覽
+                            </a>
+                            <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                <li><a class="dropdown-item" href="#">台北西門館</a></li>
+                                <li><a class="dropdown-item" href="#">台北松山館</a></li>
+                                <li><a class="dropdown-item" href="#">新北板橋館</a></li>
+                                <li><a class="dropdown-item" href="#">新北土城館</a></li>
+                                <li><a class="dropdown-item" href="#">桃園中壢館</a></li>
+                                <li><a class="dropdown-item" href="#">台中民權館</a></li>
+                                <li><a class="dropdown-item" href="#">高雄亞灣館</a></li>
+                            </ul>
+                        </li>
+                        <li class="nav-item">
+                            @Html.ActionLink("房型一覽", "About", "Home", new { area = "" }, new { @class = "nav-link" })
+                        </li>
+                        <li class="nav-item">
+                            @Html.ActionLink("FAQ", "Contact", "Home", new { area = "" }, new { @class = "nav-link" })
+                        </li>
+                        <li class="nav-item">
+                            @Html.ActionLink("關於我們", "About", "Home", new { area = "" }, new { @class = "nav-link" })
+                        </li>
+                        <li class="nav-item">
+                            @Html.ActionLink("聯絡我們", "About", "Home", new { area = "" }, new { @class = "nav-link" })
+                        </li>
+                    </ul>
+                    <ul class="navbar-nav justify-content-end flex-grow-1 pe-3">
+                        @{
+                            if (User.Identity.IsAuthenticated)
+                            {
+                                <li class="nav-item float-end">@Html.ActionLink("會員中心", "Logout", "Members", new { area = "" }, new { @class = "nav-link bi bi-person-circle" })</li>
+                                <li class="nav-item float-end">@Html.ActionLink("登出", "Logout", "Members", new { area = "" }, new { @class = "nav-link bi bi-box-arrow-right" })</li>
+
+                            }
+                            else
+                            {
+                                <li class="nav-item float-end">@Html.ActionLink("登入", "Login", "Members", new { area = "" }, new { @class = "nav-link bi bi-person-up" })</li>
+                                <li class="nav-item float-end">@Html.ActionLink("註冊新會員", "Register", "Members", new { area = "" }, new { @class = "nav-link bi bi-person-add" })</li>
+                            }
+                        }
+                    </ul>                                                
+                </div>
+            </div>
+        </nav>
+    </div>
     <div class="container body-content">
         @RenderBody()
         <hr />
         <footer>
-            <p>&copy; @DateTime.Now.Year - 我的 ASP.NET 應用程式</p>
+            <p>&copy; @DateTime.Now.Year - 住宿趣</p>
         </footer>
     </div>
 
     @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/bootstrap")
     @RenderSection("scripts", required: false)
+    @RenderSection("js", required: false)
 </body>
 </html>

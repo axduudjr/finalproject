@@ -1,0 +1,181 @@
+﻿@model IEnumerable<Final_ASP_04.Models.ViewModels.RoomVm>
+@using PagedList;
+@using PagedList.Mvc
+
+@{
+    ViewBag.Title = "預訂房間";
+    var totalResult = ViewBag.TotalCount;
+    var roomTypeId = ViewBag.RoomTypeId;
+    var guestNumberId = ViewBag.GuestNumberId;
+    var startDateTime = ViewBag.StartDateTime;
+    var endDateTime = ViewBag.EndDateTime;
+}
+
+<!-- 標題 -->
+<div class="container-fluid" style="margin-top:80px;">
+    <h1 class="title">新北板橋館</h1>
+</div>
+<!-- 搜尋列 -->
+<div class="container">
+    <div class="row">
+        <div class="col-12">
+            <form action="">
+                <div class="row searchBlock">
+                    <div class="col-lg-2">
+                        <div class="form-floating mb-3">
+                            <input class="form-control" name="startDateTime" id="datepicker1" placeholder="" readonly>
+                            <label for="datepicker1">入住日期</label>
+                        </div>
+                    </div>
+
+                    <div class="col-lg-2">
+                        <div class="form-floating mb-3">
+                            <input class="form-control" name="endDateTime" id="datepicker2" placeholder="" readonly>
+                            <label for="datepicker2">退房日期</label>
+                        </div>
+                    </div>
+
+                    <div class="col-lg-2">
+                        <div class="form-floating mb-3">
+                            <select class="form-select" name="roomTypeId" id="roomTypeId" placeholder="" readonly aria-label="Floating label select example">
+                            </select>
+                            <label for="floatingSelect1">房型</label>
+                        </div>
+                    </div>
+
+                    <div class="col-lg-2">
+                        <div class="form-floating mb-3">
+                            <select class="form-select" name="guestNumberId" id="guestNumberId" placeholder="" readonly aria-label="Floating label select example">
+                            </select>
+                            <label for="floatingSelect2">人數</label>
+                        </div>
+                    </div>
+                    <div class="col-lg-2">
+                        <input type="submit" class="btn btn-primary search" id="btnSearch" value="搜尋">
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+    <!-- 搜尋結果 -->
+    <div class="row mt-3">
+        <div class="col-8">
+            <h5>搜尋結果：<span id="resultNumber">@totalResult</span>件</h5>
+        </div>
+        <div class="col-4">
+            <select class="form-select" aria-label="Default select example">
+                <option selected>排序方式</option>
+                <option value="1">按價格排序(從低至高)</option>
+                <option value="2">按價格排序(從高至低)</option>
+                <option value="3">按推薦排序</option>
+            </select>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-12 result">
+            @foreach (var item in Model)
+            {
+                <div class="card mb-3 resultCard">
+                    <div class="row g-0">
+                        <div class="col-md-3">
+                            <img src="images/frames-for-your-heart-FqqiAvJejto-unsplash.jpg" class="img-fluid rounded-start resultImg" alt="">
+                        </div>
+                        <div class="col-md-9">
+                            <div class="card-body">
+                                <h5 class="card-title">
+                                    @Html.DisplayFor(modelItem => item.RoomTypeName)
+                                    <small>@Html.DisplayFor(modelItem => item.GuestNumberName)</small>
+                                </h5>
+                                <p class="card-text">@Html.DisplayFor(modelItem => item.RoomDescription)</p>
+                                <p class="card-text">@Html.DisplayFor(modelItem => item.RoomTypeDescription)</p>
+                                <p class="card-text">NT$@Html.DisplayFor(modelItem => item.Price)</p>
+                                <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            }
+        </div>
+    </div>
+    <!-- 分頁 -->
+    <div class="text-center">
+        @Html.PagedListPager((IPagedList)Model, page => Url.Action("SearchRoom", "Rooms", new { page, roomTypeId, guestNumberId, startDateTime, endDateTime }))
+    </div>
+</div>
+@section css {
+    <link rel="stylesheet" href="./Content/bootstrap.css">
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.13.2/themes/base/jquery-ui.css">
+    <link href="~/Content/PagedList.css" rel="stylesheet" />
+    <style>
+        .row.searchBlock {
+            margin-top: 20px;
+            display: flex;
+            justify-content: center;
+        }
+
+        .result {
+            margin-top: 20px;
+            border: 1px solid #ddd;
+            border-radius: 10px;            
+        }
+
+        .title {
+            margin-top: 20px;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        .btn.search {
+            margin-top: 8px;
+            width: 120px;
+        }
+
+        @@media (max-width: 991px) {
+            .btn.search {
+                float: right;
+            }
+        }
+
+        .resultImg {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .resultCard {
+            box-shadow: 0 0 10px #a8a7a7;
+            margin-bottom: 1.5rem !important;
+        }
+    </style>
+}
+
+@section js {
+    <script src="/js/bootstrap.js"></script>
+    <script src="/js/jquery.3.6.4.js"></script>
+    <script src="/js/bootstrap.bundle.js"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
+    <script src="https://code.jquery.com/ui/1.13.2/jquery-ui.js"></script>
+    <script src="/js/datepicker-zh-TW.js"></script>
+    <script>
+        $(function () {
+            $("#datepicker1").datepicker($.datepicker.regional["zh-TW"]);
+
+            $("#datepicker1").click(function () {
+                $("#datepicker1").addClass("form-select");
+                $("#datepicker1").removeClass("form-control");
+            });
+
+            $("#datepicker2").datepicker();
+
+            $("#datepicker2").click(function () {
+                $("#datepicker2").addClass("form-select");
+                $("#datepicker2").removeClass("form-control");
+            });
+        });
+    </script>
+}
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+    <script src="~/js/Rooms_Search.js"></script>
+}

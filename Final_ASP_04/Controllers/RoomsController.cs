@@ -33,6 +33,7 @@ namespace Final_ASP_04.Controllers
             var rooms = service.SearchRoom(roomTypeId, guestNumberId, startDateTime.Value, endDateTime.Value);
 
             var roomsVm = rooms.Select(x => x.ToRoomVm()).ToList();
+
             ViewBag.TotalCount = roomsVm.Count();
             ViewBag.RoomTypeId = roomTypeId;
             ViewBag.GuestNumberId = guestNumberId;

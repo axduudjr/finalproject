@@ -1,0 +1,126 @@
+﻿@model IEnumerable<Final_ASP_04.Models.ViewModels.RoomTypeVm>
+@using Final_ASP_04.Models.ViewModels;
+@{
+    ViewBag.Title = "ListRoomTypes";
+    var roomTypeVms = ViewBag.RoomTypeVms as List<RoomTypeVm>;
+}
+
+@*@foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.BrnachName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.RoomTypeName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.RoomTypeDescription)
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
+                @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
+                @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
+            </td>
+        </tr>
+    }*@
+
+<!-- 標題 -->
+<div class="container-fluid has-background-image" style="margin-top:56px;">
+    <h1 class="pageTitle">房型介紹</h1>
+</div>
+<!-- 麵包屑 -->
+<div class="container">
+    <div class="mt-3">
+        <nav aria-label="breadcrumb">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a href="#">首頁</a></li>
+                <li class="breadcrumb-item active">房型介紹</li>
+            </ol>
+        </nav>
+    </div>
+</div>
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-2">
+            <div role="tabpanel" class="mt-3">
+                <!-- 選擇分店 -->
+                <div class="list-group" id="myList" role="tablist">
+                    <a class="list-group-item list-group-item-action active" data-bs-toggle="list" href="#台北西門館1" role="tab">台北西門館</a>
+                    <a class="list-group-item list-group-item-action" data-bs-toggle="list" href="#台北松山館2" role="tab">台北松山館</a>
+                    <a class="list-group-item list-group-item-action" data-bs-toggle="list" href="#新北板橋館3" role="tab">新北板橋館</a>
+                    <a class="list-group-item list-group-item-action" data-bs-toggle="list" href="#新北土城館4" role="tab">新北土城館</a>
+                    <a class="list-group-item list-group-item-action" data-bs-toggle="list" href="#桃園中壢館5" role="tab">桃園中壢館</a>
+                    <a class="list-group-item list-group-item-action" data-bs-toggle="list" href="#台中民權館6" role="tab">台中民權館</a>
+                    <a class="list-group-item list-group-item-action" data-bs-toggle="list" href="#高雄亞灣館7" role="tab">高雄亞灣館</a>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-10">
+            <!-- 房型介紹 -->
+            <div class="tab-content">  
+                <div class="row productCategory">
+                    @foreach (var roomtype in roomTypeVms)
+                    {
+                        Html.RenderPartial("_RoomTypePartial", roomtype);
+                    }
+                </div> 
+            </div>
+        </div>
+    </div>
+</div>
+@section css {
+    <link rel="stylesheet" href="Content/bootstrap.css" />
+    <style>
+        .has-background-image {
+            background-image: url(images/sasha-kaunas-TAgGZWz6Qg8-unsplash.jpg);
+            height: 200px;
+        }
+
+        .pageTitle {
+            box-sizing: border-box;
+            color: black;
+            font-size: 50px;
+            font-weight: bold;
+            padding-top: 60px;
+            padding-left: 15%;
+        }
+
+        .breadcrumb {
+            background-color: transparent;
+            font-size: 18px;
+        }
+
+        .productImg {
+            height: 200px;
+            width: 300px;
+            border: 1px solid #ddd;
+            border-radius: 10px;
+            object-fit: cover;
+        }
+
+        .card-title {
+            font-size: 20px;
+            font-weight: bold;
+            margin-top: 10px;
+        }
+    </style>
+}
+
+@section js {
+    <script src="js/bootstrap.js"></script>
+    <script src="js/jquery.3.6.4.js"></script>
+    <script src="js/bootstrap.bundle.js"></script>
+    <script>
+        // 在點擊分店時，將分店的id傳到後端
+        document.querySelectorAll('.list-group-item').forEach(function (item) {
+            item.addEventListener('click', function (event) {
+                event.preventDefault();
+
+                var selectedBranchId = item.getAttribute('href').substring(6);
+                window.location.href = '/Branches/ListRoomTypes?selectedBranchId=' + selectedBranchId;               
+            });
+        });
+    </script>
+}

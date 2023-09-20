@@ -14,6 +14,7 @@ namespace Final_ASP_04.Models.Services
 		{
 			var repo = new RoomRepository();
 			var rooms = repo.GetRooms(roomTypeId, guestNumberId);
+
 			List<Room> resultRooms = new List<Room>();
 			foreach (var room in rooms)
 			{

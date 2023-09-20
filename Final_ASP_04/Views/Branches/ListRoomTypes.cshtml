@@ -5,26 +5,6 @@
     var roomTypeVms = ViewBag.RoomTypeVms as List<RoomTypeVm>;
 }
 
-@*@foreach (var item in Model)
-    {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.BrnachName)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.RoomTypeName)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.RoomTypeDescription)
-            </td>
-            <td>
-                @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
-                @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
-                @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
-            </td>
-        </tr>
-    }*@
-
 <!-- 標題 -->
 <div class="container-fluid has-background-image" style="margin-top:51px;">
     <h1 class="pageTitle">房型介紹</h1>

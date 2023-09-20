@@ -8,6 +8,7 @@ using System.Web;
 using System.Web.Mvc;
 using System.Web.UI;
 using PagedList;
+using Final_ASP_04.Models.EFModels;
 
 namespace Final_ASP_04.Controllers
 {
@@ -15,7 +16,7 @@ namespace Final_ASP_04.Controllers
     {
 		private int _pageSize = 5;
 		// GET: Rooms
-		public ActionResult SearchRoom(int page= 1, int roomTypeId = 0, int guestNumberId = 0, DateTime? startDateTime = null, DateTime? endDateTime = null )
+		public ActionResult SearchRoom(int page= 1, int branchId = 1, int roomTypeId = 0, int guestNumberId = 0, DateTime? startDateTime = null, DateTime? endDateTime = null )
         {
 			int pageNumber = page < 1 ? 1 : page;
 
@@ -30,7 +31,7 @@ namespace Final_ASP_04.Controllers
 			}
 
 			var service = new RoomService();
-            var rooms = service.SearchRoom(roomTypeId, guestNumberId, startDateTime.Value, endDateTime.Value);
+            var rooms = service.SearchRoom(branchId, roomTypeId, guestNumberId, startDateTime.Value, endDateTime.Value);
 
             var roomsVm = rooms.Select(x => x.ToRoomVm()).ToList();
 
@@ -39,10 +40,18 @@ namespace Final_ASP_04.Controllers
             ViewBag.GuestNumberId = guestNumberId;
 			ViewBag.StartDateTime = startDateTime.Value.ToString("yyyy-MM-dd");
 			ViewBag.EndDateTime = endDateTime.Value.ToString("yyyy-MM-dd");
+			ViewBag.BranchName = GetBranch(branchId).Name;
 
             var result = roomsVm.ToPagedList(pageNumber, _pageSize);
 
             return View(result);
         }
+		private Branch GetBranch(int branchId)
+		{
+			var db = new AppDbContext();
+			var branch = db.Branches.Find(branchId);
+
+			return branch;
+		}
     }
 }

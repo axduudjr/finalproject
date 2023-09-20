@@ -1,15 +1,16 @@
 ﻿document.addEventListener("DOMContentLoaded", function () {
-    initForm();
+    let branchId = 1;
+    initForm(branchId);
 })
 
-function initForm() {
-    var url1 = "/api/RoomsApi/GetRoomTypes"
+function initForm(branchId) {
+    var url1 = "/api/RoomsApi/GetRoomTypes?branchId="+branchId;
     var url2 = "/api/RoomsApi/GetGuestNumbers"
 
     fetchJSON(url1).then(function (jsonData) {
         renderSelect(jsonData, "roomTypeId");
     })
-
+    
     fetchJSON(url2).then(function (jsonData) {
         renderSelect(jsonData, "guestNumberId");
     })

@@ -11,7 +11,7 @@ using System.Web.Mvc;
 namespace Final_ASP_04.Controllers
 {
     public class BranchesController : Controller
-    {		
+    {
 		// GET: Branches
 		public ActionResult ListRoomTypes(string selectedBranchId = "1")
         {

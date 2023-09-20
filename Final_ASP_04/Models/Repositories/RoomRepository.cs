@@ -9,11 +9,11 @@ namespace Final_ASP_04.Models.Repositories
 {
 	public class RoomRepository
 	{		
-		public List<Room> GetRooms(int roomTypeId, int guestNumberId)
+		public List<Room> GetRooms(int branchId, int roomTypeId, int guestNumberId)
 		{
 			var db = new AppDbContext();
 
-			IQueryable<Room> rooms = db.Rooms.Include("RoomType").Include("GuestNumber");
+			IQueryable<Room> rooms = db.Rooms.Include("RoomType").Include("RoomType.Branch").Include("GuestNumber").Where(x => x.RoomType.BranchId == branchId);
 
 			if (roomTypeId > 0)
 			{

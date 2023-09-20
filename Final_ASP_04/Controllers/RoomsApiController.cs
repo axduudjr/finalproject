@@ -11,9 +11,9 @@ namespace Final_ASP_04.Controllers
     public class RoomsApiController : ApiController
     {
 		[HttpGet]
-		public IHttpActionResult GetRoomTypes()
+		public IHttpActionResult GetRoomTypes(string branchId)
 		{
-			var roomtypes = new AppDbContext().RoomTypes.OrderBy(x => x.DisplayOrder).Select(x => new { x.Id, x.Name, x.DisplayOrder }).ToList();
+			var roomtypes = new AppDbContext().RoomTypes.Where(x => x.BranchId.ToString() == branchId).OrderBy(x => x.DisplayOrder).Select(x => new { x.Id, x.Name, x.DisplayOrder }).ToList();
 
 			return Ok(roomtypes);
 		}

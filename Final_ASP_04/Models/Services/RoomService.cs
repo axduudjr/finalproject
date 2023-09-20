@@ -10,10 +10,10 @@ namespace Final_ASP_04.Models.Services
 {
 	public class RoomService
 	{
-		public List<RoomListDTO> SearchRoom(int roomTypeId, int guestNumberId, DateTime checkIn, DateTime checkOut)
+		public List<RoomListDTO> SearchRoom(int branchId, int roomTypeId, int guestNumberId, DateTime checkIn, DateTime checkOut)
 		{
 			var repo = new RoomRepository();
-			var rooms = repo.GetRooms(roomTypeId, guestNumberId);
+			var rooms = repo.GetRooms(branchId, roomTypeId, guestNumberId);
 
 			List<Room> resultRooms = new List<Room>();
 			foreach (var room in rooms)

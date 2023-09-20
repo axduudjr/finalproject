@@ -22,6 +22,7 @@ namespace Final_ASP_04.Controllers
 
             var roomTypeVms = roomTypeDtos.Select(x => x.ToRoomTypeVm()).ToList();
             ViewBag.RoomTypeVms = roomTypeVms;
+            ViewBag.SelectedBranchId = selectedBranchId;
 
 			return View(roomTypeVms);
         }

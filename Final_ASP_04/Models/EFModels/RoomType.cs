@@ -24,6 +24,9 @@ namespace Final_ASP_04.Models.EFModels
 
         public string Description { get; set; }
 
+        [StringLength(50)]
+        public string FileName { get; set; }
+
         public int DisplayOrder { get; set; }
 
         public virtual Branch Branch { get; set; }

@@ -396,7 +396,6 @@
     <Content Include="Content\Site.css" />
     <Content Include="js\bootstrap.bundle.js" />
     <Content Include="js\bootstrap.js" />
-    <Content Include="js\datepicker-zh-TW.js" />
     <Content Include="js\jquery.3.6.4.js" />
     <Content Include="js\Rooms_Search.js" />
     <Content Include="ReadMe.txt" />

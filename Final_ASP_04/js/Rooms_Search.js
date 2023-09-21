@@ -16,21 +16,6 @@ function initForm(branchId) {
     })
 };
 
-function setDatapicker() {
-    $("#datepicker1").datepicker();
-    $("#datepicker2").datepicker();
-
-    $("#datepicker1").click(function () {
-        $("#datepicker1").addClass("form-select");
-        $("#datepicker1").removeClass("form-control");
-    });
-
-    $("#datepicker2").click(function () {
-        $("#datepicker2").addClass("form-select");
-        $("#datepicker2").removeClass("form-control");
-    });
-}
-
 function fetchJSON(url) {
     return fetch(url, {
         method: "GET",

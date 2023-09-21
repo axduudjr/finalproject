@@ -25,15 +25,15 @@
                 <div class="row searchBlock">
                     <div class="col-lg-2">
                         <div class="form-floating mb-3">
-                            <input class="form-control" name="startDateTime" id="datepicker1" placeholder="" readonly>
-                            <label for="datepicker1">入住日期</label>
+                            <input class="form-control" name="startDateTime" type="date" id="startDateTime" placeholder="" min="@DateTime.Now.ToString("yyyy-MM-dd")">
+                            <label for="startDateTime">入住日期</label>
                         </div>
                     </div>
 
                     <div class="col-lg-2">
                         <div class="form-floating mb-3">
-                            <input class="form-control" name="endDateTime" id="datepicker2" placeholder="" readonly>
-                            <label for="datepicker2">退房日期</label>
+                            <input class="form-control" name="endDateTime" type="date" id="endDateTime" placeholder="" min="@DateTime.Now.AddDays(1).ToString("yyyy-MM-dd")">
+                            <label for="endDateTime">退房日期</label>
                         </div>
                     </div>
 
@@ -87,7 +87,6 @@
     </div>
 </div>
 @section css {
-    <link rel="stylesheet" href="//code.jquery.com/ui/1.13.2/themes/base/jquery-ui.css">
     <link href="~/Content/PagedList.css" rel="stylesheet" />
     <style>
         .row.searchBlock {
@@ -133,17 +132,23 @@
 }
 
 @section js {
-    <script src="/js/bootstrap.js"></script>
-    <script src="/js/jquery.3.6.4.js"></script>
-    <script src="/js/bootstrap.bundle.js"></script>
-    @*<script src="https://code.jquery.com/jquery-3.6.0.js"></script>*@
-    <script src="https://code.jquery.com/ui/1.13.2/jquery-ui.js"></script>
-    <script src="~/js/datepicker-zh-TW.js"></script>
-    <script src="~/js/Rooms_Search.js"></script>
+    <script src="/Scripts/bootstrap.bundle.js"></script>
+    <script src="/js/Rooms_Search.js"></script>
     <script>
         $(function () {
-            $.datepicker.setDefaults($.datepicker.regional["zh-TW"]);
-            setDatapicker();
+            var startDateTimeInput = document.getElementById("startDateTime");
+            var endDateTimeInput = document.getElementById("endDateTime");
+
+            startDateTimeInput.addEventListener("change", function () {
+
+                var selectedDate = new Date(startDateTimeInput.value);
+
+                var nextDay = new Date(selectedDate);
+                nextDay.setDate(selectedDate.getDate() + 1);
+
+                endDateTimeInput.min = nextDay.toISOString().split("T")[0];
+                endDateTimeInput.value = nextDay.toISOString().split("T")[0];
+            });
 
         $(".orderResult").on("change", function () {
     const selectedValue = $(this).val();
@@ -161,14 +166,9 @@
             //將結果顯示在畫面上
             $('body').html(data);
             initForm(@ViewBag.BranchId);
-            $.datepicker.setDefaults($.datepicker.regional["zh-TW"]);
-            setDatapicker();
+
         });
     })
 });
     </script>
-}
-
-@section Scripts {
-    @Scripts.Render("~/bundles/jqueryval")
 }

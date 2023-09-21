@@ -91,8 +91,15 @@ namespace Final_ASP_04.Controllers
 
 			ViewBag.RoomsVm = result;
 
-			return View(result);
-			
+			if (Request.IsAjaxRequest())
+			{
+				return PartialView("_RoomSearchResultPartial", result);
+			}
+			else
+			{
+				return View(result);
+			}
+
 		}
 		private Branch GetBranchByBranchId(int branchId)
 		{

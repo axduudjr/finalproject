@@ -87,7 +87,6 @@
     </div>
 </div>
 @section css {
-    <link rel="stylesheet" href="./Content/bootstrap.css">
     <link rel="stylesheet" href="//code.jquery.com/ui/1.13.2/themes/base/jquery-ui.css">
     <link href="~/Content/PagedList.css" rel="stylesheet" />
     <style>
@@ -100,7 +99,7 @@
         .result {
             margin-top: 20px;
             border: 1px solid #ddd;
-            border-radius: 10px;            
+            border-radius: 10px;
         }
 
         .title {
@@ -137,46 +136,39 @@
     <script src="/js/bootstrap.js"></script>
     <script src="/js/jquery.3.6.4.js"></script>
     <script src="/js/bootstrap.bundle.js"></script>
-    <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
+    @*<script src="https://code.jquery.com/jquery-3.6.0.js"></script>*@
     <script src="https://code.jquery.com/ui/1.13.2/jquery-ui.js"></script>
-    <script src="/js/datepicker-zh-TW.js"></script>
+    <script src="~/js/datepicker-zh-TW.js"></script>
+    <script src="~/js/Rooms_Search.js"></script>
     <script>
         $(function () {
-            $("#datepicker1").datepicker($.datepicker.regional["zh-TW"]);
+            $.datepicker.setDefaults($.datepicker.regional["zh-TW"]);
+            setDatapicker();
 
-            $("#datepicker1").click(function () {
-                $("#datepicker1").addClass("form-select");
-                $("#datepicker1").removeClass("form-control");
-            });
-
-            $("#datepicker2").datepicker();
-
-            $("#datepicker2").click(function () {
-                $("#datepicker2").addClass("form-select");
-                $("#datepicker2").removeClass("form-control");
-            });
-
-            $(".orderResult").on("change", function () {
+        $(".orderResult").on("change", function () {
     const selectedValue = $(this).val();
 
-    $.post("/Rooms/SearchRoom", {
-        page: 1,
-        branchId: @ViewBag.BranchId,
-        roomTypeId: @ViewBag.RoomTypeId,
-        guestNumberId: @ViewBag.GuestNumberId,
-        startDateTime: "@ViewBag.StartDateTime",
-        endDateTime: "@ViewBag.EndDateTime",
-        sortvalue: selectedValue
-    }, function (data) {
-        // 更新页面上的房间列表
-        $(".col-12.result").html(data);
-    });
-})
+        $.post("/Rooms/SearchRoom", {
+            page: 1,
+            branchId: @ViewBag.BranchId,
+            roomTypeId: @ViewBag.RoomTypeId,
+            guestNumberId: @ViewBag.GuestNumberId,
+            startDateTime: "@ViewBag.StartDateTime",
+            endDateTime: "@ViewBag.EndDateTime",
+            sortvalue: selectedValue
+        }, function (data) {
+
+            //將結果顯示在畫面上
+            $('body').html(data);
+            initForm(@ViewBag.BranchId);
+            $.datepicker.setDefaults($.datepicker.regional["zh-TW"]);
+            setDatapicker();
         });
+    })
+});
     </script>
 }
 
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")
-    <script src="~/js/Rooms_Search.js"></script>
 }

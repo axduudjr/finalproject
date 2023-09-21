@@ -18,5 +18,14 @@ namespace Final_ASP_04.Models.Services
 
 			return roomTypeListDTOs;
 		}
+		public RoomTypeListDTO GetRoomTypeById(int roomTypeId)
+		{
+			var repo = new RoomTypeRepository();
+			var roomType = repo.GetRoomTypeById(roomTypeId);
+
+			var roomTypeListDTO = roomType.ToRoomTypeListDTO();
+
+			return roomTypeListDTO;
+		}
 	}
 }

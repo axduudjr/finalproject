@@ -89,15 +89,10 @@ namespace Final_ASP_04.Controllers
 
 			var result = roomsVm.ToPagedList(pageNumber, _pageSize);
 
-			if (Request.IsAjaxRequest())
-			{				
-				return PartialView("_RoomListPartial", result);
-			}
-			else
-			{
-				ViewBag.RoomsVm = result;
-				return View(result);
-			}
+			ViewBag.RoomsVm = result;
+
+			return View(result);
+			
 		}
 		private Branch GetBranchByBranchId(int branchId)
 		{

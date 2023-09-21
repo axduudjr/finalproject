@@ -1,0 +1,282 @@
+﻿@model Final_ASP_04.Models.ViewModels.RoomTypeVm
+@using Final_ASP_04.Models.ViewModels;
+@{
+    ViewBag.Title = "RoomTypeInfo";
+    var otherRoomTypes = ViewBag.OtherRoomTypes as List<RoomTypeVm>;
+}
+<!-- 標題 -->
+<div class="container-fluid has-background-image" style="margin-top:51px;">
+    <h1 class="pageTitle">房間資訊</h1>
+</div>
+<!-- 麵包屑 -->
+<div class="container">
+    <div class="mt-3">
+        <nav aria-label="breadcrumb">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a href="#">首頁</a></li>
+                <li class="breadcrumb-item"><a href="Categories.html">房型介紹</a></li>
+                <li class="breadcrumb-item active">房間資訊</a></li>
+            </ol>
+        </nav>
+    </div>
+</div>
+
+<!-- 房間資訊 -->
+<div>
+    <div class="container">
+        <div class="row">
+            <h1>
+                @Html.DisplayFor(model => model.RoomTypeName)
+            </h1>
+        </div>
+        <div class="row product-info">
+            <div class="col-lg-4">
+                <div class="left">
+                    <img src="/Files/@Html.DisplayFor(model => model.FileName)" width="100%" class="productPhoto" alt="">
+                    <div class="images">
+                        <ul>
+                            <li><img src="images/adam-winger-VGs8z60yT2c-unsplash.jpg" alt=""></li>
+                            <li><img src="images/erick-palacio-_B9J6abAHPA-unsplash.jpg" alt=""></li>
+                            <li><img src="images/frames-for-your-heart-FqqiAvJejto-unsplash.jpg" alt=""></li>
+                            <li><img src="images/kenny-eliason-iAftdIcgpFc-unsplash.jpg" alt=""></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-8">
+                <div class="right">
+                    <h3>房間資訊</h3>
+                    <p>
+                        @Html.DisplayFor(model => model.RoomTypeDescription)
+                    </p>
+                    <h3>房內設備</h3>
+                    <ul>
+                        <li>免費無線WIFI</li>
+                        <li>礦泉水 / UCC咖啡 / 塔爾登茶包</li>
+                        <li>免治馬桶</li>
+                        <li>高畫質液晶電視</li>
+                    </ul>
+                    <div>
+                        <p class="fw-bolder" style="font-size: large;">
+                            NT$2500
+                            &nbsp;&nbsp;<a class="btn btn-primary" href="#">預約訂房</a>
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- 其他房間 -->
+        <div class="row">
+            <h3 class="fw-bolder">其他房間資訊</h3>
+            <table class="table otherProducts">
+                <tr>
+                    <td>
+                        <img src="images/erick-palacio-_B9J6abAHPA-unsplash.jpg" class="img-fluid rounded otherProduct">
+                    </td>
+                    <td width="80%">
+                        <h6>家庭房</h6>
+                        <p>房間面積為10坪的寬敞空間，設有獨家「雙床雙衛浴房型」，適合帶有年長者與兒童同行之旅客。</p>
+                        <p class="fw-bolder">NT$3000&nbsp;&nbsp;<a class="btn btn-primary" href="#">預約訂房</a></p>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <img src="images/frames-for-your-heart-FqqiAvJejto-unsplash.jpg" class="img-fluid rounded otherProduct">
+                    </td>
+                    <td width="80%">
+                        <h6>豪華房</h6>
+                        <p>房間面積為12坪的寬敞空間，加大的空間體驗，加倍的幸福感受。</p>
+                        <p class="fw-bolder">NT$2800&nbsp;&nbsp;<a class="btn btn-primary" href="#">預約訂房</a></p>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <img src="images/kenny-eliason-iAftdIcgpFc-unsplash.jpg" class="img-fluid rounded otherProduct">
+                    </td>
+                    <td width="80%">
+                        <h6>主題房</h6>
+                        <p>擁有8坪大空間，提供一大床寬敞舒適的入住環境，面向城市景觀與海景景觀，浪漫且溫暖。客房以簡約設計，提供精緻的家具與質感備品，營造簡約時尚品味。</p>
+                        <p class="fw-bolder">NT$2500&nbsp;&nbsp;<a class="btn btn-primary" href="#">預約訂房</a></p>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <img src="images/pranav-kumar-jain-pHcLOc_RzQ0-unsplash.jpg" class="img-fluid rounded otherProduct">
+                    </td>
+                    <td width="80%">
+                        <h6>一般房</h6>
+                        <p>簡約的復古設計，享受輕鬆自在的氛圍。</p>
+                        <p class="fw-bolder">NT$1800&nbsp;&nbsp;<a class="btn btn-primary" href="#">預約訂房</a></p>
+                    </td>
+                </tr>
+            </table>
+        </div>
+    </div>
+</div>
+</div>
+@section css{
+    <style>
+        .has-background-image {
+            background-image: url(/Files/TitleImg.jpg);
+            height: 200px;
+        }
+
+        @@media screen and (min-width: 1200px) {
+            .body-content {
+                padding: 5px;
+                margin: 0px;
+                max-width: none;
+            }
+        }
+
+        .pageTitle {
+            box-sizing: border-box;
+            color: black;
+            font-size: 50px;
+            font-weight: bold;
+            padding-top: 60px;
+            padding-left: 15%;
+        }
+
+        h3 {
+            background-color: rgb(226, 252, 252);
+        }
+
+        .otherProduct {
+            max-width: 250px;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .otherProducts h6 {
+            font-weight: 700;
+            color: #333;
+            margin-bottom: 15px;
+            font-size: 1.3rem;
+        }
+
+        .breadcrumb {
+            background-color: transparent;
+            font-size: 18px;
+        }
+
+        .product-info { /*內含left , right 二個div*/
+            width: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: start;
+            /* border: 1px solid #ccc; */
+        }
+
+            .product-info .left {
+                height: 450px;
+                padding-bottom: 20px;
+                display: flex;
+                flex-direction: column;
+                justify-content: center;
+                align-items: start;
+                /* border: 1px solid #ccc; */
+            }
+
+            .product-info .right {
+                padding-top: 20px;
+            }
+
+        .productPhoto {
+            padding-bottom: 25px;
+            object-fit: cover; /*contain 符合指定的寬高比例*/
+            height: 320px;
+        }
+
+        .product-info .images {
+            width: 100%;
+            height: 70px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: start;
+            overflow-y: hidden;
+            overflow-x: auto;
+            border: 1px solid #ccc;
+        }
+
+        .product-info li img {
+            width: 65px;
+            margin-left: 2px;
+        }
+
+        .product-info .images ul {
+            list-style: none; /* 不顯示項目符號 */
+            width: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            cursor: pointer;
+            border: 1px solid #ccc;
+        }
+    </style>
+}
+
+@section js {
+    <script>
+        $(function () {
+            $('.product-info ul li img').click(function () {
+                let imgSrc = $(this).attr('src');
+                $('.productPhoto').attr('src', imgSrc);
+            })
+        })
+    </script>
+}
+
+@*<h2>RoomTypeInfo</h2>
+
+    <div>
+        <h4>RoomTypeVm</h4>
+        <hr />
+        <dl class="dl-horizontal">
+            <dt>
+                @Html.DisplayNameFor(model => model.BranchId)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.BranchId)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.BranchName)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.BranchName)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.RoomTypeName)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.RoomTypeName)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.RoomTypeDescription)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.RoomTypeDescription)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.FileName)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.FileName)
+            </dd>
+
+        </dl>
+    </div>
+    <p>
+        @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
+        @Html.ActionLink("Back to List", "Index")
+    </p>*@

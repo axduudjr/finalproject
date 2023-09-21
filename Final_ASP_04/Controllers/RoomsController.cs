@@ -41,15 +41,15 @@ namespace Final_ASP_04.Controllers
 
 		private List<RoomVm> ApplySort(List<RoomVm> roomsVm, int sortvalue)
 		{
-			if(sortvalue == 1)
+			if (sortvalue == 1)
 			{
 				roomsVm = roomsVm.OrderBy(x => x.Price).ToList();
 			}
-			if(sortvalue == 2)
+			if (sortvalue == 2)
 			{
 				roomsVm = roomsVm.OrderByDescending(x => x.Price).ToList();
 			}
-			if(sortvalue == 3)
+			if (sortvalue == 3)
 			{
 				roomsVm = roomsVm.OrderByDescending(x => x.RoomTypeDisplayOrder).ToList();
 			}

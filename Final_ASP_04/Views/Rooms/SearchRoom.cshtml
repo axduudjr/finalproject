@@ -73,13 +73,8 @@
             </select>
         </div>
     </div>
-    <div class="row">
-        <div class="col-12 result">
-            @foreach (var room in rooms)
-            {
-                Html.RenderPartial("_RoomListPartial", room);
-            }
-        </div>
+    <div class="row allSearchResult">        
+      @Html.Partial("_RoomSearchResultPartial", rooms);
     </div>
     <!-- 分頁 -->
     <div class="text-center">

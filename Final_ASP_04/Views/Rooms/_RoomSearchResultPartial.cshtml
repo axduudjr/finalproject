@@ -1,0 +1,12 @@
+﻿@using PagedList;
+@using PagedList.Mvc
+@using Final_ASP_04.Models.ViewModels;
+
+@model IPagedList<RoomVm>
+
+<div class="col-12 result">
+    @foreach (var room in Model)
+    {
+        Html.RenderPartial("_RoomListPartial", room);
+    }
+</div>

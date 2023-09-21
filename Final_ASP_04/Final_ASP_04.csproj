@@ -362,6 +362,7 @@
     <Compile Include="Models\EFModels\Room.cs" />
     <Compile Include="Models\EFModels\RoomType.cs" />
     <Compile Include="Models\EFModels\User.cs" />
+    <Compile Include="Models\Repositories\CommentRepository.cs" />
     <Compile Include="Models\Repositories\RoomRepository.cs" />
     <Compile Include="Models\Repositories\RoomTypeRepository.cs" />
     <Compile Include="Models\Services\RoomService.cs" />
@@ -428,6 +429,7 @@
     <Content Include="Views\Rooms\SearchRoom.cshtml" />
     <Content Include="Views\Branches\ListRoomTypes.cshtml" />
     <Content Include="Views\Branches\_RoomTypePartial.cshtml" />
+    <Content Include="Views\Rooms\_RoomListPartial.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

@@ -11,6 +11,7 @@ namespace Final_ASP_04.Models.ViewModels
 	{
 		public string RoomTypeName { get; set; }
 		public string RoomTypeDescription { get; set; }
+		public int RoomTypeDisplayOrder { get; set; }
 		public string RoomTypeFileName { get; set; }
 		public string GuestNumberName { get; set; }
 		public string RoomName { get; set; }
@@ -25,6 +26,7 @@ namespace Final_ASP_04.Models.ViewModels
 			{
 				RoomTypeName = dto.RoomType.Name,
 				RoomTypeDescription = dto.RoomType.Description,
+				RoomTypeDisplayOrder = dto.RoomType.DisplayOrder,
 				RoomTypeFileName = dto.RoomType.FileName,
 				GuestNumberName = dto.GuestNumber.Name,
 				RoomName = dto.Name,

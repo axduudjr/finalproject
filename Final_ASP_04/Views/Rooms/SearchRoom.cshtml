@@ -1,6 +1,7 @@
 ﻿@model IEnumerable<Final_ASP_04.Models.ViewModels.RoomVm>
 @using PagedList;
 @using PagedList.Mvc
+@using Final_ASP_04.Models.ViewModels;
 
 @{
     ViewBag.Title = "預訂房間";
@@ -9,6 +10,7 @@
     var guestNumberId = ViewBag.GuestNumberId;
     var startDateTime = ViewBag.StartDateTime;
     var endDateTime = ViewBag.EndDateTime;
+    var rooms = ViewBag.RoomsVm as IPagedList<RoomVm>;
 }
 
 <!-- 標題 -->
@@ -63,7 +65,7 @@
             <h5>搜尋結果：<span id="resultNumber">@totalResult</span>件</h5>
         </div>
         <div class="col-4">
-            <select class="form-select" aria-label="Default select example">
+            <select class="form-select orderResult" aria-label="Default select example">
                 <option selected>排序方式</option>
                 <option value="1">按價格排序(從低至高)</option>
                 <option value="2">按價格排序(從高至低)</option>
@@ -73,27 +75,9 @@
     </div>
     <div class="row">
         <div class="col-12 result">
-            @foreach (var item in Model)
+            @foreach (var room in rooms)
             {
-                <div class="card mb-3 resultCard">
-                    <div class="row g-0">
-                        <div class="col-md-3">
-                            <img src="~/Files/@item.RoomTypeFileName" class="img-fluid rounded-start resultImg" alt="">
-                        </div>
-                        <div class="col-md-9">
-                            <div class="card-body">
-                                <h5 class="card-title">
-                                    @Html.DisplayFor(modelItem => item.RoomTypeName)
-                                    <small>@Html.DisplayFor(modelItem => item.GuestNumberName)</small>
-                                </h5>
-                                <p class="card-text">@Html.DisplayFor(modelItem => item.RoomDescription)</p>
-                                <p class="card-text">@Html.DisplayFor(modelItem => item.RoomTypeDescription)</p>
-                                <p class="card-text">NT$@Html.DisplayFor(modelItem => item.Price)</p>
-                                <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+                Html.RenderPartial("_RoomListPartial", room);
             }
         </div>
     </div>
@@ -171,6 +155,23 @@
                 $("#datepicker2").addClass("form-select");
                 $("#datepicker2").removeClass("form-control");
             });
+
+            $(".orderResult").on("change", function () {
+    const selectedValue = $(this).val();
+
+    $.post("/Rooms/SearchRoom", {
+        page: 1,
+        branchId: @ViewBag.BranchId,
+        roomTypeId: @ViewBag.RoomTypeId,
+        guestNumberId: @ViewBag.GuestNumberId,
+        startDateTime: "@ViewBag.StartDateTime",
+        endDateTime: "@ViewBag.EndDateTime",
+        sortvalue: selectedValue
+    }, function (data) {
+        // 更新页面上的房间列表
+        $(".col-12.result").html(data);
+    });
+})
         });
     </script>
 }

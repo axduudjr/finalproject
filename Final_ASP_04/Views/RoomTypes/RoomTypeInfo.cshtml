@@ -3,6 +3,8 @@
 @{
     ViewBag.Title = "RoomTypeInfo";
     var otherRoomTypes = ViewBag.OtherRoomTypes as List<RoomTypeVm>;
+    var selectedBranchId = ViewBag.selectedBranchId;
+    var selectedRoomTypeId = ViewBag.selectedRoomTypeId;
 }
 <!-- 標題 -->
 <div class="container-fluid has-background-image" style="margin-top:51px;">
@@ -58,8 +60,8 @@
                     </ul>
                     <div>
                         <p class="fw-bolder" style="font-size: large;">
-                            NT$2500
-                            &nbsp;&nbsp;<a class="btn btn-primary" href="#">預約訂房</a>
+                            最低NT$1000起
+                            &nbsp;&nbsp;@Html.ActionLink("預約訂房", "SearchRoom","Rooms",new { branchId = selectedBranchId, roomTypeId = selectedRoomTypeId },new {@class="btn btn-primary"})
                         </p>
                     </div>
                 </div>
@@ -69,46 +71,7 @@
         <div class="row">
             <h3 class="fw-bolder">其他房間資訊</h3>
             <table class="table otherProducts">
-                <tr>
-                    <td>
-                        <img src="images/erick-palacio-_B9J6abAHPA-unsplash.jpg" class="img-fluid rounded otherProduct">
-                    </td>
-                    <td width="80%">
-                        <h6>家庭房</h6>
-                        <p>房間面積為10坪的寬敞空間，設有獨家「雙床雙衛浴房型」，適合帶有年長者與兒童同行之旅客。</p>
-                        <p class="fw-bolder">NT$3000&nbsp;&nbsp;<a class="btn btn-primary" href="#">預約訂房</a></p>
-                    </td>
-                </tr>
-                <tr>
-                    <td>
-                        <img src="images/frames-for-your-heart-FqqiAvJejto-unsplash.jpg" class="img-fluid rounded otherProduct">
-                    </td>
-                    <td width="80%">
-                        <h6>豪華房</h6>
-                        <p>房間面積為12坪的寬敞空間，加大的空間體驗，加倍的幸福感受。</p>
-                        <p class="fw-bolder">NT$2800&nbsp;&nbsp;<a class="btn btn-primary" href="#">預約訂房</a></p>
-                    </td>
-                </tr>
-                <tr>
-                    <td>
-                        <img src="images/kenny-eliason-iAftdIcgpFc-unsplash.jpg" class="img-fluid rounded otherProduct">
-                    </td>
-                    <td width="80%">
-                        <h6>主題房</h6>
-                        <p>擁有8坪大空間，提供一大床寬敞舒適的入住環境，面向城市景觀與海景景觀，浪漫且溫暖。客房以簡約設計，提供精緻的家具與質感備品，營造簡約時尚品味。</p>
-                        <p class="fw-bolder">NT$2500&nbsp;&nbsp;<a class="btn btn-primary" href="#">預約訂房</a></p>
-                    </td>
-                </tr>
-                <tr>
-                    <td>
-                        <img src="images/pranav-kumar-jain-pHcLOc_RzQ0-unsplash.jpg" class="img-fluid rounded otherProduct">
-                    </td>
-                    <td width="80%">
-                        <h6>一般房</h6>
-                        <p>簡約的復古設計，享受輕鬆自在的氛圍。</p>
-                        <p class="fw-bolder">NT$1800&nbsp;&nbsp;<a class="btn btn-primary" href="#">預約訂房</a></p>
-                    </td>
-                </tr>
+                @Html.Partial("_ListOtherRoomTypePartial", otherRoomTypes)                
             </table>
         </div>
     </div>
@@ -228,55 +191,3 @@
     </script>
 }
 
-@*<h2>RoomTypeInfo</h2>
-
-    <div>
-        <h4>RoomTypeVm</h4>
-        <hr />
-        <dl class="dl-horizontal">
-            <dt>
-                @Html.DisplayNameFor(model => model.BranchId)
-            </dt>
-
-            <dd>
-                @Html.DisplayFor(model => model.BranchId)
-            </dd>
-
-            <dt>
-                @Html.DisplayNameFor(model => model.BranchName)
-            </dt>
-
-            <dd>
-                @Html.DisplayFor(model => model.BranchName)
-            </dd>
-
-            <dt>
-                @Html.DisplayNameFor(model => model.RoomTypeName)
-            </dt>
-
-            <dd>
-                @Html.DisplayFor(model => model.RoomTypeName)
-            </dd>
-
-            <dt>
-                @Html.DisplayNameFor(model => model.RoomTypeDescription)
-            </dt>
-
-            <dd>
-                @Html.DisplayFor(model => model.RoomTypeDescription)
-            </dd>
-
-            <dt>
-                @Html.DisplayNameFor(model => model.FileName)
-            </dt>
-
-            <dd>
-                @Html.DisplayFor(model => model.FileName)
-            </dd>
-
-        </dl>
-    </div>
-    <p>
-        @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
-        @Html.ActionLink("Back to List", "Index")
-    </p>*@

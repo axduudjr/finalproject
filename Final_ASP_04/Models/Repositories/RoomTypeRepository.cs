@@ -45,5 +45,24 @@ namespace Final_ASP_04.Models.Repositories
 				return result;
 			}
 		}
+
+		public List<RoomType> GetOtherRoomTypesInBranch(int branchId, int selectedRoomTypeId)
+		{
+			using (var conn = new SqlDb().GetConnection("AppDbContext"))
+			{
+				string sql = @"SELECT * FROM RoomTypes AS RT
+                    INNER JOIN Branches AS B ON B.Id = RT.BranchId
+                    WHERE RT.BranchId = @BranchId AND RT.Id != @SelectedRoomTypeId";
+
+				var result = conn.Query<RoomType, Branch, RoomType>(sql, (roomType, branch) =>
+				{
+					roomType.Branch = branch;
+					return roomType;
+				}, new { BranchId = branchId, SelectedRoomTypeId = selectedRoomTypeId }, splitOn: "Id").ToList();
+
+				return result;
+			}
+		}
+
 	}
 }

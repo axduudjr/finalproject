@@ -436,6 +436,7 @@
     <Content Include="Views\Rooms\_RoomListPartial.cshtml" />
     <Content Include="Views\RoomTypes\RoomTypeInfo.cshtml" />
     <Content Include="Views\Rooms\_RoomSearchResultPartial.cshtml" />
+    <Content Include="Views\RoomTypes\_ListOtherRoomTypePartial.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

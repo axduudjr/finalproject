@@ -13,12 +13,10 @@ namespace Final_ASP_04.Controllers
     public class BranchesController : Controller
     {
 		// GET: Branches
-		public ActionResult ListRoomTypes(string selectedBranchId = "1")
+		public ActionResult ListRoomTypes(int selectedBranchId = 1)
         {
-            var branchIdInt = int.Parse(selectedBranchId);
-
             var service = new RoomTypeService();
-            var roomTypeDtos = service.GetRoomTypesByBranchId(branchIdInt);
+            var roomTypeDtos = service.GetRoomTypesByBranchId(selectedBranchId);
 
             var roomTypeVms = roomTypeDtos.Select(x => x.ToRoomTypeVm()).ToList();
             ViewBag.RoomTypeVms = roomTypeVms;

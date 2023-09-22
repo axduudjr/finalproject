@@ -1,0 +1,18 @@
+﻿@using Final_ASP_04.Models.ViewModels;
+@model List<RoomTypeVm>
+@{ 
+    var selectedBranchId = ViewBag.selectedBranchId;
+}
+@foreach (var room in Model)
+{
+    <tr>
+        <td>
+            <img src="/Files/@room.FileName" class="img-fluid rounded otherProduct">
+        </td>
+        <td width="80%">
+            <h6>@room.RoomTypeName</h6>
+            <p>@room.RoomTypeDescription</p>
+            <p class="fw-bolder">@Html.ActionLink("更多資訊", "RoomTypeInfo", new { selectedBranchId = selectedBranchId, selectedRoomTypeId = room.Id }, new { @class = "btn btn-primary" })</p>
+        </td>
+    </tr>
+}

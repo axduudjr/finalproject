@@ -11,21 +11,25 @@ namespace Final_ASP_04.Controllers
     public class RoomTypesController : Controller
     {
         // GET: RoomTypes
-        public ActionResult RoomTypeInfo(string selectedBranchId = "1", string selectedRoomTypeId = "1")
+        public ActionResult RoomTypeInfo(int selectedBranchId = 1, int selectedRoomTypeId = 1)
         {
-            var selectedRoomTypeIdInt = int.Parse(selectedRoomTypeId);
-            var selectedBranchIdInt = int.Parse(selectedBranchId);
-
             var service = new RoomTypeService();
-            var roomTypeDto = service.GetRoomTypeById(selectedRoomTypeIdInt);
-            var roomTypesDto = service.GetRoomTypesByBranchId(selectedBranchIdInt);
+
+            var roomTypeDto = service.GetRoomTypeById(selectedRoomTypeId);
+            var roomTypesDto = service.GetRoomTypesByBranchId(selectedBranchId);
+
+            var otherRoomTypesDto = service.GetOtherRoomTypesInBranch(selectedBranchId, selectedRoomTypeId);
 
             var roomTypeVm = roomTypeDto.ToRoomTypeVm();
             var roomTypesVm = roomTypesDto.Select(x => x.ToRoomTypeVm()).ToList();
-            
-            ViewBag.otherRoomTypes = roomTypesVm;
 
-            return View(roomTypeVm);
+            var otherRoomTypesVm = otherRoomTypesDto.Select(x => x.ToRoomTypeVm()).ToList();
+
+            ViewBag.selectedBranchId = selectedBranchId;
+            ViewBag.selectedRoomTypeId = selectedRoomTypeId;
+			ViewBag.otherRoomTypes = otherRoomTypesVm;
+
+			return View(roomTypeVm);
         }
     }
 }

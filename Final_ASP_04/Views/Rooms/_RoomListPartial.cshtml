@@ -12,6 +12,7 @@
                 <p class="card-text">@Model.RoomDescription</p>
                 <p class="card-text">@Model.RoomTypeDescription</p>
                 <p class="card-text">NT$@Model.Price</p>
+                <p class="card-text">@Html.ActionLink("預約", "CreateCart", new { roomTypeName = Model.RoomTypeName, guestNumberName = Model.GuestNumberName, roomDescription = Model.RoomDescription }, new {@class="btn btn-primary"})</p>
             </div>
         </div>
     </div>

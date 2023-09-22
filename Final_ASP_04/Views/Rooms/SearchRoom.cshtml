@@ -1,4 +1,4 @@
-﻿@model IEnumerable<Final_ASP_04.Models.ViewModels.RoomVm>
+﻿@model IPagedList<RoomVm>
 @using PagedList;
 @using PagedList.Mvc
 @using Final_ASP_04.Models.ViewModels;
@@ -11,6 +11,7 @@
     var guestNumberId = ViewBag.GuestNumberId;
     var startDateTime = ViewBag.StartDateTime;
     var endDateTime = ViewBag.EndDateTime;
+    var sortvalue = ViewBag.SortValue;
     var rooms = ViewBag.RoomsVm as IPagedList<RoomVm>;
 }
 
@@ -68,18 +69,14 @@
         <div class="col-4">
             <select class="form-select orderResult" aria-label="Default select example">
                 <option selected>排序方式</option>
-                <option value="1">按價格排序(從低至高)</option>
-                <option value="2">按價格排序(從高至低)</option>
-                <option value="3">按推薦排序</option>
+                <option value="1" id="orderbyPrice">按價格排序(從低至高)</option>
+                <option value="2" id="orderbyPriceDESC">按價格排序(從高至低)</option>
+                <option value="3" id="orderbyRank">按推薦排序</option>
             </select>
         </div>
     </div>
-    <div class="row allSearchResult">        
-      @Html.Partial("_RoomSearchResultPartial", rooms)
-    </div>
-    <!-- 分頁 -->
-    <div class="text-center">
-        @Html.PagedListPager((IPagedList)Model, page => Url.Action("SearchRoom", "Rooms", new { page, branchId, roomTypeId, guestNumberId, startDateTime, endDateTime }))
+    <div class="row allSearchResult">
+        @Html.Partial("_RoomSearchResultPartial", rooms)
     </div>
 </div>
 @section css {
@@ -150,7 +147,7 @@
     const selectedValue = $(this).val();
 
         $.post("/Rooms/SearchRoom", {
-            page: 1,
+            page: @Model.PageNumber,
             branchId: @ViewBag.BranchId,
             roomTypeId: @ViewBag.RoomTypeId,
             guestNumberId: @ViewBag.GuestNumberId,
@@ -162,6 +159,8 @@
             //將結果顯示在畫面上
             $('.allSearchResult').html(data);
             initForm(@ViewBag.BranchId);
+
+            $(".orderResult").val(@ViewBag.SortValue);
 
         });
     })

@@ -84,8 +84,10 @@ namespace Final_ASP_04.Controllers
 			ViewBag.StartDateTime = startDateTime.Value.ToString("yyyy-MM-dd");
 			ViewBag.EndDateTime = endDateTime.Value.ToString("yyyy-MM-dd");
 			ViewBag.BranchName = GetBranchByBranchId(branchId).Name;
-
-			roomsVm = ApplySort(roomsVm, sortvalue);
+			
+			roomsVm = ApplySort(roomsVm, sortvalue);			
+			
+			ViewBag.SortValue = sortvalue;
 
 			var result = roomsVm.ToPagedList(pageNumber, _pageSize);
 

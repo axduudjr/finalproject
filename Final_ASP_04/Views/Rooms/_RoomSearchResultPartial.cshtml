@@ -3,10 +3,24 @@
 @using Final_ASP_04.Models.ViewModels;
 
 @model IPagedList<RoomVm>
+@{ 
+    var branchId = ViewBag.BranchId;
+    var roomTypeId = ViewBag.RoomTypeId;
+    var guestNumberId = ViewBag.GuestNumberId;
+    var startDateTime = ViewBag.StartDateTime;
+    var endDateTime = ViewBag.EndDateTime;
+    var sortvalue = ViewBag.SortValue;
+}
 
-<div class="col-12 result">
-    @foreach (var room in Model)
-    {
-        Html.RenderPartial("_RoomListPartial", room);
-    }
+<div>
+    <div class="col-12 result">
+        @foreach (var room in Model)
+        {
+            Html.RenderPartial("_RoomListPartial", room);
+        }
+    </div>
+</div>
+<!-- 分頁 -->
+<div class="text-center">
+    @Html.PagedListPager((IPagedList)Model, page => Url.Action("SearchRoom", "Rooms", new { page, branchId, roomTypeId, guestNumberId, startDateTime, endDateTime, sortvalue }))
 </div>

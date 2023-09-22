@@ -16,8 +16,8 @@
         <nav aria-label="breadcrumb">
             <ol class="breadcrumb">
                 <li class="breadcrumb-item"><a href="#">首頁</a></li>
-                <li class="breadcrumb-item"><a href="Categories.html">房型介紹</a></li>
-                <li class="breadcrumb-item active">房間資訊</a></li>
+                <li class="breadcrumb-item"><a href="/Branches/ListRoomTypes?selectedBranchId=@selectedBranchId">房型一覽</a></li>
+                <li class="breadcrumb-item active"><a>房間資訊</a></li>
             </ol>
         </nav>
     </div>
@@ -61,7 +61,17 @@
                     <div>
                         <p class="fw-bolder" style="font-size: large;">
                             最低NT$1000起
-                            &nbsp;&nbsp;@Html.ActionLink("預約訂房", "SearchRoom","Rooms",new { branchId = selectedBranchId, roomTypeId = selectedRoomTypeId },new {@class="btn btn-primary"})
+                            &nbsp;&nbsp;@using (Html.BeginForm("SearchRoom", "Rooms", FormMethod.Post))
+                            {
+                                @Html.Hidden("startDateTime", DateTime.Now.ToString("yyyy-MM-dd"))
+                                @Html.Hidden("endDateTime", DateTime.Now.AddDays(1).ToString("yyyy-MM-dd"))
+                                @Html.Hidden("branchId", Model.BranchId)
+                                @Html.Hidden("roomTypeId", Model.Id)
+                                @Html.Hidden("guestNumberId", 0)
+
+                                <button type="submit" class="btn btn-primary">前往預約</button>
+                            }
+                            @*@Html.ActionLink("前往預約", "SearchRoom","Rooms",new { startDateTime = DateTime.Now.ToString("yyyy-MM-dd"), endDateTime = @DateTime.Now.AddDays(1).ToString("yyyy-MM-dd"), branchId = selectedBranchId, roomTypeId = selectedRoomTypeId, guestNumberId = 0 },new {@class="btn btn-primary"})*@
                         </p>
                     </div>
                 </div>
@@ -76,7 +86,7 @@
         </div>
     </div>
 </div>
-</div>
+
 @section css{
     <style>
         .has-background-image {

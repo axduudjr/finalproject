@@ -6,6 +6,7 @@
 @{
     ViewBag.Title = "預訂房間";
     var totalResult = ViewBag.TotalCount;
+    var branchId = ViewBag.BranchId;
     var roomTypeId = ViewBag.RoomTypeId;
     var guestNumberId = ViewBag.GuestNumberId;
     var startDateTime = ViewBag.StartDateTime;
@@ -25,14 +26,14 @@
                 <div class="row searchBlock">
                     <div class="col-lg-2">
                         <div class="form-floating mb-3">
-                            <input class="form-control" name="startDateTime" type="date" id="startDateTime" placeholder="" min="@DateTime.Now.ToString("yyyy-MM-dd")">
+                            <input class="form-control" name="startDateTime" type="date" id="startDateTime" placeholder="" min="@DateTime.Now.ToString("yyyy-MM-dd")" value="@DateTime.Now.ToString("yyyy-MM-dd")">
                             <label for="startDateTime">入住日期</label>
                         </div>
                     </div>
 
                     <div class="col-lg-2">
                         <div class="form-floating mb-3">
-                            <input class="form-control" name="endDateTime" type="date" id="endDateTime" placeholder="" min="@DateTime.Now.AddDays(1).ToString("yyyy-MM-dd")">
+                            <input class="form-control" name="endDateTime" type="date" id="endDateTime" placeholder="" min="@DateTime.Now.AddDays(1).ToString("yyyy-MM-dd")" value="@DateTime.Now.AddDays(1).ToString("yyyy-MM-dd")">
                             <label for="endDateTime">退房日期</label>
                         </div>
                     </div>
@@ -74,11 +75,11 @@
         </div>
     </div>
     <div class="row allSearchResult">        
-      @Html.Partial("_RoomSearchResultPartial", rooms);
+      @Html.Partial("_RoomSearchResultPartial", rooms)
     </div>
     <!-- 分頁 -->
     <div class="text-center">
-        @Html.PagedListPager((IPagedList)Model, page => Url.Action("SearchRoom", "Rooms", new { page, roomTypeId, guestNumberId, startDateTime, endDateTime }))
+        @Html.PagedListPager((IPagedList)Model, page => Url.Action("SearchRoom", "Rooms", new { page, branchId, roomTypeId, guestNumberId, startDateTime, endDateTime }))
     </div>
 </div>
 @section css {

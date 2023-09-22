@@ -350,6 +350,8 @@
     <Compile Include="Models\DTOs\RoomTypeListDTO.cs" />
     <Compile Include="Models\EFModels\AppDbContext.cs" />
     <Compile Include="Models\EFModels\Branch.cs" />
+    <Compile Include="Models\EFModels\BranchPicture.cs" />
+    <Compile Include="Models\EFModels\Cart.cs" />
     <Compile Include="Models\EFModels\City.cs" />
     <Compile Include="Models\EFModels\Comment.cs" />
     <Compile Include="Models\EFModels\Discount.cs" />
@@ -362,6 +364,7 @@
     <Compile Include="Models\EFModels\PaymentType.cs" />
     <Compile Include="Models\EFModels\Room.cs" />
     <Compile Include="Models\EFModels\RoomType.cs" />
+    <Compile Include="Models\EFModels\RoomTypePicture.cs" />
     <Compile Include="Models\EFModels\User.cs" />
     <Compile Include="Models\Repositories\CommentRepository.cs" />
     <Compile Include="Models\Repositories\RoomRepository.cs" />

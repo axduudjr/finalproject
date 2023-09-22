@@ -11,6 +11,7 @@ namespace Final_ASP_04.Models.EFModels
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public Branch()
         {
+            Carts = new HashSet<Cart>();
             Discounts = new HashSet<Discount>();
             News = new HashSet<News>();
             Orders = new HashSet<Order>();
@@ -36,7 +37,13 @@ namespace Final_ASP_04.Models.EFModels
         [StringLength(50)]
         public string Address { get; set; }
 
+        [StringLength(50)]
+        public string FileName { get; set; }
+
         public virtual City City { get; set; }
+
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Cart> Carts { get; set; }
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Discount> Discounts { get; set; }

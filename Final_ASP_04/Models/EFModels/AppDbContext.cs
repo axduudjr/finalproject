@@ -13,6 +13,7 @@ namespace Final_ASP_04.Models.EFModels
 		}
 
 		public virtual DbSet<Branch> Branches { get; set; }
+		public virtual DbSet<Cart> Carts { get; set; }
 		public virtual DbSet<City> Cities { get; set; }
 		public virtual DbSet<Comment> Comments { get; set; }
 		public virtual DbSet<Discount> Discounts { get; set; }
@@ -24,8 +25,10 @@ namespace Final_ASP_04.Models.EFModels
 		public virtual DbSet<Order> Orders { get; set; }
 		public virtual DbSet<PaymentType> PaymentTypes { get; set; }
 		public virtual DbSet<Room> Rooms { get; set; }
+		public virtual DbSet<RoomTypePicture> RoomTypePictures { get; set; }
 		public virtual DbSet<RoomType> RoomTypes { get; set; }
 		public virtual DbSet<User> Users { get; set; }
+		public virtual DbSet<BranchPicture> BranchPictures { get; set; }
 
 		protected override void OnModelCreating(DbModelBuilder modelBuilder)
 		{
@@ -33,6 +36,11 @@ namespace Final_ASP_04.Models.EFModels
 				.Property(e => e.PhoneNumber)
 				.IsFixedLength()
 				.IsUnicode(false);
+
+			modelBuilder.Entity<Branch>()
+				.HasMany(e => e.Carts)
+				.WithRequired(e => e.Branch)
+				.WillCascadeOnDelete(false);
 
 			modelBuilder.Entity<Branch>()
 				.HasMany(e => e.Discounts)
@@ -69,13 +77,18 @@ namespace Final_ASP_04.Models.EFModels
 				.IsUnicode(false);
 
 			modelBuilder.Entity<Member>()
-				.Property(e => e.Password)
+				.Property(e => e.EncryptedPassword)
 				.IsUnicode(false);
 
 			modelBuilder.Entity<Member>()
 				.Property(e => e.PhoneNumber)
 				.IsFixedLength()
 				.IsUnicode(false);
+
+			modelBuilder.Entity<Member>()
+				.HasMany(e => e.Carts)
+				.WithRequired(e => e.Member)
+				.WillCascadeOnDelete(false);
 
 			modelBuilder.Entity<Member>()
 				.HasMany(e => e.Mails)
@@ -98,9 +111,18 @@ namespace Final_ASP_04.Models.EFModels
 				.WillCascadeOnDelete(false);
 
 			modelBuilder.Entity<Room>()
+				.HasMany(e => e.Carts)
+				.WithRequired(e => e.Room)
+				.WillCascadeOnDelete(false);
+
+			modelBuilder.Entity<Room>()
 				.HasMany(e => e.Orders)
 				.WithRequired(e => e.Room)
 				.WillCascadeOnDelete(false);
+
+			modelBuilder.Entity<RoomTypePicture>()
+				.HasOptional(e => e.RoomTypePictures1)
+				.WithRequired(e => e.RoomTypePicture1);
 
 			modelBuilder.Entity<RoomType>()
 				.HasMany(e => e.Rooms)

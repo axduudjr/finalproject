@@ -1,9 +1,4 @@
-﻿document.addEventListener("DOMContentLoaded", function () {
-    let branchId = 1;
-    initForm(branchId);
-})
-
-function initForm(branchId) {
+﻿function initForm(branchId) {
     var url1 = "/api/RoomsApi/GetRoomTypes?branchId="+branchId;
     var url2 = "/api/RoomsApi/GetGuestNumbers"
 

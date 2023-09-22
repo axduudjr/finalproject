@@ -23,7 +23,7 @@
 <div class="container">
     <div class="row">
         <div class="col-12">
-            <form action="">
+            <form method="get">
                 <div class="row searchBlock">
                     <div class="col-lg-2">
                         <div class="form-floating mb-3">
@@ -55,6 +55,7 @@
                         </div>
                     </div>
                     <div class="col-lg-2">
+                        <input type="hidden" name="branchId" value="@branchId" />
                         <input type="submit" class="btn btn-primary search" id="btnSearch" value="搜尋">
                     </div>
                 </div>
@@ -69,9 +70,9 @@
         <div class="col-4">
             <select class="form-select orderResult" aria-label="Default select example">
                 <option selected>排序方式</option>
-                <option value="1" id="orderbyPrice">按價格排序(從低至高)</option>
-                <option value="2" id="orderbyPriceDESC">按價格排序(從高至低)</option>
-                <option value="3" id="orderbyRank">按推薦排序</option>
+                <option value="/Rooms/SearchRoom?page=@Model.PageNumber&branchId=@branchId&roomTypeId=@roomTypeId&guestNumberId=@guestNumberId&startDateTime=@startDateTime&endDateTime=@endDateTime&sortvalue=1" id="orderbyPrice">按價格排序(從低至高)</option>
+                <option value="/Rooms/SearchRoom?page=@Model.PageNumber&branchId=@branchId&roomTypeId=@roomTypeId&guestNumberId=@guestNumberId&startDateTime=@startDateTime&endDateTime=@endDateTime&sortvalue=2" id="orderbyPriceDESC">按價格排序(從高至低)</option>
+                <option value="/Rooms/SearchRoom?page=@Model.PageNumber&branchId=@branchId&roomTypeId=@roomTypeId&guestNumberId=@guestNumberId&startDateTime=@startDateTime&endDateTime=@endDateTime&sortvalue=3" id="orderbyRank">按推薦排序</option>
             </select>
         </div>
     </div>
@@ -129,6 +130,8 @@
     <script src="/js/Rooms_Search.js"></script>
     <script>
         $(function () {
+            initForm(@ViewBag.BranchId);
+
             var startDateTimeInput = document.getElementById("startDateTime");
             var endDateTimeInput = document.getElementById("endDateTime");
 
@@ -144,9 +147,10 @@
             });
 
         $(".orderResult").on("change", function () {
-    const selectedValue = $(this).val();
+            var url = $(this).find('option:selected').val();
+            window.location.href = url;
 
-        $.post("/Rooms/SearchRoom", {
+        @*$.post("/Rooms/SearchRoom", {
             page: @Model.PageNumber,
             branchId: @ViewBag.BranchId,
             roomTypeId: @ViewBag.RoomTypeId,
@@ -162,8 +166,8 @@
 
             $(".orderResult").val(@ViewBag.SortValue);
 
-        });
-    })
+            });*@
+        })
 });
     </script>
 }

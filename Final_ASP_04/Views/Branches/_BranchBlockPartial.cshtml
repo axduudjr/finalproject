@@ -1,0 +1,63 @@
+﻿@model Final_ASP_04.Models.ViewModels.BranchVm
+
+<!--商品 begin-->
+<div class="container mt-5 pb-md-4 product">
+    <div class="row">
+        <!--輪播照片 begin-->
+        <div class="col-lg-5 col-12 custom-carousel-container">
+            <div id="@Model.CarouselExampleId" class="carousel slide">
+                <div class="carousel-inner">
+                    @*_BranchPicPartial*@
+                    @{
+                        foreach (var pic in @Model.FileName)
+                        {
+                            @Html.Partial("_BranchPicPartial", pic);
+                        }
+                    }
+                </div>
+                <button class="carousel-control-prev"
+                        type="button"
+                        data-bs-target="@Model.DataBsTarget"
+                        data-bs-slide="prev">
+                    <span class="carousel-control-prev-icon"
+                          aria-hidden="true"></span>
+                    <span class="visually-hidden">Previous</span>
+                </button>
+                <button class="carousel-control-next"
+                        type="button"
+                        data-bs-target="@Model.DataBsTarget"
+                        data-bs-slide="next">
+                    <span class="carousel-control-next-icon"
+                          aria-hidden="true"></span>
+                    <span class="visually-hidden">Next</span>
+                </button>
+            </div>
+        </div>
+        <!--輪播照片 end-->
+        <!--分店文字 begin-->
+        <div class="col-lg-7 col-12 pt-3 pt-md-0">
+            <h2 class="pb-2">@Model.Name</h2>
+            <p class="custom-BranchDescription">
+                @Model.Description
+            </p>
+            <p class="custom-BranchDescription">
+                @Model.Address
+            </p>
+            <p class="custom-BranchDescription">
+                @Model.PhoneNumber
+            </p>
+        </div>
+    </div>
+    <!--分店文字 end-->
+</div>
+<!--商品 end-->
+
+@section css{
+    <style>
+        img {
+            object-fit: cover;
+        }
+    </style>
+}
+
+

@@ -12,34 +12,34 @@
 </head>
 <body>
     @*<nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-dark bg-dark">
-        <div class="container">
-            @Html.ActionLink("應用程式名稱", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
-            <button type="button" class="navbar-toggler" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" title="切換導覽" aria-controls="navbarSupportedContent"
-                    aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse d-sm-inline-flex justify-content-between">
-                <ul class="navbar-nav flex-grow-1">
-                    <li>@Html.ActionLink("首頁", "Index", "Home", new { area = "" }, new { @class = "nav-link" })</li>
-                    <li>@Html.ActionLink("關於", "About", "Home", new { area = "" }, new { @class = "nav-link" })</li>
-                    <li>@Html.ActionLink("連絡人", "Contact", "Home", new { area = "" }, new { @class = "nav-link" })</li>
-                </ul>
+            <div class="container">
+                @Html.ActionLink("應用程式名稱", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
+                <button type="button" class="navbar-toggler" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" title="切換導覽" aria-controls="navbarSupportedContent"
+                        aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse d-sm-inline-flex justify-content-between">
+                    <ul class="navbar-nav flex-grow-1">
+                        <li>@Html.ActionLink("首頁", "Index", "Home", new { area = "" }, new { @class = "nav-link" })</li>
+                        <li>@Html.ActionLink("關於", "About", "Home", new { area = "" }, new { @class = "nav-link" })</li>
+                        <li>@Html.ActionLink("連絡人", "Contact", "Home", new { area = "" }, new { @class = "nav-link" })</li>
+                    </ul>
+                </div>
             </div>
-        </div>
-    </nav>*@
+        </nav>*@
     <!-- 導覽列 -->
     <div>
         <nav class="navbar navbar-expand-md fixed-top" style="background-color: rgb(167, 192, 199); white-space:nowrap">
             <div class="container">
-                <img src="/Files/icon.png" alt="" width="30" height="24" class="d-inline-block align-text-top">
-                @Html.ActionLink("住宿趣", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
+                <img src="/images/icon.png" alt="" width="30" height="24" class="d-inline-block align-text-top">
+                @Html.ActionLink("住宿趣", "ChooseBranch", "Branches", new { area = "" }, new { @class = "navbar-brand" })
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
                 </button>
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                         <li class="nav-item">
-                            @Html.ActionLink("首頁", "Index", "Home", new { area = "" }, new { @class = "nav-link" })
+                            @Html.ActionLink("首頁", "ChooseBranch", "Branches", new { area = "" }, new { @class = "nav-link" })
                         </li>
                         <li class="nav-item dropdown">
                             <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
@@ -56,7 +56,7 @@
                             </ul>
                         </li>
                         <li class="nav-item">
-                            @Html.ActionLink("房型一覽", "About", "Home", new { area = "" }, new { @class = "nav-link" })
+                            @Html.ActionLink("房型一覽", "ListRoomTypes", "Branches", new { area = "" }, new { @class = "nav-link" })
                         </li>
                         <li class="nav-item">
                             @Html.ActionLink("FAQ", "Contact", "Home", new { area = "" }, new { @class = "nav-link" })
@@ -72,13 +72,13 @@
                         @{
                             if (User.Identity.IsAuthenticated)
                             {
-                                <li class="nav-item float-end">@Html.ActionLink("會員中心", "Logout", "Members", new { area = "" }, new { @class = "nav-link bi bi-person-circle" })</li>
+                                <li class="nav-item float-end">@Html.ActionLink("會員中心", "Index", "Members", new { area = "" }, new { @class = "nav-link bi bi-person-circle" })</li>
                                 <li class="nav-item float-end">@Html.ActionLink("登出", "Logout", "Members", new { area = "" }, new { @class = "nav-link bi bi-box-arrow-right" })</li>
 
                             }
                             else
                             {
-                                <li class="nav-item float-end">@Html.ActionLink("登入", "Login", "Members", new { area = "" }, new { @class = "nav-link bi bi-person-up" })</li>
+                                <li class="nav-item float-end">@Html.ActionLink("會員登入", "Login", "Members", new { area = "" }, new { @class = "nav-link bi bi-person-up" })</li>
                                 <li class="nav-item float-end">@Html.ActionLink("註冊新會員", "Register", "Members", new { area = "" }, new { @class = "nav-link bi bi-person-add" })</li>
                             }
                         }
@@ -90,10 +90,10 @@
     <div class="container body-content">
         @RenderBody()
         <hr />
-        <footer>
-            <p>&copy; @DateTime.Now.Year - 住宿趣</p>
-        </footer>
     </div>
+    <footer style="background-color:white" class="text-center">
+        <p>&copy; @DateTime.Now.Year - 住宿趣</p>
+    </footer>
 
     @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/bootstrap")

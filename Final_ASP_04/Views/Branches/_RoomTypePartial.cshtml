@@ -5,7 +5,7 @@ var selectedBranchId = (int)ViewData["selectedBranchId"];
 <div class="col-lg-4 col-md-6 d-flex align-items-stretch">
     <div class="card mt-3">
         <div class="card-body">
-            <img class="img-fluid productImg" src="/Files/@Model.FileName" alt="">
+            <img class="img-fluid productImg" src="/images/@Model.FileName" alt="">
             <h5 class="card-title">@Model.RoomTypeName</h5>
             <p class="card-text">@Model.RoomTypeDescription</p>
             <p>@Html.ActionLink("更多資訊", "RoomTypeInfo" ,"RoomTypes", new { selectedBranchId = selectedBranchId, selectedRoomTypeId = Model.Id }, new { @class = "btn btn-primary" })</p>

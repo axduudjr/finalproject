@@ -1,0 +1,54 @@
+﻿
+@{
+    ViewBag.Title = "ChooseBranch";
+    var branches = ViewBag.Branches as List<Final_ASP_04.Models.ViewModels.BranchVm>;
+}
+
+@{
+    foreach (var b in branches)
+    {
+        @Html.Partial("_BranchBlockPartial", b);
+    }
+}
+
+@section scripts{
+    <script>
+        $(document).ready(function () {
+            // 找到 data-id = 1 的 .carousel-item 元素，add active
+            $(".carousel-item[data-id='1']").addClass("active");
+        });
+    </script>
+}
+
+@section css{
+    <style>
+        img {
+            object-fit: cover;
+        }
+
+        body {
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh; /* 使内容至少占据整个视口高度 */
+            margin: 0;
+        }
+
+        .container {
+            flex: 1; /* 使内容部分占据剩余空间 */
+            /* 添加其他样式 */
+        }
+
+        .product {
+            /* 添加一些容器的样式，例如背景颜色、边框等 */
+            border: 1px solid #ccc;
+            border-radius: 20px;
+            padding: 40px;
+            cursor: pointer; /* 更改鼠标光标为手型，指示链接 */
+        }
+
+            .product:hover {
+                /* 当鼠标悬停在容器上时，修改容器的样式以模拟链接样式 */
+                background-color: #e8e3e3; /* 更改背景颜色 */
+            }
+    </style>
+}

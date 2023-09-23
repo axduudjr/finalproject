@@ -75,7 +75,7 @@ namespace Final_ASP_04.Controllers
 
 			ViewData["BranchId"] = new SelectList(items, "Value", "Text", null);
 		}
-		[HttpGet]
+		[HttpGet]		
 		public ActionResult Edit(int? id)
 		{
 			if (id == null)

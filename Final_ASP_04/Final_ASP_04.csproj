@@ -339,6 +339,7 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Controllers\BranchesController.cs" />
+    <Compile Include="Controllers\CommentsController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\RoomsApiController.cs" />
     <Compile Include="Controllers\RoomsController.cs" />
@@ -347,6 +348,7 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\DTOs\CartCreateDTO.cs" />
+    <Compile Include="Models\DTOs\CommentCreateDTO.cs" />
     <Compile Include="Models\DTOs\RoomListDTO.cs" />
     <Compile Include="Models\DTOs\RoomTypeListDTO.cs" />
     <Compile Include="Models\EFModels\AppDbContext.cs" />
@@ -375,6 +377,7 @@
     <Compile Include="Models\Services\CartService.cs" />
     <Compile Include="Models\Services\RoomService.cs" />
     <Compile Include="Models\Services\RoomTypeService.cs" />
+    <Compile Include="Models\ViewModels\CommentCreateVm.cs" />
     <Compile Include="Models\ViewModels\RoomTypeVm.cs" />
     <Compile Include="Models\ViewModels\RoomVm.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -444,6 +447,7 @@
     <Content Include="Views\RoomTypes\RoomTypeInfo.cshtml" />
     <Content Include="Views\Rooms\_RoomSearchResultPartial.cshtml" />
     <Content Include="Views\RoomTypes\_ListOtherRoomTypePartial.cshtml" />
+    <Content Include="Views\Comments\CreateComment.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

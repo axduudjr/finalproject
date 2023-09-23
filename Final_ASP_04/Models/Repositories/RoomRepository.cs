@@ -36,16 +36,16 @@ namespace Final_ASP_04.Models.Repositories
 
 			return orders;
 		}
-		public Room GetFirstRoom(string roomTypeName, string guestNumberName, string roomTypeDescription)
-		{
-			var db = new AppDbContext();
+		//public Room GetFirstRoom(string roomTypeName, string guestNumberName, string roomTypeDescription)
+		//{
+		//	var db = new AppDbContext();
 
-			var room = db.Rooms.Include("RoomType").Include("GuestNumber")
-				.FirstOrDefault(x => x.RoomType.Name == roomTypeName 
-								&& x.GuestNumber.Name == guestNumberName 
-								&& x.RoomType.Description == roomTypeDescription);
+		//	var room = db.Rooms.Include("RoomType").Include("GuestNumber")
+		//		.FirstOrDefault(x => x.RoomType.Name == roomTypeName 
+		//						&& x.GuestNumber.Name == guestNumberName 
+		//						&& x.RoomType.Description == roomTypeDescription);
 
-			return room;
-		}
+		//	return room;
+		//}
 	}
 }

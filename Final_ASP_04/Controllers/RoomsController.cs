@@ -58,13 +58,13 @@ namespace Final_ASP_04.Controllers
 		public ActionResult CreateCart(RoomVm roomVm, DateTime startDateTime, DateTime endDateTime)
 		{
 
-			var buyer = User.Identity.Name;
+			//var buyer = User.Identity.Name;
 			var service = new CartService();
 			var dto = new CartCreateDTO
 			{
 				BranchId = new BranchRepository().GetBranchByRoomId(roomVm.Id).Id,
 				RoomId = roomVm.Id,
-				MemberId = 30,
+				MemberId = 30, //待取得真正的會員Id
 				Price = roomVm.Price,
 				StartDateTime = startDateTime,
 				EndDateTime = endDateTime,

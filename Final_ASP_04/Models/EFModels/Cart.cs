@@ -24,7 +24,6 @@ namespace Final_ASP_04.Models.EFModels
 
         public int? PaymentTypeId { get; set; }
 
-        [Required]
         [StringLength(50)]
         public string Status { get; set; }
 

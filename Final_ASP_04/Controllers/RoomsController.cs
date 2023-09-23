@@ -9,6 +9,7 @@ using System.Web.Mvc;
 using System.Web.UI;
 using PagedList;
 using Final_ASP_04.Models.EFModels;
+using Final_ASP_04.Models.DTOs;
 
 namespace Final_ASP_04.Controllers
 {
@@ -52,6 +53,25 @@ namespace Final_ASP_04.Controllers
 			ViewBag.RoomsVm = result;
 
 			return View(result);
+		}
+		[HttpPost]
+		public ActionResult CreateCart(RoomVm roomVm, DateTime startDateTime, DateTime endDateTime)
+		{
+
+			var buyer = User.Identity.Name;
+			var service = new CartService();
+			var dto = new CartCreateDTO
+			{
+				BranchId = new BranchRepository().GetBranchByRoomId(roomVm.Id).Id,
+				RoomId = roomVm.Id,
+				MemberId = 30,
+				Price = roomVm.Price,
+				StartDateTime = startDateTime,
+				EndDateTime = endDateTime,
+			};
+			service.CreateCart(dto);
+
+			return RedirectToAction("Index", "Home");
 		}
 
 		private List<RoomVm> ApplySort(List<RoomVm> roomsVm, int sortvalue)

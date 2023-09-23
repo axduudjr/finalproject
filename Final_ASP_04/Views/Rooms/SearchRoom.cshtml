@@ -122,6 +122,11 @@
             box-shadow: 0 0 10px #a8a7a7;
             margin-bottom: 1.5rem !important;
         }
+        .no-border{
+            border: none;
+            outline: none;
+            width: 100px;
+        }
     </style>
 }
 
@@ -150,23 +155,6 @@
             var url = $(this).find('option:selected').val();
             window.location.href = url;
 
-        @*$.post("/Rooms/SearchRoom", {
-            page: @Model.PageNumber,
-            branchId: @ViewBag.BranchId,
-            roomTypeId: @ViewBag.RoomTypeId,
-            guestNumberId: @ViewBag.GuestNumberId,
-            startDateTime: "@ViewBag.StartDateTime",
-            endDateTime: "@ViewBag.EndDateTime",
-            sortvalue: selectedValue
-        }, function (data) {
-
-            //將結果顯示在畫面上
-            $('.allSearchResult').html(data);
-            initForm(@ViewBag.BranchId);
-
-            $(".orderResult").val(@ViewBag.SortValue);
-
-            });*@
         })
 });
     </script>

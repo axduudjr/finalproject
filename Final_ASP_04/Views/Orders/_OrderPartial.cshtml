@@ -1,0 +1,15 @@
+﻿<div class="col-md-6 mb-3">
+    <img src="~/images/@Model.RoomPicFile" alt="圖片描述" class="resize-image">
+</div>
+
+<div class="col-md-6 mb-3 caption mb-3">
+
+    <h6>分店名稱: @Model.BranchName</h6>
+    <h6>房型: @Model.RoomType</h6>
+    <h6>入住日期: @Model.StartDate.ToString("yyyy-MM-dd")</h6>
+    <h6>退房日期: @Model.EndDate.ToString("yyyy-MM-dd")</h6>
+    <h6>預定時間: @Model.OrderTime</h6>
+    <h6>總金額: @Model.Price.ToString("#,#")</h6>
+    <h6>訂單狀態: @Model.Status</h6>
+    @Html.Raw(ViewData["Link"])
+</div>

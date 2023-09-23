@@ -10,7 +10,7 @@ namespace Final_ASP_04.Models.Services
 {
 	public class CartService
 	{
-		public void CreateCart(CartCreateDTO dto)
+		public int CreateCart(CartCreateDTO dto)
 		{
 			var cart = new Cart
 			{
@@ -22,7 +22,9 @@ namespace Final_ASP_04.Models.Services
 				EndDateTime = dto.EndDateTime,
 			};
 			var repo = new CartRepository();
-			repo.CreateCart(cart);
+			var cartId = repo.CreateCart(cart);
+
+			return cartId;
 		}
 	}
 }

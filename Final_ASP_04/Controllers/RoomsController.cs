@@ -69,9 +69,9 @@ namespace Final_ASP_04.Controllers
 				StartDateTime = startDateTime,
 				EndDateTime = endDateTime,
 			};
-			service.CreateCart(dto);
+			var cartId = service.CreateCart(dto);
 
-			return RedirectToAction("Index", "Home");
+			return RedirectToAction("CheckoutStepOne", "Checkout", new { cartId });
 		}
 
 		private List<RoomVm> ApplySort(List<RoomVm> roomsVm, int sortvalue)

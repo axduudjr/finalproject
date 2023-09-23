@@ -8,11 +8,13 @@ namespace Final_ASP_04.Models.Repositories
 {
 	public class CartRepository
 	{
-		public void CreateCart(Cart cart)
+		public int CreateCart(Cart cart)
 		{
 			var db = new AppDbContext();
 			db.Carts.Add(cart);
 			db.SaveChanges();
+
+			return cart.Id;
 		}
 	}
 }

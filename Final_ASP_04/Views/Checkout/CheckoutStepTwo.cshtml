@@ -1,0 +1,106 @@
+﻿@model Final_ASP_04.Models.ViewModels.CheckoutVM
+
+@{
+    ViewBag.Title = "選擇付款方式";
+}
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+    <div class="container">
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        @Html.HiddenFor(model => model.Id)
+        <div class="row text-center">
+            <h1>@Html.Raw(Model.BranchName)</h1>
+            <div class="row justify-content-center text-center mt-3 ">
+                <div class="col-md-4">
+                    <div class="alert alert-secondary rounded-pill mr-2" role="alert">
+                        1.確認訂單資料
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="alert alert-success rounded-pill mr-2" role="alert">
+                        2.選擇付款方式
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="alert alert-secondary rounded-pill mr-2" role="alert">
+                        3.完成訂單
+                    </div>
+                </div>
+            </div>
+        </div>
+        <hr />
+
+
+        <div class="row row-reverse">
+            <div class="col-md-5 mt-3">
+                <form action="">
+                    <div class="roominfo">
+                        <div style="background-color: white; border-radius: 20px; text-align: center;">
+                            <h4><strong>訂房資訊</strong></h4>
+                        </div>
+                        <div>
+                            入住日期：@Html.Raw(Model.StartDateTime.ToString("yyyy-MM-dd"))
+                            <br>
+                            退房日期：@Html.Raw(Model.EndDateTime.ToString("yyyy-MM-dd"))
+                            <br>
+                            入住天數：@Math.Floor((Model.EndDateTime - Model.StartDateTime).TotalDays) 晚
+
+                            <br>
+                            分店：@Html.Raw(Model.BranchName)
+                            <br>
+                            房型：@Html.Raw(Model.RoomName)
+
+                            <br><br><br>
+                            <strong style="font-size: 1.5em;">合計金額：NT$@Html.Raw(Model.Price)</strong>
+                        </div>
+                    </div>
+                </form>
+
+            </div>
+            <div class="col-md-7 mt-3">
+                <div class="guestinfo">
+                    <div style="background-color: white; border-radius: 20px; text-align: center;">
+                        <h4><strong>選擇付款方式</strong></h4>
+                    </div>
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.PaymentTypeId, htmlAttributes: new { @class = "control-label col-md-2" })
+                        @Html.DropDownListFor(model => model.PaymentTypeId, ViewBag.PaymentTypes as SelectList, "請選擇支付方式", new { @class = "form-control" })
+                        @Html.ValidationMessageFor(model => model.PaymentTypeId, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-12 mt-3">
+                <input type="submit" value="確定付款方式，完成預定" class="btn btn-primary" style="width:100%" />
+            </div>
+        </div>
+    </div>
+
+}
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}
+@section css{
+    <style>
+        .row-reverse {
+            flex-direction: row-reverse;
+        }
+
+        .roominfo {
+            padding: 10px;
+            background-color: #f7efcc;
+            /*border: 1px solid black;*/
+            font-size: 20px;
+            border-radius: 20px;
+        }
+
+        .guestinfo {
+            padding: 10px;
+            background-color: #f7efcc;
+            border-radius: 20px;
+        }
+    </style>
+}

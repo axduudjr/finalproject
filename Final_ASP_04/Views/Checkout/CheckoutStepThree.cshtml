@@ -1,0 +1,83 @@
+﻿
+@{
+    ViewBag.Title = "CheckoutStepThree";
+}
+
+@using (Html.BeginForm())
+{
+    <div class="container">
+        <div class="row text-center">
+            <h1>台北市西門分店</h1>
+            <div class="row justify-content-center text-center mt-3 ">
+                <div class="col-md-4">
+                    <div class="alert alert-secondary rounded-pill mr-2" role="alert">
+                        1.確認訂單資料
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="alert alert-secondary rounded-pill mr-2" role="alert">
+                        2.選擇付款方式
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="alert alert-success rounded-pill mr-2" role="alert">
+                        3.完成訂單
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-12 mt-3">
+                <div class="alert alert-success" role="alert">
+                    感謝您的預定，以下是您的訂房明細
+                </div>
+            </div>
+        </div>
+
+        <div class="row detail">
+            <div class="col-md-6">
+                <img src="images/point3d-commercial-imaging-ltd-GUno-FetWJM-unsplash.jpg" alt=""
+                     style="width: 600px; border-radius: 10px;">
+            </div>
+            <div class="col-md-6">
+                入住日期：@Html.Raw(Model.StartDate.ToString("yyyy-MM-dd"))
+                <br>
+                退房日期：@Html.Raw(Model.EndDate.ToString("yyyy-MM-dd"))
+                <br>
+                入住天數：@Math.Floor((Model.EndDate - Model.StartDate).TotalDays) 晚
+                <br>
+                分店：@Html.Raw(Model.BranchName)
+                <br>
+                房型：@Html.Raw(Model.RoomType)
+                <br>
+                付款方式：@Html.Raw(Model.PaymentType)
+                <br><br>
+                <strong style="font-size: 1.5em;">合計金額：$@Html.Raw(Model.Price)</strong>
+            </div>
+        </div>
+    </div>
+
+}
+
+@section css{
+    <style>
+        .detail {
+            padding: 10px;
+            background-color: antiquewhite;
+            border-radius: 10px;
+        }
+    </style>
+}
+
+@section scripts{
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+    <script>
+        swal({
+            title: "已完成訂房！",
+            text: "感謝您在「住宿趣」預定房間",
+            icon: "success",
+            button: "OK!",
+        });
+    </script>
+}

@@ -1,0 +1,65 @@
+﻿@using Final_ASP_04.Models.ViewModels
+@model IEnumerable<Final_ASP_04.Models.ViewModels.OrderVM>
+
+@{
+    ViewBag.Title = "我的訂房資訊";
+    var orders = ViewBag.Orders as List<OrderVM>;
+}
+
+
+<div class="container">
+    <div class="row">
+        <h1>我的訂房資訊</h1>
+    </div>
+
+    <form action="" method="get">
+        分店名稱: @Html.DropDownList("BranchId", null, new { @class = "form-select form-select-sm me-3 mb-3", style = "width:auto;display:inline-block;" })
+        <input type="submit" value="查詢" class="btn btn-success btn-sm" />
+    </form>
+
+    <div class="row">
+
+        @foreach (var order in orders)
+        {
+            ViewData["Link"] = Html.ActionLink("查看", "Edit", new { id = order.Id }, new { @class = "big-button" });
+            Html.RenderPartial("_OrderPartial", order);
+
+        }
+    </div>
+</div>
+
+@section css{
+    <style>
+        .caption {
+            border-radius: 5px;
+            background-color: #dfeff7;
+            border: 1px solid #c7e0ee;
+            padding: 20px
+        }
+
+        .big-button {
+            width: 100%;
+            display: inline-block;
+            padding: 5px 5px;
+            background: #4b9ce1;
+            color: #fff;
+            text-align: center;
+            text-decoration: none;
+            border: 2px solid #0056b3;
+            border-radius: 5px;
+            font-size: 16px;
+        }
+
+            .big-button:hover {
+                background-color: #d7d8d2;
+            }
+
+        .resize-image {
+            max-width: 100%;
+            max-height: 100%;
+            width: auto;
+            height: auto;
+            border-radius: 5px
+        }
+    </style>
+}

@@ -62,7 +62,7 @@ namespace Final_ASP_04.Controllers
 			var newId = CreateOrder(cartInDb);
 
 			// 清空Cart，測試先拿掉
-			// EmptyCart(cartInDb);
+			EmptyCart(cartInDb);
 
 			return RedirectToAction("CheckoutStepThree", new { newId });
 

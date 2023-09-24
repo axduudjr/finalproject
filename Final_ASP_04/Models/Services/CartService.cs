@@ -26,5 +26,17 @@ namespace Final_ASP_04.Models.Services
 
 			return cartId;
 		}
+		public Cart CheckForUncompletedCartByMemberId(int memberId)
+		{
+			var repo = new CartRepository();
+			var cart = repo.GetCartByMemberId(memberId);
+
+			return cart;
+		}
+		public void DeleteCart(int cartId)
+		{
+			var repo = new CartRepository();
+			repo.DeleteCart(cartId);
+		}
 	}
 }

@@ -1,9 +1,14 @@
-﻿@{ 
+﻿@{
     var branchId = ViewBag.BranchId;
     var roomTypeId = ViewBag.RoomTypeId;
     var guestNumberId = ViewBag.GuestNumberId;
     var startDateTime = ViewBag.StartDateTime;
     var endDateTime = ViewBag.EndDateTime;
+    int totalDays = 1;
+    if (startDateTime != null && endDateTime != null)
+    {
+        totalDays = (DateTime.Parse(endDateTime) - DateTime.Parse(startDateTime)).Days;
+    }
 }
 <div class="card mb-3 resultCard">
     <form method="post" action="CreateCart">
@@ -13,18 +18,21 @@
             </div>
             <div class="col-md-9">
                 <div class="card-body">
-                    <h5 class="card-title">
+                    <h5 class="card-title fw-bolder">
                         @Model.RoomTypeName
                         <small>@Model.GuestNumberName</small>
                     </h5>
-                    <p class="card-text">@Model.RoomDescription</p>
+                    <p class="card-text" style="color: darkred; text-decoration: underline">@Model.RoomDescription</p>
                     <p class="card-text">@Model.RoomTypeDescription</p>
-                    <p class="card-text">NT$<input type="text" class="no-border" name="Price" value="@Model.Price" readonly /></p>
+                    <p class="card-text">NT$<input type="text" class="no-border fw-bolder" style="color:darkblue" name="Price" value="@(Model.Price * totalDays)" readonly /></p>
                     <input type="hidden" name="Id" value="@Model.Id" />
-                    <input type="hidden" name="startDateTime" value="@startDateTime" />
-                    <input type="hidden" name="endDateTime" value="@endDateTime" />
-                    <p class="card-text"><input type="submit" class="btn btn-primary" value="預約" /></p>
-                    @*<p class="card-text">@Html.ActionLink("預約", "CreateCart", new { branchId= branchId, roomTypeId= roomTypeId, guestNumberId= guestNumberId, startDateTime= startDateTime, endDateTime= endDateTime }, new {@class="btn btn-primary"})</p>*@
+                    <p class="card-text">
+                        入住日期：
+                        <input type="text" class="no-border" style="color:darkblue" name="startDateTime" value="@startDateTime" />
+                        退房日期：
+                        <input type="text" class="no-border" style="color:darkblue" name="endDateTime" value="@endDateTime" />
+                    </p>
+                    <p class="card-text"><input type="submit" class="btn btn-primary" value="預約" /></p>                   
                 </div>
             </div>
         </div>

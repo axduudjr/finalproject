@@ -382,6 +382,7 @@
     <Compile Include="Models\Repositories\MemberRepository.cs" />
     <Compile Include="Models\Repositories\RoomRepository.cs" />
     <Compile Include="Models\Repositories\RoomTypeRepository.cs" />
+    <Compile Include="Models\Services\BranchService.cs" />
     <Compile Include="Models\Services\CartService.cs" />
     <Compile Include="Models\Services\RoomService.cs" />
     <Compile Include="Models\Services\RoomTypeService.cs" />

@@ -11,22 +11,6 @@
     @RenderSection("css", required: false)
 </head>
 <body>
-    @*<nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-dark bg-dark">
-            <div class="container">
-                @Html.ActionLink("應用程式名稱", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
-                <button type="button" class="navbar-toggler" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" title="切換導覽" aria-controls="navbarSupportedContent"
-                        aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-                <div class="collapse navbar-collapse d-sm-inline-flex justify-content-between">
-                    <ul class="navbar-nav flex-grow-1">
-                        <li>@Html.ActionLink("首頁", "Index", "Home", new { area = "" }, new { @class = "nav-link" })</li>
-                        <li>@Html.ActionLink("關於", "About", "Home", new { area = "" }, new { @class = "nav-link" })</li>
-                        <li>@Html.ActionLink("連絡人", "Contact", "Home", new { area = "" }, new { @class = "nav-link" })</li>
-                    </ul>
-                </div>
-            </div>
-        </nav>*@
     <!-- 導覽列 -->
     <div>
         <nav class="navbar navbar-expand-md fixed-top" style="background-color: rgb(167, 192, 199); white-space:nowrap">
@@ -46,26 +30,25 @@
                                 分店一覽
                             </a>
                             <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                <li><a class="dropdown-item" href="#">台北西門館</a></li>
-                                <li><a class="dropdown-item" href="#">台北松山館</a></li>
-                                <li><a class="dropdown-item" href="#">新北板橋館</a></li>
-                                <li><a class="dropdown-item" href="#">新北土城館</a></li>
-                                <li><a class="dropdown-item" href="#">桃園中壢館</a></li>
-                                <li><a class="dropdown-item" href="#">台中民權館</a></li>
-                                <li><a class="dropdown-item" href="#">高雄亞灣館</a></li>
-                            </ul>
+                                @{
+                                    foreach (var branch in new Final_ASP_04.Models.Services.BranchService().GetAllBranches())
+                                    {
+                                        <li><a class="dropdown-item" href="#">@branch.Name</a></li>
+                                    }
+                                 }                                    
+                                </ul>
                         </li>
                         <li class="nav-item">
                             @Html.ActionLink("房型一覽", "ListRoomTypes", "Branches", new { area = "" }, new { @class = "nav-link" })
                         </li>
                         <li class="nav-item">
-                            @Html.ActionLink("FAQ", "Contact", "Home", new { area = "" }, new { @class = "nav-link" })
+                            @Html.ActionLink("FAQ", "About", "Home", new { area = "" }, new { @class = "nav-link" })
                         </li>
                         <li class="nav-item">
                             @Html.ActionLink("關於我們", "About", "Home", new { area = "" }, new { @class = "nav-link" })
                         </li>
                         <li class="nav-item">
-                            @Html.ActionLink("聯絡我們", "About", "Home", new { area = "" }, new { @class = "nav-link" })
+                            @Html.ActionLink("聯絡我們", "Contact", "Home", new { area = "" }, new { @class = "nav-link" })
                         </li>
                     </ul>
                     <ul class="navbar-nav justify-content-end flex-grow-1 pe-3">

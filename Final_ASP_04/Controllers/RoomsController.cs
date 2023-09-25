@@ -59,7 +59,6 @@ namespace Final_ASP_04.Controllers
 		{
 
 			var buyer = User.Identity.Name;
-			int totalDays = (endDateTime - startDateTime).Days;
 
 			var service = new CartService();
 			var dto = new CartCreateDTO
@@ -67,7 +66,7 @@ namespace Final_ASP_04.Controllers
 				BranchId = new BranchRepository().GetBranchByRoomId(roomVm.Id).Id,
 				RoomId = roomVm.Id,
 				MemberId = new MemberRepository().GetMemberByAccount(buyer).Id,
-				Price = roomVm.Price * totalDays,
+				Price = roomVm.Price,
 				StartDateTime = startDateTime,
 				EndDateTime = endDateTime,
 			};

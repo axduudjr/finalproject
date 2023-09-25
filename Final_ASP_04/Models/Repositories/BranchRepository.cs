@@ -15,5 +15,12 @@ namespace Final_ASP_04.Models.Repositories
 
 			return room.RoomType.Branch;
 		}
+		public List<Branch> GetAllBranches()
+		{
+			var db = new AppDbContext();
+			var branches = db.Branches.ToList();
+
+			return branches;
+		}
 	}
 }

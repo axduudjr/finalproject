@@ -4,6 +4,7 @@
     ViewBag.Title = "ListRoomTypes";
     var roomTypeVms = ViewBag.RoomTypeVms as List<RoomTypeVm>;
     var selectedBranchId = ViewBag.SelectedBranchId;
+    var branches = ViewBag.Branches;
 }
 
 <!-- 標題 -->
@@ -15,7 +16,7 @@
     <div class="mt-3">
         <nav aria-label="breadcrumb">
             <ol class="breadcrumb">
-                <li class="breadcrumb-item"><a href="#">首頁</a></li>
+                <li class="breadcrumb-item"><a href="/">首頁</a></li>
                 <li class="breadcrumb-item active">房型介紹</li>
             </ol>
         </nav>
@@ -28,13 +29,12 @@
             <div role="tabpanel" class="mt-3">
                 <!-- 選擇分店 -->
                 <div class="list-group" id="myList" role="tablist">
-                    <a class="list-group-item list-group-item-action" data-bs-toggle="list" href="#台北西門館" data-id="1" role="tab">台北西門館</a>
-                    <a class="list-group-item list-group-item-action" data-bs-toggle="list" href="#台北松山館" data-id="2" role="tab">台北松山館</a>
-                    <a class="list-group-item list-group-item-action" data-bs-toggle="list" href="#新北板橋館" data-id="3" role="tab">新北板橋館</a>
-                    <a class="list-group-item list-group-item-action" data-bs-toggle="list" href="#新北土城館" data-id="4" role="tab">新北土城館</a>
-                    <a class="list-group-item list-group-item-action" data-bs-toggle="list" href="#桃園中壢館" data-id="5" role="tab">桃園中壢館</a>
-                    <a class="list-group-item list-group-item-action" data-bs-toggle="list" href="#台中民權館" data-id="6" role="tab">台中民權館</a>
-                    <a class="list-group-item list-group-item-action" data-bs-toggle="list" href="#高雄亞灣館" data-id="7" role="tab">高雄亞灣館</a>
+                    @{
+                        foreach (var branch in branches)
+                        {
+                            <a class="list-group-item list-group-item-action" data-bs-toggle="list" href="#@branch.Name" data-id="@branch.Id" role="tab">@branch.Name</a>
+                        }
+                    }                    
                 </div>
             </div>
         </div>

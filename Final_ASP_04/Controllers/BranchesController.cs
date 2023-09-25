@@ -66,6 +66,11 @@ namespace Final_ASP_04.Controllers
             ViewBag.RoomTypeVms = roomTypeVms;
             ViewBag.SelectedBranchId = selectedBranchId;
 
+			var branchService = new BranchService();
+			var branches = branchService.GetAllBranches();
+
+			ViewBag.Branches = branches;
+
 			return View(roomTypeVms);
         }
     }

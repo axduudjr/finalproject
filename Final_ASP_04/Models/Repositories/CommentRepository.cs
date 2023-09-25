@@ -1,20 +1,50 @@
-﻿using Final_ASP_04.Models.EFModels;
+﻿using Dapper;
+using Final_ASP_04.Models.EFModels;
+using Final_ASP_04.Utilities;
 using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Linq;
 using System.Web;
+using System.Web.UI.WebControls.WebParts;
 
 namespace Final_ASP_04.Models.Repositories
 {
 	public class CommentRepository
-	{
-		public List<Comment> GetHighRankCommentsByRoomTypeId(int roomTypeId)
+	{		
+		public List<Comment> GetAllCommentsByBranchId(int branchId)
 		{
-			var db = new AppDbContext();
+			using (var conn = new SqlDb().GetConnection("AppDbContext"))
+			{
+				var parameters = new DynamicParameters();
+				parameters.Add("@branchId", branchId);
 
-			var comments = db.Comments.Where(x => x.Order.Room.RoomTypeId == roomTypeId && x.Rank >= 4).ToList();
+				var result = conn.Query<Comment, Order, Branch, Comment>(
+					"SelectCommentsByBranchId",
+					(comment, order, branch) =>
+					{
+						comment.Order = order;
+						order.Branch = branch;
+						return comment;
+					},
+					parameters,splitOn: "Id",commandType: CommandType.StoredProcedure).ToList();
 
-			return comments;
+				return result;
+			}
+		}
+		public void CreateComment(Comment comment)
+		{			
+			using (var conn = new SqlDb().GetConnection("AppDbContext"))
+			{				
+				var parameters = new DynamicParameters();
+				parameters.Add("@orderId", comment.OrderId);
+				parameters.Add("@Rank", comment.Rank);
+				parameters.Add("@Description", comment.Description);
+				parameters.Add("@CreatedTime", comment.CreatedTime);
+				parameters.Add("@ModifiedTime", comment.ModifiedTime);
+
+				conn.Execute("CreateComment", parameters, commandType: CommandType.StoredProcedure);
+			}
 		}
 	}
 }

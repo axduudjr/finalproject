@@ -8,6 +8,10 @@
     if (startDateTime != null && endDateTime != null)
     {
         totalDays = (DateTime.Parse(endDateTime) - DateTime.Parse(startDateTime)).Days;
+        if(totalDays < 1)
+        {
+            totalDays = 1;
+        }
     }
 }
 <div class="card mb-3 resultCard">

@@ -15,6 +15,7 @@ namespace Final_ASP_04.App_Start
 		{			
 			CreateMap<RoomTypeListDTO, RoomType>();
 			CreateMap<RoomType, RoomTypeListDTO>();
+			CreateMap<CommentCreateDTO, Comment>().ReverseMap();
 		}
 	}
 }

@@ -1,10 +1,11 @@
 ﻿@model Final_ASP_04.Models.ViewModels.RoomTypeVm
 @using Final_ASP_04.Models.ViewModels;
 @{
-    ViewBag.Title = "RoomTypeInfo";
+    ViewBag.Title = "房間資訊";
     var otherRoomTypes = ViewBag.OtherRoomTypes as List<RoomTypeVm>;
     var selectedBranchId = ViewBag.selectedBranchId;
     var selectedRoomTypeId = ViewBag.selectedRoomTypeId;
+    var roomTypePictures = ViewBag.RoomTypePictures;
 }
 <!-- 標題 -->
 <div class="container-fluid has-background-image" style="margin-top:51px;">
@@ -37,10 +38,10 @@
                     <img src="/images/@Html.DisplayFor(model => model.FileName)" width="100%" class="productPhoto" alt="">
                     <div class="images">
                         <ul>
-                            <li><img src="images/adam-winger-VGs8z60yT2c-unsplash.jpg" alt=""></li>
-                            <li><img src="images/erick-palacio-_B9J6abAHPA-unsplash.jpg" alt=""></li>
-                            <li><img src="images/frames-for-your-heart-FqqiAvJejto-unsplash.jpg" alt=""></li>
-                            <li><img src="images/kenny-eliason-iAftdIcgpFc-unsplash.jpg" alt=""></li>
+                            <li><img src="/images/@Model.FileName" alt=""></li>
+                            <li><img src="/images/@roomTypePictures[0].FileName" alt=""></li>
+                            <li><img src="/images/@roomTypePictures[1].FileName" alt=""></li>
+                            <li><img src="/images/@roomTypePictures[2].FileName" alt=""></li>
                         </ul>
                     </div>
                 </div>
@@ -79,7 +80,7 @@
         </div>
         <!-- 評論 -->
         <div class="row"> 
-            <h3 class="fw-bolder mb-3">客戶評價</h3>
+            <h3 class="fw-bolder mb-3">本館客戶評價</h3>
                 @{
                     Html.RenderAction("ListComments", "Comments", new { branchId = selectedBranchId });
                 }

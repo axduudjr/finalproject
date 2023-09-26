@@ -24,7 +24,7 @@ namespace Final_ASP_04.Controllers
 				CreatedTime = x.CreatedTime
             });
 
-            return PartialView(commentVms.ToList());
+            return PartialView(commentVms.Take(4).ToList());
         }
         public ActionResult CreateComment(int orderId)
         {

@@ -1,4 +1,5 @@
-﻿using Final_ASP_04.Models.Services;
+﻿using Final_ASP_04.Models.EFModels;
+using Final_ASP_04.Models.Services;
 using Final_ASP_04.Models.ViewModels;
 using System;
 using System.Collections.Generic;
@@ -25,11 +26,22 @@ namespace Final_ASP_04.Controllers
 
             var otherRoomTypesVm = otherRoomTypesDto.Select(x => x.ToRoomTypeVm()).ToList();
 
-            ViewBag.selectedBranchId = selectedBranchId;
+            ViewBag.roomTypePictures = GetRoomTypePictures(roomTypeVm);
+
+			ViewBag.selectedBranchId = selectedBranchId;
             ViewBag.selectedRoomTypeId = selectedRoomTypeId;
 			ViewBag.otherRoomTypes = otherRoomTypesVm;
 
 			return View(roomTypeVm);
         }
-    }
+
+		private List<RoomTypePicture> GetRoomTypePictures(RoomTypeVm roomTypeVm)
+		{
+            var db = new AppDbContext();
+
+            var roomTypePictures = db.RoomTypePictures.Where(x => x.RoomTypeName == roomTypeVm.RoomTypeName).OrderBy(x => x.DisplayOrder).ToList();
+
+            return roomTypePictures;
+		}
+	}
 }

@@ -19,9 +19,5 @@ namespace Final_ASP_04.Models.EFModels
         public string FileName { get; set; }
 
         public int DisplayOrder { get; set; }
-
-        public virtual RoomTypePicture RoomTypePictures1 { get; set; }
-
-        public virtual RoomTypePicture RoomTypePicture1 { get; set; }
     }
 }

@@ -27,6 +27,7 @@ namespace Final_ASP_04.Models.EFModels
 		public virtual DbSet<Room> Rooms { get; set; }
 		public virtual DbSet<RoomTypePicture> RoomTypePictures { get; set; }
 		public virtual DbSet<RoomType> RoomTypes { get; set; }
+		public virtual DbSet<sysdiagram> sysdiagrams { get; set; }
 		public virtual DbSet<User> Users { get; set; }
 		public virtual DbSet<BranchPicture> BranchPictures { get; set; }
 
@@ -119,10 +120,6 @@ namespace Final_ASP_04.Models.EFModels
 				.HasMany(e => e.Orders)
 				.WithRequired(e => e.Room)
 				.WillCascadeOnDelete(false);
-
-			modelBuilder.Entity<RoomTypePicture>()
-				.HasOptional(e => e.RoomTypePictures1)
-				.WithRequired(e => e.RoomTypePicture1);
 
 			modelBuilder.Entity<RoomType>()
 				.HasMany(e => e.Rooms)

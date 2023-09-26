@@ -14,7 +14,7 @@ namespace Final_ASP_04.Models.Services
 		public List<Comment> GetAllCommentsByBranchId(int branchId)
 		{
 			var repo = new CommentRepository();
-			var comments = repo.GetAllCommentsByBranchId(branchId).OrderByDescending(x => x.Rank).Take(4).ToList();
+			var comments = repo.GetAllCommentsByBranchId(branchId).OrderByDescending(x => x.Rank).ToList();
 
 			return comments;
 		}

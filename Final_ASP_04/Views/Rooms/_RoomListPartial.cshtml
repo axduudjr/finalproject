@@ -26,7 +26,7 @@
                         @Model.RoomTypeName
                         <small>@Model.GuestNumberName</small>
                     </h5>
-                    <p class="card-text" style="color: darkred; text-decoration: underline">@Model.RoomDescription</p>
+                    <p class="card-text fw-bolder" style="color:mediumvioletred">@Model.RoomDescription</p>
                     <p class="card-text">@Model.RoomTypeDescription</p>
                     <p class="card-text">總金額NT$<input type="text" class="no-border fw-bolder" style="color:darkblue" name="Price" value="@(Model.Price * totalDays)" readonly /></p>
                     <input type="hidden" name="Id" value="@Model.Id" />

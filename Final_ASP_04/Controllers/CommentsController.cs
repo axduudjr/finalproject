@@ -47,7 +47,20 @@ namespace Final_ASP_04.Controllers
         [HttpPost]
         public ActionResult CreateComment(CommentCreateVm vm)
         {
-            var service = new CommentService();
+			var service = new CommentService();
+
+			var orderAlreadyComment = service.GetCommentByOrderId(vm.OrderId);
+			if (orderAlreadyComment != null)
+			{
+                ModelState.AddModelError("", "該筆訂單已經給過評價");
+				var repo = new OrderRepository();
+				var order = repo.GetOrder(vm.OrderId);
+
+				ViewBag.Order = order;
+				return View(vm);
+				//return RedirectToAction("ListRoomTypes", "Branches");
+			}
+			
             var dto = vm.ToCommentCreateDTO();
 
             service.CreateComment(dto);

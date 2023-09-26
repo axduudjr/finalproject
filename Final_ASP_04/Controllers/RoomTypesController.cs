@@ -46,7 +46,7 @@ namespace Final_ASP_04.Controllers
 			return View(roomTypeVm);
         }
 
-		private List<RoomTypePicture> GetRoomTypePictures(RoomTypeVm roomTypeVm)
+		public List<RoomTypePicture> GetRoomTypePictures(RoomTypeVm roomTypeVm)
 		{
             var db = new AppDbContext();
 

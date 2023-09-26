@@ -54,6 +54,7 @@ namespace Final_ASP_04.Controllers
 
 			return View(result);
 		}
+
 		[HttpPost]
 		public ActionResult CreateCart(RoomVm roomVm, DateTime startDateTime, DateTime endDateTime)
 		{
@@ -122,5 +123,5 @@ namespace Final_ASP_04.Controllers
 
 			return branch;
 		}
-    }
+	}
 }

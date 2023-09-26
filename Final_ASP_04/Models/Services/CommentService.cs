@@ -25,5 +25,12 @@ namespace Final_ASP_04.Models.Services
 
 			repo.CreateComment(comment);
 		}
+		public Comment GetCommentByOrderId(int orderId)
+		{
+			var repo = new CommentRepository();
+			var comment = repo.GetCommentByOrderId(orderId);
+
+			return comment;
+		}
 	}
 }

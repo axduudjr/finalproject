@@ -46,5 +46,12 @@ namespace Final_ASP_04.Models.Repositories
 				conn.Execute("CreateComment", parameters, commandType: CommandType.StoredProcedure);
 			}
 		}
+		public Comment GetCommentByOrderId(int orderId)
+		{
+			var db = new AppDbContext();
+			var comment = db.Comments.FirstOrDefault(x => x.OrderId == orderId);
+
+			return comment;
+		}
 	}
 }

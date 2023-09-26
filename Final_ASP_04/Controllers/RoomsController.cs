@@ -28,7 +28,7 @@ namespace Final_ASP_04.Controllers
 
 			if (!endDateTime.HasValue)
 			{
-				endDateTime = DateTime.Now;
+				endDateTime = DateTime.Now.AddDays(1);
 			}
 
 			var service = new RoomService();

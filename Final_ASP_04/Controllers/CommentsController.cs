@@ -23,8 +23,12 @@ namespace Final_ASP_04.Controllers
 				Rank = x.Rank,
 				CreatedTime = x.CreatedTime
             });
-
-            return PartialView(commentVms.Take(4).ToList());
+            
+			return PartialView(commentVms.Take(4).ToList());
+        }
+        public ActionResult ListAllComments(List<CommentListVm> vms)
+        {
+            return PartialView(vms);
         }
         public ActionResult CreateComment(int orderId)
         {

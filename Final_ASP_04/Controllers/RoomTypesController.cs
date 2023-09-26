@@ -28,6 +28,17 @@ namespace Final_ASP_04.Controllers
 
             ViewBag.roomTypePictures = GetRoomTypePictures(roomTypeVm);
 
+            var commentService = new CommentService();
+            var allComments = commentService.GetAllCommentsByBranchId(selectedBranchId);
+            var allCommentsVm = allComments.Select(x => new CommentListVm
+            {
+				Description = x.Description,
+				Rank = x.Rank,
+				CreatedTime = x.CreatedTime
+			}).ToList();
+
+            ViewBag.AllComments = allCommentsVm;
+
 			ViewBag.selectedBranchId = selectedBranchId;
             ViewBag.selectedRoomTypeId = selectedRoomTypeId;
 			ViewBag.otherRoomTypes = otherRoomTypesVm;

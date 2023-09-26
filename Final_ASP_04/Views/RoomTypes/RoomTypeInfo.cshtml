@@ -6,6 +6,7 @@
     var selectedBranchId = ViewBag.selectedBranchId;
     var selectedRoomTypeId = ViewBag.selectedRoomTypeId;
     var roomTypePictures = ViewBag.RoomTypePictures;
+    var allComments = ViewBag.AllComments as List<CommentListVm>;
 }
 <!-- 標題 -->
 <div class="container-fluid has-background-image" style="margin-top:51px;">
@@ -80,10 +81,38 @@
         </div>
         <!-- 評論 -->
         <div class="row"> 
-            <h3 class="fw-bolder mb-3">本館客戶評價</h3>
-                @{
-                    Html.RenderAction("ListComments", "Comments", new { branchId = selectedBranchId });
-                }
+            <h3 class="fw-bolder mb-2">本館客戶評價</h3>
+            <div class="col-12 text-end">
+                <!-- Button trigger modal -->
+                <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                    查看全部
+                </button>
+
+                <!-- Modal -->
+                <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                    <div class="modal-dialog modal-dialog-scrollable">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="exampleModalLabel">本館全部評價</h5>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                            </div>
+                            <div class="modal-body">                                
+                                @Html.Action("ListAllComments", "Comments", new{vms = allComments})
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">關閉</button>                              
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-12 mt-2">
+                <div class="row">
+                    @{
+                        Html.RenderAction("ListComments", "Comments", new { branchId = selectedBranchId });
+                    }
+                </div>              
+            </div>
         </div>
         <!-- 其他房間 -->
         <div class="row mt-4">

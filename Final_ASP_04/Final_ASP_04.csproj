@@ -524,6 +524,7 @@
     <Content Include="Views\Members\RegisterConfirm.cshtml" />
     <Content Include="Views\Members\ResetPassword.cshtml" />
     <Content Include="Views\Comments\ListComments.cshtml" />
+    <Content Include="Views\Comments\ListAllComments.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

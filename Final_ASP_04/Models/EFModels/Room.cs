@@ -30,6 +30,9 @@ namespace Final_ASP_04.Models.EFModels
 
         public int Price { get; set; }
 
+        [StringLength(50)]
+        public string FileName { get; set; }
+
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Cart> Carts { get; set; }
 

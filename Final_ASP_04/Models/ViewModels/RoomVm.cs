@@ -20,6 +20,7 @@ namespace Final_ASP_04.Models.ViewModels
 		public string RoomName { get; set; }
 		public string RoomDescription { get; set; }
 		public int Price { get; set; }
+		public string RoomFileName { get; set; }
 	}
 	public static class RoomExts
 	{
@@ -37,7 +38,8 @@ namespace Final_ASP_04.Models.ViewModels
 				GuestNumberName = dto.GuestNumber.Name,				
 				RoomName = dto.Name,
 				RoomDescription = dto.Description,
-				Price = dto.Price
+				Price = dto.Price,
+				RoomFileName = dto.FileName
 			};
 		}
 	}

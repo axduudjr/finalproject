@@ -14,6 +14,7 @@ namespace Final_ASP_04.Models.DTOs
 		public string Name { get; set; }
 		public string Description { get; set; }
 		public int Price { get; set; }
+		public string FileName { get; set; }
 	}
 	public static class RoomListDTOExts 
 	{ 		
@@ -26,7 +27,8 @@ namespace Final_ASP_04.Models.DTOs
 				GuestNumber = room.GuestNumber,
 				Name = room.Name,
 				Description = room.Description,
-				Price = room.Price
+				Price = room.Price,
+				FileName = room.FileName
 			};
 		}
 	}

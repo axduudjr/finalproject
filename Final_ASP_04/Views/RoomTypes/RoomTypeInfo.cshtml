@@ -63,7 +63,7 @@
                     <div>
                         <p class="fw-bolder" style="font-size: large;">
                             最低NT$1000起
-                            &nbsp;&nbsp;@using (Html.BeginForm("SearchRoom", "Rooms", FormMethod.Post))
+                            &nbsp;&nbsp;@using (Html.BeginForm("SearchRoom", "Rooms", FormMethod.Get))
                             {
                                 @Html.Hidden("startDateTime", DateTime.Now.ToString("yyyy-MM-dd"))
                                 @Html.Hidden("endDateTime", DateTime.Now.AddDays(1).ToString("yyyy-MM-dd"))
@@ -81,10 +81,10 @@
         </div>
         <!-- 評論 -->
         <div class="row"> 
-            <h3 class="fw-bolder mb-2">本館客戶評價</h3>
+            <h3 class="fw-bolder mb-2">本館評價</h3>
             <div class="col-12 text-end">
                 <!-- Button trigger modal -->
-                <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                <button type="button" class="btn btn-link" style="font-size: 18px" data-bs-toggle="modal" data-bs-target="#exampleModal">
                     查看全部
                 </button>
 

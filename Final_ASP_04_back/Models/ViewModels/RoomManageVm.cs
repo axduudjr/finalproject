@@ -27,6 +27,7 @@ namespace Final_ASP_04_back.Models.ViewModels
 		[Display(Name = "房間價格")]
 		[Required]
 		public int Price { get; set; }
+		public bool IsBooked { get; set; }
 	}
 	public static class RoomManageVmExts
 	{

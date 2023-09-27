@@ -225,7 +225,6 @@
     <Content Include="Views\Home\Contact.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\RoomsManage\Index.cshtml" />
-    <Content Include="Views\RoomsManage\RoomDetails.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

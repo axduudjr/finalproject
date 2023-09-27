@@ -16,12 +16,5 @@ namespace Final_ASP_04_back.Models.Services
 
 			return rooms;
 		}
-		public RoomManageDTO GetRoom(int id)
-		{
-			var repo = new RoomRepository();
-			var room = repo.GetRoom(id).ToRoomManageDTO();
-
-			return room;
-		}
 	}
 }

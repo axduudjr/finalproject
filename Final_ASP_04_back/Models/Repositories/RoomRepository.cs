@@ -26,12 +26,13 @@ namespace Final_ASP_04_back.Models.Repositories
 			return rooms.ToList();
 
 		}
-		public Room GetRoom(int id)
+		public Order GetCurrentReservationForRoom(int id)
 		{
 			var db = new AppDbContext();
-			var room = db.Rooms.Include("RoomType").Include("RoomType.Branch").FirstOrDefault(x => x.Id == id);
-
-			return room;
+			
+			var order = db.Orders.Where(x => x.RoomId == id && x.StartDateTime <= DateTime.Now && x.EndDateTime >= DateTime.Now).FirstOrDefault();
+			
+			return order;
 		}
 	}
 }

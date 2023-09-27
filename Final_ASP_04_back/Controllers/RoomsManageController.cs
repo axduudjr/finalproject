@@ -1,4 +1,5 @@
-﻿using Final_ASP_04_back.Models.Services;
+﻿using Final_ASP_04_back.Models.Repositories;
+using Final_ASP_04_back.Models.Services;
 using Final_ASP_04_back.Models.ViewModels;
 using System;
 using System.Collections.Generic;
@@ -16,14 +17,20 @@ namespace Final_ASP_04_back.Controllers
             var service = new RoomService();
             var roomsVm = service.GetRooms(branchId, roomTypeName).Select(r => r.ToRoomManageVm()).ToList();
 
+            foreach (var room in roomsVm)
+            {
+				room.IsBooked = CheckIfRoomBooked(room.Id);
+			}
+
             return View(roomsVm);
         }
-        public ActionResult RoomDetails(int id)
-        {
-			var service = new RoomService();
-			var roomVm = service.GetRoom(id).ToRoomManageVm();
+		private bool CheckIfRoomBooked(int id)
+		{
+			var repo = new RoomRepository();
 
-			return PartialView(roomVm);
+			var order = repo.GetCurrentReservationForRoom(id);
+
+			return order != null;
 		}
-    }
+	}
 }

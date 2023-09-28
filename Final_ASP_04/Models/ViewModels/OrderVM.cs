@@ -28,6 +28,7 @@ namespace Final_ASP_04.Models.ViewModels
 		[Display(Name = "訂單狀態")]
 		public string Status { get; set; }
 		public string RoomPicFile { get; set; }
+		public bool IsCommented { get; set; }
 	}
 
 	public class OrderCancelVM

@@ -10,7 +10,8 @@ namespace Final_ASP_04_back.Models.ViewModels
 {
 	public class RoomManageVm
 	{
-		public int Id { get; set; }				
+		public int Id { get; set; }
+		public int BranchId { get; set; }
 		public int RoomTypeId { get; set; }
 		[Display(Name = "房型名稱")]
 		public string RoomTypeName { get; set; }
@@ -36,6 +37,7 @@ namespace Final_ASP_04_back.Models.ViewModels
 			return new RoomManageVm
 			{
 				Id = dto.Id,
+				BranchId = dto.RoomType.BranchId,
 				RoomTypeId = dto.RoomType.Id,
 				RoomTypeName = dto.RoomType.Name,
 				GuestNumberId = dto.GuestNumber.Id,

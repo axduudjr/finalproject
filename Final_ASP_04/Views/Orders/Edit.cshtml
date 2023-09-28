@@ -99,6 +99,17 @@
 
     <script>
         $(document).ready(function () {
+            let editbtn = document.getElementById("editorder");
+            editbtn.addEventListener("click", function (event) {
+                let startDate = document.getElementById("StartDate").value;
+                let endDate = document.getElementById("EndDate").value;
+                if (startDate >= endDate) {
+                    alert("入住日期不能大於等於退房日期")
+                    event.preventDefault();
+                    return;
+                }
+            })
+
             $(".datepicker").on("change", function () {
                 let startDate = document.getElementById("StartDate").value;
                 let endDate = document.getElementById("EndDate").value;

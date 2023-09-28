@@ -15,56 +15,43 @@ namespace Final_ASP_04.Controllers
 		private AppDbContext db = new AppDbContext();
 
 		// GET: Orders
+		[Authorize]
 		public ActionResult Index(int branchId = 0)
 		{
+			var buyer = User.Identity.Name;
+
 			PrepareBranchDataSource();
 
-			if (branchId == 0)
-			{
-				List<OrderVM> orders = db.Orders.Include(o => o.Branch)
+			IQueryable<Order> orders = db.Orders.Include(o => o.Branch)
 								  .Include(o => o.Member)
 								  .Include(o => o.PaymentType)
 								  .Include(o => o.Room)
-								  .OrderByDescending(o => o.StartDateTime)
-								  .Select(o => new OrderVM
-								  {
-									  Id = o.Id,
-									  BranchName = o.Branch.Name,
-									  RoomType = o.Room.RoomType.Name + o.Room.GuestNumber.Name,
-									  StartDate = o.StartDateTime,
-									  EndDate = o.EndDateTime,
-									  OrderTime = o.OrderTime,
-									  Price = o.Price,
-									  Status = o.Status,
-									  RoomPicFile = o.Room.RoomType.FileName
-								  }).ToList()
-								  ;
-				ViewBag.Orders = orders;
-				return View(orders);
+								  .OrderByDescending(o => o.StartDateTime);
+			if (branchId == 0)
+			{
+				orders = orders.Where(o => o.Member.Account == buyer);
 			}
 			else
 			{
-				List<OrderVM> orders = db.Orders.Include(o => o.Branch)
-								  .Include(o => o.Member)
-								  .Include(o => o.PaymentType)
-								  .Include(o => o.Room)
-								  .Where(o => o.BranchId == branchId)
-								  .Select(o => new OrderVM
-								  {
-									  Id = o.Id,
-									  BranchName = o.Branch.Name,
-									  RoomType = o.Room.RoomType.Name + o.Room.GuestNumber.Name,
-									  StartDate = o.StartDateTime,
-									  EndDate = o.EndDateTime,
-									  OrderTime = o.OrderTime,
-									  Price = o.Price,
-									  Status = o.Status,
-									  RoomPicFile = o.Room.RoomType.FileName
-								  }).ToList()
-								  ;
-				ViewBag.Orders = orders;
-				return View(orders);
+				orders = orders.Where(o => o.BranchId == branchId && o.Member.Account == buyer);
 			}
+
+			var vm = orders.Select(o => new OrderVM
+			{
+				Id = o.Id,
+				BranchName = o.Branch.Name,
+				RoomType = o.Room.RoomType.Name + o.Room.GuestNumber.Name,
+				StartDate = o.StartDateTime,
+				EndDate = o.EndDateTime,
+				OrderTime = o.OrderTime,
+				Price = o.Price,
+				Status = o.Status,
+				RoomPicFile = o.Room.RoomType.FileName,
+				IsCommented = db.Comments.Any(c => c.OrderId == o.Id)
+			}).ToList();
+
+			ViewBag.Orders = vm;
+			return View(vm);
 		}
 		private void PrepareBranchDataSource()
 		{

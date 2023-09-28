@@ -11,5 +11,17 @@
     <h6>預定時間: @Model.OrderTime</h6>
     <h6>總金額: @Model.Price.ToString("#,#")</h6>
     <h6>訂單狀態: @Model.Status</h6>
-    @Html.Raw(ViewData["Link"])
+
+
+    @{
+        if (!@Model.IsCommented && Model.Status == "已入住")
+        {
+            <p>@Html.Raw(ViewData["Link"])</p>
+            <p>@Html.Raw(ViewData["CommentLink"])</p>
+        }
+        else
+        {
+            @Html.Raw(ViewData["Link"])
+        }
+    }
 </div>

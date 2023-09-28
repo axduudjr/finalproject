@@ -1,4 +1,4 @@
-﻿@model Final_ASP_04_back.Models.EFModels.RoomType
+﻿@model Final_ASP_04_back.Models.ViewModels.CreateRoomTypeVM
 
 @{
     ViewBag.Title = "建立新房型";
@@ -23,9 +23,9 @@
                     @Html.ValidationMessageFor(model => model.BranchId, "", new { @class = "text-danger" })
                 </div>
                 <div class="col-12 mb-3">
-                    @Html.LabelFor(model => model.Name, htmlAttributes: new { @class = "form-label col-md-2" })
-                    @Html.EditorFor(model => model.Name, new { htmlAttributes = new { @class = "form-control" } })
-                    @Html.ValidationMessageFor(model => model.Name, "", new { @class = "text-danger" })
+                    @Html.LabelFor(model => model.RoomTypeName, htmlAttributes: new { @class = "form-label col-md-2" })
+                    @Html.EditorFor(model => model.RoomTypeName, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.RoomTypeName, "", new { @class = "text-danger" })
                 </div>
                 <div class="col-12 mb-3">
                     @Html.LabelFor(model => model.Description, htmlAttributes: new { @class = "form-label col-md-2" })
@@ -34,8 +34,9 @@
                 </div>
 
                 <div class="col-12 mb-3">
-                    <label for="formFileSm" class="form-label">上傳房型照片</label>
+                    @Html.LabelFor(model => model.FileName, htmlAttributes: new { @class = "form-label col-md-2" })
                     <input class="form-control form-control-sm" id="myfile" name="myfile" type="file">
+                    @Html.ValidationMessageFor(model => model.FileName, "", new { @class = "text-danger" })
 
                 </div>
 

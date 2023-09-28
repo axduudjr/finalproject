@@ -18,6 +18,112 @@ namespace Final_ASP_04.Controllers
 			ViewBag.branches = BranchBlockPartial();
 			return View();
 		}
+		[HttpGet]
+		public ActionResult BranchMain(int branchId)
+		{
+			var Newsvm = GetNewsVM(branchId);
+			var branchInfoVms = GetBranchInfoVm(branchId);
+			var branchPic = GetBranchPic(branchId);
+
+			//todo 記得在頁面導入 picture
+			ViewBag.News = Newsvm;
+			ViewBag.BranchInfo = branchInfoVms;
+			ViewBag.BranchPic = branchPic;
+			ViewBag.BranchId = branchId;
+
+			return View();
+		}
+		[Authorize]
+		public ActionResult Mail()
+		{
+			var db = new AppDbContext();
+			var user = User.Identity.Name;
+			var member = db.Members.FirstOrDefault(m => m.Account == user);
+
+			if (member == null)
+			{
+				//todo
+				return View();
+			}
+			ViewBag.Member = member;
+
+			return View();
+		}
+		[Authorize]
+		[HttpPost]
+		public ActionResult Mail(MailVm vm)
+		{
+			var db = new AppDbContext();
+			var user = User.Identity.Name;
+			var member = db.Members.FirstOrDefault(m => m.Account == user);
+
+			if (member == null)
+			{
+				//todo
+				return View();
+			}
+
+			var newMail = new Mail
+			{
+				MemberId = member.Id,
+				Title = vm.Title,
+				Description = vm.Description,
+				CreatedTime = DateTime.Now,
+			};
+
+			db.Mails.Add(newMail);
+			db.SaveChanges();
+
+			return View();
+		}
+		public ActionResult FAQs()
+		{
+			var db = new AppDbContext();
+			var qanda = db.FAQs.ToList();
+
+			ViewBag.FAQs = qanda;
+			return View();
+		}
+		private List<BranchPicture> GetBranchPic(int branchId)
+		{
+			var db = new AppDbContext();
+			return db.BranchPictures.Where(b => b.BranchId == branchId).ToList();
+		}
+		private BranchInfoVm GetBranchInfoVm(int branchId)
+		{
+			var db = new AppDbContext();
+			var result = db.Branches.Where(b => b.Id == branchId)
+								.Select(b => new BranchInfoVm
+								{
+									Name = b.Name,
+									Address = b.Address,
+								}).FirstOrDefault();
+
+			var trafficInfo = db.TrafficInfos.Where(t => t.BranchId == branchId)
+												.Select(t => new TrafficInfoVm
+												{
+													Title = t.Title,
+													Description = t.Description,
+												})
+												.ToList();
+
+			result.Traffics = trafficInfo;
+			return result;
+		}
+		private static List<NewsVm> GetNewsVM(int branchId)
+		{
+			var db = new AppDbContext();
+			var model = db.News.Where(b => b.BranchId == branchId).ToList();
+
+			List<NewsVm> vm = model.Select(m => new NewsVm
+			{
+				Id = m.Id,
+				Title = m.Title,
+				Description = m.Description,
+				FileName = m.FileName,
+			}).ToList();
+			return vm;
+		}
 		public List<BranchVm> BranchBlockPartial()
 		{
 			var db = new AppDbContext();
@@ -71,97 +177,6 @@ namespace Final_ASP_04.Controllers
 			ViewBag.Branches = branches;
 
 			return View(roomTypeVms);
-		}
-		[HttpGet]
-		public ActionResult BranchMain(int branchId)
-		{
-			List<NewsVm> Newsvm = GetNewsVM(branchId);
-			var branchInfoVms = GetBranchInfoVm(branchId);
-
-			//todo 記得在頁面導入 picture
-			ViewBag.News = Newsvm;
-			ViewBag.branchInfo = branchInfoVms;
-			ViewBag.branchId = branchId;
-
-			return View();
-		}
-		private BranchInfoVm GetBranchInfoVm(int branchId)
-		{
-			var db = new AppDbContext();
-			var result = db.Branches.Where(b => b.Id == branchId)
-								.Select(b => new BranchInfoVm
-								{
-									Name = b.Name,
-									Address = b.Address,
-								}).FirstOrDefault();
-
-			var trafficInfo = db.TrafficInfos.Where(t => t.BranchId == branchId)
-												.Select(t => new TrafficInfoVm
-												{
-													Title = t.Title,
-													Description = t.Description,
-												})
-												.ToList();
-
-			result.Traffics = trafficInfo;
-			return result;
-		}
-		private static List<NewsVm> GetNewsVM(int branchId)
-		{
-			var db = new AppDbContext();
-			var model = db.News.Where(b => b.BranchId == branchId).ToList();
-
-			List<NewsVm> vm = model.Select(m => new NewsVm
-			{
-				Id = m.Id,
-				Title = m.Title,
-				Description = m.Description,
-				FileName = m.FileName,
-			}).ToList();
-			return vm;
-		}
-		[Authorize]
-		public ActionResult Mail()
-		{
-			var db = new AppDbContext();
-			var user = User.Identity.Name;
-			var member = db.Members.FirstOrDefault(m => m.Account == user);
-
-			if (member == null)
-			{
-				//todo
-				return View();
-			}
-			ViewBag.Member = member;
-
-			return View();
-		}
-		[Authorize]
-		[HttpPost]
-		public ActionResult Mail(MailVm vm)
-		{
-			var db = new AppDbContext();
-			var user = User.Identity.Name;
-			var member = db.Members.FirstOrDefault(m => m.Account == user);
-
-			if (member == null)
-			{
-				//todo
-				return View();
-			}
-
-			var newMail = new Mail
-			{
-				MemberId = member.Id,
-				Title = vm.Title,
-				Description = vm.Description,
-				CreatedTime = DateTime.Now,
-			};
-
-			db.Mails.Add(newMail);
-			db.SaveChanges();
-
-			return View();
 		}
 	}
 }

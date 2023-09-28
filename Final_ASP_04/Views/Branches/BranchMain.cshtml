@@ -1,7 +1,8 @@
 ﻿
 @{
     ViewBag.Title = "BranchMain";
-    var branchInfo = ViewBag.branchInfo;
+    var branchInfo = ViewBag.BranchInfo;
+    var branchPic = ViewBag.BranchPic;
     int count = 1;
 }
 <!--輪播照片 begin-->
@@ -26,21 +27,31 @@
                             aria-label="Slide 3"></button>
                 </div>
                 <div class="carousel-inner">
-                    <div class="carousel-item active">
-                        <img src="~/images/bathroom-8004699_1920.jpg"
-                             class="d-block custom-img"
-                             alt="..." />
-                    </div>
-                    <div class="carousel-item">
-                        <img src="~/images/pool-bar-3652849_1920.jpg"
-                             class="d-block custom-img"
-                             alt="..." />
-                    </div>
-                    <div class="carousel-item">
-                        <img src="~/images/bedroom-5664221_1280.jpg"
-                             class="d-block custom-img"
-                             alt="..." />
-                    </div>
+                    @{
+                        foreach (var pic in branchPic)
+                        {
+                            <div class="carousel-item branchPic" data-id="@pic.DisplayOrder">
+                                <img src="~/images/@pic.FileName"
+                                     class="d-block custom-img"
+                                     alt="..." />
+                            </div>
+                        }
+                    }
+                    @*<div class="carousel-item active">
+                            <img src="~/images/bathroom-8004699_1920.jpg"
+                                 class="d-block custom-img"
+                                 alt="..." />
+                        </div>
+                        <div class="carousel-item">
+                            <img src="~/images/pool-bar-3652849_1920.jpg"
+                                 class="d-block custom-img"
+                                 alt="..." />
+                        </div>
+                        <div class="carousel-item">
+                            <img src="~/images/bedroom-5664221_1280.jpg"
+                                 class="d-block custom-img"
+                                 alt="..." />
+                        </div>*@
                 </div>
                 <button class="carousel-control-prev"
                         type="button"
@@ -373,7 +384,8 @@
 
     <script>
         $(document).ready(function () {
-            $(".News-item").first().addClass("active")
+            $(".News-item").first().addClass("active");
+            $(".branchPic").first().addClass("active");
         })
 
         $(".carousel .News-item").each(function () {
@@ -392,5 +404,6 @@
                 next.children(":first-child").clone().appendTo($(this));
             }
         });
+
     </script>
 }

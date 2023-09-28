@@ -9,6 +9,7 @@ using System.Web;
 using System.Web.Mvc;
 using System.Web.Security;
 using System.Collections;
+using System.Net.PeerToPeer;
 
 namespace Final_ASP_04.Controllers
 {
@@ -124,7 +125,8 @@ namespace Final_ASP_04.Controllers
 				return View(vm);
 			}
 
-			return RedirectToAction("MemberProfile");
+			ViewBag.message = "成功修改";
+			return View(vm);
 		}
 
 		//忘記密碼
@@ -187,8 +189,6 @@ namespace Final_ASP_04.Controllers
 				ModelState.AddModelError("", ex.Message);
 			}
 
-			Session.Abandon();
-			FormsAuthentication.SignOut();
 			return RedirectToAction("Login");
 		}
 
@@ -219,9 +219,11 @@ namespace Final_ASP_04.Controllers
 				return View();
 			}
 
-			//todo要先登出
+			Session.Abandon();
+			FormsAuthentication.SignOut();
+			ViewBag.message = "成功修改";
 
-			return RedirectToAction("Login");
+			return View(vm);
 		}
 
 		public ActionResult RegisterConfirm()
@@ -315,6 +317,8 @@ namespace Final_ASP_04.Controllers
 			var cookie = new HttpCookie(FormsAuthentication.FormsCookieName, value);
 
 			var url = FormsAuthentication.GetRedirectUrl(account, true);
+			FormsAuthentication.RedirectFromLoginPage(account, false);
+
 
 			return (url, cookie);
 		}

@@ -22,6 +22,8 @@ namespace Final_ASP_04.Controllers
             var otherRoomTypesDto = service.GetOtherRoomTypesInBranch(selectedBranchId, selectedRoomTypeId);
 
             var roomTypeVm = roomTypeDto.ToRoomTypeVm();
+            roomTypeVm.BestPrice = new RoomTypeService().GetBestPrice(selectedRoomTypeId);
+
             var roomTypesVm = roomTypesDto.Select(x => x.ToRoomTypeVm()).ToList();
 
             var otherRoomTypesVm = otherRoomTypesDto.Select(x => x.ToRoomTypeVm()).ToList();

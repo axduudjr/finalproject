@@ -17,6 +17,7 @@ namespace Final_ASP_04.Controllers
     {
 		private int _pageSize = 5;
 		// GET: Rooms
+		[Authorize]
 		public ActionResult SearchRoom(int page = 1, int branchId = 1, int roomTypeId = 0, int guestNumberId = 0, DateTime? startDateTime = null, DateTime? endDateTime = null, int sortvalue = 1)
 		{
 			int pageNumber = page < 1 ? 1 : page;

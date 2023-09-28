@@ -12,6 +12,7 @@ namespace Final_ASP_04.Controllers
 	{
 		private AppDbContext db = new AppDbContext();
 		// GET: Checkout
+		[Authorize]
 		public ActionResult CheckoutStepOne(int cartId)
 		{
 			var cart = GetCart(cartId);

@@ -1,11 +1,13 @@
-﻿using Final_ASP_04_back.Models.EFModels;
-using System;
+﻿using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Data.Entity;
 using System.Linq;
 using System.Net;
 using System.Web;
 using System.Web.Mvc;
+using Final_ASP_04_back.Models.EFModels;
+using Final_ASP_04_back.Models.ViewModels;
 
 namespace Final_ASP_04_back.Controllers
 {
@@ -16,22 +18,14 @@ namespace Final_ASP_04_back.Controllers
 		// GET: FAQs
 		public ActionResult Index()
 		{
-			return View(db.FAQs.ToList());
-		}
+			var vm = db.FAQs.Select(o => new FaqVM
+			{
+				Id = o.Id,
+				Question = o.Question,
+				Answer = o.Answer
+			}).ToList();
 
-		// GET: FAQs/Details/5
-		public ActionResult Details(int? id)
-		{
-			if (id == null)
-			{
-				return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-			}
-			FAQ fAQ = db.FAQs.Find(id);
-			if (fAQ == null)
-			{
-				return HttpNotFound();
-			}
-			return View(fAQ);
+			return View(vm);
 		}
 
 		// GET: FAQs/Create
@@ -40,21 +34,19 @@ namespace Final_ASP_04_back.Controllers
 			return View();
 		}
 
-		// POST: FAQs/Create
-		// 若要免於大量指派 (overposting) 攻擊，請啟用您要繫結的特定屬性，
-		// 如需詳細資料，請參閱 https://go.microsoft.com/fwlink/?LinkId=317598。
 		[HttpPost]
 		[ValidateAntiForgeryToken]
-		public ActionResult Create([Bind(Include = "Id,Question,Answer")] FAQ fAQ)
+		public ActionResult Create(FaqVM vm)
 		{
 			if (ModelState.IsValid)
 			{
+				var fAQ = vm.VM2FAQ();
 				db.FAQs.Add(fAQ);
 				db.SaveChanges();
 				return RedirectToAction("Index");
 			}
 
-			return View(fAQ);
+			return View(vm);
 		}
 
 		// GET: FAQs/Edit/5
@@ -69,15 +61,15 @@ namespace Final_ASP_04_back.Controllers
 			{
 				return HttpNotFound();
 			}
-			return View(fAQ);
+
+			var vm = fAQ.FAQ2VM();
+
+			return View(vm);
 		}
 
-		// POST: FAQs/Edit/5
-		// 若要免於大量指派 (overposting) 攻擊，請啟用您要繫結的特定屬性，
-		// 如需詳細資料，請參閱 https://go.microsoft.com/fwlink/?LinkId=317598。
 		[HttpPost]
 		[ValidateAntiForgeryToken]
-		public ActionResult Edit([Bind(Include = "Id,Question,Answer")] FAQ fAQ)
+		public ActionResult Edit(FAQ fAQ)
 		{
 			if (ModelState.IsValid)
 			{
@@ -100,10 +92,10 @@ namespace Final_ASP_04_back.Controllers
 			{
 				return HttpNotFound();
 			}
-			return View(fAQ);
+			var vm = fAQ.FAQ2VM();
+			return View(vm);
 		}
 
-		// POST: FAQs/Delete/5
 		[HttpPost, ActionName("Delete")]
 		[ValidateAntiForgeryToken]
 		public ActionResult DeleteConfirmed(int id)

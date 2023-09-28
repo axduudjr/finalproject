@@ -179,12 +179,13 @@
     <Compile Include="Models\Repositories\GuestNumberRepository.cs" />
     <Compile Include="Models\Repositories\RoomRepository.cs" />
     <Compile Include="Models\Services\RoomService.cs" />
-    <Compile Include="Models\ViewModels\CreateRoomTypeVM.cs" />
+    <Compile Include="Models\ViewModels\FaqVM.cs" />
     <Compile Include="Models\ViewModels\LoginVM.cs" />
     <Compile Include="Models\ViewModels\MailVM.cs" />
     <Compile Include="Models\ViewModels\MemberVM.cs" />
     <Compile Include="Models\ViewModels\OrderListVM.cs" />
     <Compile Include="Models\ViewModels\RoomManageVm.cs" />
+    <Compile Include="Models\ViewModels\RoomTypeVM.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

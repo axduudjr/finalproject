@@ -39,10 +39,10 @@
                                 </ul>
                         </li>
                         <li class="nav-item">
-                            @Html.ActionLink("房型一覽", "ListRoomTypes", "Branches", new { area = "",selectedBranchId = ViewBag.branchId }, new { @class = "nav-link" })
+                            @Html.ActionLink("房型一覽", "ListRoomTypes", "Branches", new { area = "",selectedBranchId = ViewBag.BranchId }, new { @class = "nav-link" })
                         </li>
                         <li class="nav-item">
-                            @Html.ActionLink("FAQ", "About", "Home", new { area = "" }, new { @class = "nav-link" })
+                            @Html.ActionLink("FAQ", "FAQs", "Branches", new { area = "" }, new { @class = "nav-link" })
                         </li>
                         <li class="nav-item">
                             @Html.ActionLink("關於我們", "About", "Home", new { area = "" }, new { @class = "nav-link" })
@@ -55,7 +55,7 @@
                         @{
                             if (User.Identity.IsAuthenticated)
                             {
-                                <li class="nav-item float-end">@Html.ActionLink("會員中心", "Index", "Members", new { area = "" }, new { @class = "nav-link bi bi-person-circle" })</li>
+                                <li class="nav-item float-end">@Html.ActionLink("會員中心", "MemberProfile", "Members", new { area = "" }, new { @class = "nav-link bi bi-person-circle" })</li>
                                 <li class="nav-item float-end">@Html.ActionLink("登出", "Logout", "Members", new { area = "" }, new { @class = "nav-link bi bi-box-arrow-right" })</li>
 
                             }

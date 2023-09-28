@@ -36,5 +36,12 @@ namespace Final_ASP_04.Models.Services
 
 			return roomTypeListDTOs;
 		}
+		public int GetBestPrice(int roomTypeId)
+		{
+			var repo = new RoomTypeRepository();
+			var bestPrice = repo.GetRoomTypeBestPrice(roomTypeId).Price;
+
+			return bestPrice;
+		}
 	}
 }

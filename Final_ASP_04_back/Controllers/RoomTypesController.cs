@@ -6,6 +6,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using System.Data.Entity;
+using Final_ASP_04_back.Models.ViewModels;
 
 namespace Final_ASP_04_back.Controllers
 {
@@ -17,7 +18,14 @@ namespace Final_ASP_04_back.Controllers
 		public ActionResult Index()
 		{
 			var roomTypes = db.RoomTypes.Include(r => r.Branch);
-			return View(roomTypes.ToList());
+			var vm = roomTypes.Select(o => new RoomTypeVM
+			{
+				BranchName = o.Branch.Name,
+				Description = o.Description,
+				RoomTypeName = o.Name
+			}).ToList();
+
+			return View(vm);
 		}
 
 		public ActionResult Create()
@@ -31,11 +39,16 @@ namespace Final_ASP_04_back.Controllers
 		}
 
 		[HttpPost]
-		public ActionResult Create(RoomType roomType, HttpPostedFileBase myfile)
+		public ActionResult Create(CreateRoomTypeVM roomType, HttpPostedFileBase myfile)
 		{
+			List<Branch> items = db.Branches.ToList();
+			IEnumerable<SelectListItem> branchList = new SelectList(items, "Id", "Name");
+
+			ViewBag.BranchId = branchList;
+
 			#region 將上傳檔案存到 /Files 資料夾下
 			string fileName;
-			string path = Server.MapPath("~/images");
+			string path = Server.MapPath("~/Images");
 			IFileValidator[] validators =
 				new IFileValidator[]
 				{
@@ -76,7 +89,7 @@ namespace Final_ASP_04_back.Controllers
 			var newRoomType = new RoomType
 			{
 				BranchId = roomType.BranchId,
-				Name = roomType.Name,
+				Name = roomType.RoomTypeName,
 				Description = roomType.Description,
 				FileName = fileName,
 				DisplayOrder = roomType.DisplayOrder
@@ -85,8 +98,7 @@ namespace Final_ASP_04_back.Controllers
 			db.RoomTypes.Add(newRoomType);
 			db.SaveChanges();
 
-			return View();
-
+			return RedirectToAction("Index");
 		}
 
 		protected override void Dispose(bool disposing)

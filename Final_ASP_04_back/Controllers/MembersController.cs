@@ -55,15 +55,24 @@ namespace Final_ASP_04_back.Controllers
 			{
 				return HttpNotFound();
 			}
-			return View(member);
+
+			var vm = new MemberVM
+			{
+				Id = member.Id,
+				Name = member.Name,
+				PhoneNumber = member.PhoneNumber,
+				Email = member.Email,
+				Enabled = member.Enabled,
+				IsConfirmed = member.IsConfirmed
+			};
+
+			return View(vm);
 		}
 
 		[HttpPost]
 		[ValidateAntiForgeryToken]
 		public ActionResult Edit(Member member)
 		{
-
-
 			var memberInDb = db.Members.Find(member.Id);
 
 			memberInDb.Enabled = member.Enabled;

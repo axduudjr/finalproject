@@ -15,6 +15,7 @@ namespace Final_ASP_04.Models.ViewModels
 		public string RoomTypeName { get; set; }
 		public string RoomTypeDescription { get; set; }
 		public string FileName { get; set; }
+		public int BestPrice { get; set; }
 	}
 	public static class RoomTypeExts
 	{

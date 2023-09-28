@@ -63,6 +63,24 @@ namespace Final_ASP_04.Models.Repositories
 				return result;
 			}
 		}
+		public Room GetRoomTypeBestPrice(int roomTypeId)
+		{
+			using (var conn = new SqlDb().GetConnection("AppDbContext"))
+			{
+				string sql = @"SELECT TOP 1 * FROM Rooms AS R
+							INNER JOIN RoomTypes AS RT ON RT.Id = R.RoomTypeId
+							WHERE RT.Id = @RoomTypeId
+							ORDER BY R.Price";
+
+				var result = conn.Query<Room, RoomType, Room>(sql, (room, roomType) =>
+				{
+					room.RoomType = roomType;
+					return room;
+				}, new { RoomTypeId = roomTypeId }, splitOn: "Id").FirstOrDefault();
+
+				return result;
+			}
+		}
 
 	}
 }

@@ -1,0 +1,94 @@
+﻿@model Final_ASP_04_back.Models.EFModels.RoomType
+
+@{
+    ViewBag.Title = "建立新房型";
+}
+
+<h2>建立新房型</h2>
+
+
+@using (Html.BeginForm("Create", "RoomTypes", FormMethod.Post, new { enctype = "multipart/form-data" }))
+{
+    @Html.AntiForgeryToken()
+
+    <div class="form-horizontal">
+        <hr />
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+        <div class="container">
+            <div class="row">
+                <div class="col-12 mb-3">
+                    @Html.LabelFor(model => model.BranchId, htmlAttributes: new { @class = "form-label col-md-2" })
+                    @Html.DropDownListFor(model => model.BranchId, ViewBag.BranchId as SelectList, "請選擇分店", new { @class = "form-select" })
+                    @Html.ValidationMessageFor(model => model.BranchId, "", new { @class = "text-danger" })
+                </div>
+                <div class="col-12 mb-3">
+                    @Html.LabelFor(model => model.Name, htmlAttributes: new { @class = "form-label col-md-2" })
+                    @Html.EditorFor(model => model.Name, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.Name, "", new { @class = "text-danger" })
+                </div>
+                <div class="col-12 mb-3">
+                    @Html.LabelFor(model => model.Description, htmlAttributes: new { @class = "form-label col-md-2" })
+                    @Html.EditorFor(model => model.Description, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.Description, "", new { @class = "text-danger" })
+                </div>
+
+                <div class="col-12 mb-3">
+                    <label for="formFileSm" class="form-label">上傳房型照片</label>
+                    <input class="form-control form-control-sm" id="myfile" name="myfile" type="file">
+
+                </div>
+
+                <div class="col-12 mb-3">
+                    @Html.LabelFor(model => model.DisplayOrder, htmlAttributes: new { @class = "form-label col-md-2" })
+                    @Html.EditorFor(model => model.DisplayOrder, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.DisplayOrder, "", new { @class = "text-danger" })
+                </div>
+                <div class="col-6 mb-3">
+                    @Html.ActionLink("Back to List", "Index", null, new { @class = "back" })
+                </div>
+                <div class="col-6 mb-3">
+                    <input type="submit" value="確認新增" class="confirmbtn" />
+                </div>
+            </div>
+        </div>
+    </div>
+}
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}
+
+@section css{
+    <style>
+        .back {
+            text-align: center;
+            padding: 10px 20px;
+            width: 100%;
+            display: inline-block;
+            font-size: 16px;
+            background-color: darkgray;
+            color: #ffffff;
+            border: none;
+            text-decoration: none;
+            border-radius: 10px
+        }
+
+            .back:hover {
+                color: white;
+            }
+
+        .confirmbtn {
+            text-align: center;
+            padding: 10px 20px;
+            width: 100%;
+            display: inline-block;
+            font-size: 16px;
+            background-color: deepskyblue;
+            color: #ffffff;
+            border: none;
+            text-decoration: none;
+            border-radius: 10px
+        }
+    </style>
+}

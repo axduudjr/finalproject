@@ -141,12 +141,20 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
+    <Compile Include="Controllers\FAQsController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\MailsController.cs" />
+    <Compile Include="Controllers\MembersController.cs" />
+    <Compile Include="Controllers\OrdersController.cs" />
     <Compile Include="Controllers\RoomsManageApiController.cs" />
     <Compile Include="Controllers\RoomsManageController.cs" />
+    <Compile Include="Controllers\RoomTypesController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Infra\FileValidator\FileRequired.cs" />
+    <Compile Include="Infra\FileValidator\FileSizeValidator.cs" />
+    <Compile Include="Infra\FileValidator\UploadFileHelper.cs" />
     <Compile Include="Models\Criteria\RoomSearchCriteria.cs" />
     <Compile Include="Models\DTOs\RoomManageDTO.cs" />
     <Compile Include="Models\EFModels\AppDbContext.cs" />
@@ -171,6 +179,11 @@
     <Compile Include="Models\Repositories\GuestNumberRepository.cs" />
     <Compile Include="Models\Repositories\RoomRepository.cs" />
     <Compile Include="Models\Services\RoomService.cs" />
+    <Compile Include="Models\ViewModels\CreateRoomTypeVM.cs" />
+    <Compile Include="Models\ViewModels\LoginVM.cs" />
+    <Compile Include="Models\ViewModels\MailVM.cs" />
+    <Compile Include="Models\ViewModels\MemberVM.cs" />
+    <Compile Include="Models\ViewModels\OrderListVM.cs" />
     <Compile Include="Models\ViewModels\RoomManageVm.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -194,6 +207,9 @@
     <Content Include="favicon.ico" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
+    <Content Include="images\hotelicon.png" />
+    <Content Include="images\icon.png" />
+    <Content Include="images\tklc4tex.0ih.jpg" />
     <Content Include="Scripts\bootstrap.bundle.js" />
     <Content Include="Scripts\bootstrap.bundle.min.js" />
     <Content Include="Scripts\bootstrap.esm.js" />
@@ -226,6 +242,17 @@
     <Content Include="Views\Home\Contact.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\RoomsManage\Index.cshtml" />
+    <Content Include="Views\FAQs\Create.cshtml" />
+    <Content Include="Views\FAQs\Delete.cshtml" />
+    <Content Include="Views\FAQs\Edit.cshtml" />
+    <Content Include="Views\FAQs\Index.cshtml" />
+    <Content Include="Views\Mails\Index.cshtml" />
+    <Content Include="Views\Members\Edit.cshtml" />
+    <Content Include="Views\Members\Index.cshtml" />
+    <Content Include="Views\Orders\Edit.cshtml" />
+    <Content Include="Views\Orders\Index.cshtml" />
+    <Content Include="Views\RoomTypes\Create.cshtml" />
+    <Content Include="Views\RoomTypes\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

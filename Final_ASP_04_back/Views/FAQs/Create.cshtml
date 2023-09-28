@@ -1,0 +1,78 @@
+﻿@model Final_ASP_04_back.Models.EFModels.FAQ
+
+@{
+    ViewBag.Title = "新增FAQ";
+}
+
+<h2>新增FAQ</h2>
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+    <div class="form-horizontal">
+
+        <hr />
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        <div class="container">
+            <div class="row">
+                <div class="col-12 mb-3">
+                    @Html.LabelFor(model => model.Question, htmlAttributes: new { @class = "form-label col-md-2" })
+                    @Html.EditorFor(model => model.Question, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.Question, "", new { @class = "text-danger" })
+                </div>
+
+                <div class="col-12 mb-3">
+                    @Html.LabelFor(model => model.Answer, htmlAttributes: new { @class = "form-label col-md-2" })
+                    @Html.EditorFor(model => model.Answer, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.Answer, "", new { @class = "text-danger" })
+                </div>
+
+                <div class="mb-3 col-md-5">
+                    <div class="">
+                        @Html.ActionLink("回到FAQs維護頁", "Index", null, new { @class = "back2FAQs" })
+                    </div>
+                </div>
+
+                <div class="mb-3 col-md-7">
+                    <input type="submit" value="確認新增" class="confirmbtn" />
+                </div>
+            </div>
+
+        </div>
+    </div>
+}
+
+@section css{
+    <style>
+        .back2FAQs {
+            text-align: center;
+            padding: 10px 20px;
+            width: 100%;
+            display: inline-block;
+            font-size: 16px;
+            background-color: darkgray;
+            color: #ffffff;
+            border: none;
+            text-decoration: none;
+            border-radius: 10px
+        }
+
+            .back2FAQs:hover {
+                color: white;
+            }
+
+        .confirmbtn {
+            text-align: center;
+            padding: 10px 20px;
+            width: 100%;
+            display: inline-block;
+            font-size: 16px;
+            background-color: deepskyblue;
+            color: #ffffff;
+            border: none;
+            text-decoration: none;
+            border-radius: 10px
+        }
+    </style>
+}

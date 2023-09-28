@@ -1,0 +1,59 @@
+﻿@model IEnumerable<Final_ASP_04_back.Models.ViewModels.MailVM>
+
+@{
+    ViewBag.Title = "會員來信";
+}
+
+<h1>會員來信</h1>
+
+<form action="" method="get">
+    會員姓名: @Html.TextBox("memberName", null, new { @class = "form-control form-control-sm me-3 mb-3", style = "width:auto;display:inline-block" })
+    <input type="submit" value="查詢" class="btn btn-success btn-sm" />
+</form>
+
+<table class="table table-striped table-bordered" style="border: 5px solid #B3D9D9; ">
+    <tr style=" white-space: nowrap;">
+        <th>
+            @Html.DisplayNameFor(model => model.MemberName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Title)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Description)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.CreateTime)
+        </th>
+
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.MemberName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Title)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Description)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.CreateTime)
+            </td>
+
+        </tr>
+    }
+
+</table>
+
+@section css{
+    <style>
+        h1 {
+            text-align: center;
+            color: #587D87;
+        }
+    </style>
+}

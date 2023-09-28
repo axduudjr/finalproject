@@ -1,0 +1,80 @@
+﻿@model Final_ASP_04_back.Models.EFModels.FAQ
+
+@{
+    ViewBag.Title = "確認要刪除這筆FAQ？";
+}
+
+
+
+<h3>確認要刪除這筆FAQ？</h3>
+<div>
+    <hr />
+
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Question)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Question)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Answer)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Answer)
+        </dd>
+
+    </dl>
+
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+        <div class="container">
+            <div class="row">
+                <div class="col-6">
+                    @Html.ActionLink("回到維護FAQs頁", "Index", null, new { @class = "back2FAQs" })
+                </div>
+                <div class="col-6">
+                    <input type="submit" value="Delete" class="deletebtn" />
+                </div>
+            </div>
+        </div>
+    }
+</div>
+
+@section css{
+    <style>
+        .back2FAQs {
+            text-align: center;
+            padding: 10px 20px;
+            width: 100%;
+            display: inline-block;
+            font-size: 16px;
+            background-color: darkgray;
+            color: #ffffff;
+            border: none;
+            text-decoration: none;
+            border-radius: 10px
+        }
+
+            .back2FAQs:hover {
+                color: white;
+            }
+
+        .deletebtn {
+            text-align: center;
+            padding: 10px 20px;
+            width: 100%;
+            display: inline-block;
+            font-size: 16px;
+            background-color: lightcoral;
+            color: #ffffff;
+            border: none;
+            text-decoration: none;
+            border-radius: 10px
+        }
+    </style>
+}

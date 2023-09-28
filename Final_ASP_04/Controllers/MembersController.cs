@@ -8,6 +8,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using System.Web.Security;
+using System.Collections;
 
 namespace Final_ASP_04.Controllers
 {
@@ -77,7 +78,9 @@ namespace Final_ASP_04.Controllers
 				return View(vm);
 			}
 
-			return View("RegisterConfirm");
+			repo.SendConfirmEmail(vm);
+
+			return RedirectToAction("RegisterConfirm");
 		}
 
 		//登出功能
@@ -86,7 +89,7 @@ namespace Final_ASP_04.Controllers
 		{
 			Session.Abandon();
 			FormsAuthentication.SignOut();
-			return Redirect("/Members/Login");
+			return Redirect("/Home/Index");
 		}
 
 		//會員資料維護
@@ -99,6 +102,7 @@ namespace Final_ASP_04.Controllers
 			return View(account);
 		}
 
+		//帳號目前不給修改
 		[Authorize]
 		[HttpPost]
 		public ActionResult EditProfile(EditProfileVm vm)
@@ -120,7 +124,7 @@ namespace Final_ASP_04.Controllers
 				return View(vm);
 			}
 
-			return Redirect("/Home/Index/");
+			return RedirectToAction("MemberProfile");
 		}
 
 		//忘記密碼
@@ -183,6 +187,8 @@ namespace Final_ASP_04.Controllers
 				ModelState.AddModelError("", ex.Message);
 			}
 
+			Session.Abandon();
+			FormsAuthentication.SignOut();
 			return RedirectToAction("Login");
 		}
 
@@ -210,9 +216,54 @@ namespace Final_ASP_04.Controllers
 			catch (Exception ex)
 			{
 				ModelState.AddModelError("", ex.Message);
+				return View();
 			}
 
+			//todo要先登出
+
 			return RedirectToAction("Login");
+		}
+
+		public ActionResult RegisterConfirm()
+		{
+			return View();
+		}
+
+		public ActionResult ConfirmCode(int memberId, string confirmCode)
+		{
+			var db = new AppDbContext();
+			var member = db.Members.FirstOrDefault(m => m.Id == memberId);
+
+			member.ConfirmCode = null;
+			member.IsConfirmed = true;
+			db.SaveChanges();
+
+			return View();
+		}
+
+		//使用的是EditProfileVm
+		[Authorize]
+		public ActionResult MemberProfile()
+		{
+			var user = User.Identity.Name;
+			var db = new AppDbContext();
+			var member = db.Members.FirstOrDefault(m => m.Account == user);
+
+			if (member == null)
+			{
+				return RedirectToAction("Login");
+			}
+
+			EditProfileVm vm = new EditProfileVm
+			{
+				Id = member.Id,
+				Account = member.Account,
+				Name = member.Name,
+				PhoneNumber = member.PhoneNumber,
+				Email = member.Email,
+			};
+
+			return View(vm);
 		}
 	}
 
@@ -315,13 +366,12 @@ namespace Final_ASP_04.Controllers
 			{
 				throw new Exception("你沒有修改他人資料的權限");
 			}
-			if (vm.Account != user && validAccount > 0)
-			{
-				throw new Exception("此帳號已被使用");
-			}
+			//if (vm.Account != user && validAccount > 0)
+			//{
+			//	throw new Exception("此帳號已被使用");
+			//}
 
 			memberInDb.Name = vm.Name;
-			memberInDb.Account = vm.Account;
 			memberInDb.Email = vm.Email;
 			memberInDb.PhoneNumber = vm.PhoneNumber;
 			db.SaveChanges();
@@ -386,7 +436,7 @@ namespace Final_ASP_04.Controllers
 			var salt = HashUtility.GetSalt();
 			var hashedOldPassword = HashUtility.ToSHA256(vm.OldPassword, salt);
 
-			if (member.EncryptedPassword != hashedOldPassword)
+			if (string.Compare(hashedOldPassword, member.EncryptedPassword, false) != 0)
 			{
 				throw new Exception("原始密碼不正確");
 			}
@@ -395,6 +445,15 @@ namespace Final_ASP_04.Controllers
 
 			member.EncryptedPassword = hashedPassword;
 			db.SaveChanges();
+		}
+
+		internal void SendConfirmEmail(RegisterVm vm)
+		{
+			var db = new AppDbContext();
+			var member = db.Members.FirstOrDefault(m => m.Account == vm.Account);
+
+			var emailHelper = new EmailHelper();
+			emailHelper.SenderConfirmRegisterEmail($"https://localhost:44335/Members/ConfirmCode?memberId={member.Id}&confirmCode={member.ConfirmCode}", member.Name, member.Email);
 		}
 	}
 }

@@ -13,9 +13,26 @@
 
 @section scripts{
     <script>
+        const product = $(".product");
+
         $(document).ready(function () {
             // 找到 data-id = 1 的 .carousel-item 元素，add active
             $(".carousel-item[data-id='1']").addClass("active");
+
+            //branch區塊的click事件
+            product.click(function () {
+                let self = $(this);
+                let id = self.attr("data-id");
+
+                $.get("/Branches/BranchMain?branchId=" + id,
+                    null,
+                    function (result) {
+                        console.log('success branchId=' + id);
+                        window.location.href = "/Branches/BranchMain?branchId=" + id;
+                    })
+            });
+
+            //todo hover到指定位置在變色
         });
     </script>
 }
@@ -38,7 +55,7 @@
             /* 添加其他样式 */
         }
 
-        .product {
+        .branch {
             /* 添加一些容器的样式，例如背景颜色、边框等 */
             border: 1px solid #ccc;
             border-radius: 20px;
@@ -46,9 +63,12 @@
             cursor: pointer; /* 更改鼠标光标为手型，指示链接 */
         }
 
-            .product:hover {
-                /* 当鼠标悬停在容器上时，修改容器的样式以模拟链接样式 */
-                background-color: #e8e3e3; /* 更改背景颜色 */
+            .branch:hover {
+                background-color: #e8e3e3;
             }
+
+        .body-content {
+            margin-top: 50px
+        }
     </style>
 }

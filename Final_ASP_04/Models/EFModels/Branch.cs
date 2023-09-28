@@ -16,6 +16,7 @@ namespace Final_ASP_04.Models.EFModels
             News = new HashSet<News>();
             Orders = new HashSet<Order>();
             RoomTypes = new HashSet<RoomType>();
+            TrafficInfos = new HashSet<TrafficInfo>();
         }
 
         public int Id { get; set; }
@@ -56,5 +57,8 @@ namespace Final_ASP_04.Models.EFModels
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<RoomType> RoomTypes { get; set; }
+
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<TrafficInfo> TrafficInfos { get; set; }
     }
 }

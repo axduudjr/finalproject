@@ -1,7 +1,7 @@
 ﻿@model Final_ASP_04.Models.ViewModels.BranchVm
 
 <!--商品 begin-->
-<div class="container mt-5 pb-md-4 product">
+<div class="container mt-5 pb-md-4 branch" data-id="@Model.Id">
     <div class="row">
         <!--輪播照片 begin-->
         <div class="col-lg-5 col-12 custom-carousel-container">
@@ -35,7 +35,7 @@
         </div>
         <!--輪播照片 end-->
         <!--分店文字 begin-->
-        <div class="col-lg-7 col-12 pt-3 pt-md-0">
+        <div class="col-lg-7 col-12 pt-3 pt-md-0 product" data-id="@Model.Id">
             <h2 class="pb-2">@Model.Name</h2>
             <p class="custom-BranchDescription">
                 @Model.Description

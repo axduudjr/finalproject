@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Net;
+using System.Net.Mail;
 using System.Text;
 using System.Web;
 
@@ -40,8 +42,19 @@ namespace Final_ASP_04.Models.Infra
 
 		public virtual void SendViaGoogle(string from, string to, string subject, string body)
 		{
-			var path = HttpContext.Current.Server.MapPath("~/Files/");
-			CreateTextFile(path, from, to, subject, body);
+			var smtp = new SmtpClient();
+			smtp.Host = "smtp.gmail.com";
+			smtp.Port = 587;
+			smtp.EnableSsl = true;
+			smtp.UseDefaultCredentials = false;
+			smtp.Credentials = new NetworkCredential(from, "haaw jbuh wmab rliw");
+			smtp.DeliveryMethod = SmtpDeliveryMethod.Network;
+
+			var mail = new MailMessage(from, to);
+			mail.Subject = subject;
+			mail.Body = body;
+			mail.IsBodyHtml = true;
+			smtp.Send(mail);
 			return;
 		}
 

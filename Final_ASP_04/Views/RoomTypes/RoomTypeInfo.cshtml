@@ -62,7 +62,7 @@
                     </ul>
                     <div>
                         <p class="fw-bolder" style="font-size: large;">
-                            最低NT$1000起
+                            最低NT$@(Model.BestPrice)起
                             &nbsp;&nbsp;@using (Html.BeginForm("SearchRoom", "Rooms", FormMethod.Get))
                             {
                                 @Html.Hidden("startDateTime", DateTime.Now.ToString("yyyy-MM-dd"))

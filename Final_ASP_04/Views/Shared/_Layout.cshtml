@@ -33,13 +33,13 @@
                                 @{
                                     foreach (var branch in new Final_ASP_04.Models.Services.BranchService().GetAllBranches())
                                     {
-                                        <li><a class="dropdown-item" href="#">@branch.Name</a></li>
+                                        <li><a class="dropdown-item" href="/Branches/BranchMain?branchId=@branch.Id">@branch.Name</a></li>
                                     }
                                  }                                    
                                 </ul>
                         </li>
                         <li class="nav-item">
-                            @Html.ActionLink("房型一覽", "ListRoomTypes", "Branches", new { area = "" }, new { @class = "nav-link" })
+                            @Html.ActionLink("房型一覽", "ListRoomTypes", "Branches", new { area = "",selectedBranchId = ViewBag.branchId }, new { @class = "nav-link" })
                         </li>
                         <li class="nav-item">
                             @Html.ActionLink("FAQ", "About", "Home", new { area = "" }, new { @class = "nav-link" })

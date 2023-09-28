@@ -81,6 +81,7 @@ namespace Final_ASP_04.Controllers
 			//todo 記得在頁面導入 picture
 			ViewBag.News = Newsvm;
 			ViewBag.branchInfo = branchInfoVms;
+			ViewBag.branchId = branchId;
 
 			return View();
 		}

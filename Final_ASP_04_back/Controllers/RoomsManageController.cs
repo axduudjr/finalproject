@@ -19,18 +19,34 @@ namespace Final_ASP_04_back.Controllers
 
             foreach (var room in roomsVm)
             {
-				room.IsBooked = CheckIfRoomBooked(room.Id);
+				room.Status = CheckIfRoomBooked(room.Id);
 			}
 
             return View(roomsVm);
         }
-		private bool CheckIfRoomBooked(int id)
+		private string CheckIfRoomBooked(int id)
 		{
 			var repo = new RoomRepository();
 
 			var order = repo.GetCurrentReservationForRoom(id);
+            
+            if(order != null)
+            {
+                if(order.Status == "已入住")
+                {
+                    return "已入住";
+                }
+                if(order.Status =="已付款" || order.Status == "已修改")
+                {
+                    return "已預訂";
+                }
+                else
+                {
+					return "已取消";
+				}               
+            }
 
-			return order != null;
+            return "空房";
 		}
 	}
 }

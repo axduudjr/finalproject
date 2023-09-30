@@ -1,25 +1,22 @@
 ﻿@model IEnumerable<Final_ASP_04_back.Models.ViewModels.RoomManageVm>
 
 @{
-    ViewBag.Title = "Index";
+    ViewBag.Title = "房間管理系統";
 }
-
-<h2>Index</h2>
-
-<p>
-    @Html.ActionLink("Create New", "Create")
-</p>
+<div class="text-center">
+    <h1>房間管理系統</h1>
+</div>
 <div class="container">
     <div class="row">
         <div class="col-12">
             <form method="get">
                 <div class="row searchBlock">
-                    <div class="form-floating mb-3 col-lg-2">                        
+                    <div class="form-floating mb-3 col-lg-2">
                         <select class="form-select" name="branchId" id="branchId" placeholder="" readonly aria-label="Floating label select example">
                         </select>
                         <label for="branchId">分館名稱</label>
                     </div>
-                    <div class="form-floating mb-3 col-lg-2">                        
+                    <div class="form-floating mb-3 col-lg-2">
                         <input type="text" name="roomTypeName" class="form-control">
                         <label for="roomName">房型名稱</label>
                     </div>
@@ -31,15 +28,20 @@
         </div>
     </div>
 </div>
+<div class="ms-3 mt-2 mb-2">
+    <div class="color-box red"></div><span class="instruction">已入住</span>
+    <div class="color-box yellow"></div><span class="instruction">已預訂</span>
+    <div class="color-box white"></div><span class="instruction">空房</span>
+</div>
 <div class="container">
     <div class="row row-cols-lg-5 row-cols-md-2 row-cols-1">
         @foreach (var item in Model)
         {
             <div class="col">
-                <div class="card h-100 text-center roomResult" data-bs-toggle="modal" data-bs-target="#exampleModal@(item.Id)" 
-                     data-bs-whatever="@item.Name" data-bs-Id="@item.Id" data-bs-branchId="@item.BranchId" 
-                     data-bs-roomTypeId="@item.RoomTypeId" data-bs-guestNumberCapacity="@item.GuestNumberCapacity" 
-                     data-bs-description="@item.Description" data-bs-price="@item.Price" data-bs-status="@item.IsBooked">
+                <div class="card h-100 text-center roomResult" data-bs-toggle="modal" data-bs-target="#exampleModal@(item.Id)"
+                     data-bs-whatever="@item.Name" data-bs-Id="@item.Id" data-bs-branchId="@item.BranchId"
+                     data-bs-roomTypeId="@item.RoomTypeId" data-bs-guestNumberCapacity="@item.GuestNumberCapacity"
+                     data-bs-description="@item.Description" data-bs-price="@item.Price" data-bs-status="@item.Status">
                     <div class="card-body">
                         <h5 class="card-title fw-bolder">@item.Name</h5>
                         <p class="card-text">房型：@item.RoomTypeName</p>
@@ -49,63 +51,93 @@
             </div>
 
             <!-- Modal -->
-    <div class="modal fade" id="exampleModal@(item.Id)" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <form method="post">
-            <div class="modal-dialog modal-dialog-centered">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h5 class="modal-title" id="exampleModalLabel">房號：@item.Name</h5>
-                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                    </div>
-                    <div class="modal-body">
+            <div class="modal fade" id="exampleModal@(item.Id)" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                <form method="post">
+                    <div class="modal-dialog modal-dialog-centered">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="exampleModalLabel">房號：@item.Name</h5>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                            </div>
+                            <div class="modal-body">
 
-                        <div class="mb-3">
-                            <label for="recipient-roomTypeName" class="form-label">房型</label>
-                            <select class="form-select" name="roomTypeId" id="recipient-roomTypeName@(item.Id)" placeholder="" readonly aria-label="Floating label select example">
-                            </select>                           
-                        </div>
-                        <div class="mb-3">
-                            <label for="recipient-guestNumberCapacity" class="form-label">可容納人數</label>
-                            <input type="text" class="form-control" id="recipient-guestNumberCapacity@(item.Id)" placeholder="" value="@item.GuestNumberCapacity">
-                        </div>
-                        <div class="mb-3">
-                            <label for="recipient-Description" class="form-label">房間細部規格</label>
-                            <input type="text" class="form-control" id="recipient-Description@(item.Id)" placeholder="暫無" value="@item.Description">
-                        </div>
-                        <div class="mb-3">
-                            <label for="recipient-Price" class="form-label">房間定價</label>
-                            <input type="text" class="form-control" id="recipient-Price@(item.Id)" placeholder="" value="@item.Price">
-                        </div>
-                        <div class="mb-3">
-                            <label for="recipient-Status" class="form-label">房間狀態</label>
-                            @{
-                                if (item.IsBooked == true)
-                                {
-                                    <input type="text" class="form-control" id="recipient-Status@(item.Id)" placeholder="" value="已預訂">
-                                }
-                                else
-                                {
-                                    <input type="text" class="form-control" id="recipient-Status@(item.Id)" placeholder="" value="空房">
-                                }
-                            }
+                                <div class="mb-3">
+                                    <label for="recipient-roomTypeName" class="form-label">房型</label>
+                                    <select class="form-select" name="roomTypeId" id="recipient-roomTypeName@(item.Id)" placeholder="" readonly aria-label="Floating label select example">
+                                    </select>
+                                </div>
+                                <div class="mb-3">
+                                    <label for="recipient-guestNumberCapacity" class="form-label">可容納人數</label>
+                                    <input type="text" class="form-control" id="recipient-guestNumberCapacity@(item.Id)" placeholder="" value="@item.GuestNumberCapacity">
+                                </div>
+                                <div class="mb-3">
+                                    <label for="recipient-Description" class="form-label">房間細部規格</label>
+                                    <input type="text" class="form-control" id="recipient-Description@(item.Id)" placeholder="暫無" value="@item.Description">
+                                </div>
+                                <div class="mb-3">
+                                    <label for="recipient-Price" class="form-label">房間定價</label>
+                                    <input type="text" class="form-control" id="recipient-Price@(item.Id)" placeholder="" value="@item.Price">
+                                </div>
+                                <div class="mb-3">
+                                    <label for="recipient-Status" class="form-label">房間狀態</label>
+                                    @{
+                                        if (item.Status == "已入住")
+                                        {
+                                            <input type="text" class="form-control" id="recipient-Status@(item.Id)" placeholder="" value="已入住" readonly>
+                                        }
+                                        if (item.Status == "已預訂")
+                                        {
+                                            <input type="text" class="form-control" id="recipient-Status@(item.Id)" placeholder="" value="已預訂" readonly>
+                                        }
+                                        else
+                                        {
+                                            <input type="text" class="form-control" id="recipient-Status@(item.Id)" placeholder="" value="空房" readonly>
+                                        }
+                                    }
 
+                                </div>
+                            </div>
+                            <div class="modal-footer">
+                                <input type="hidden" name="id" value="@item.Id" />
+                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">關閉</button>
+                                <button type="submit" class="btn btn-primary" id="btn@(item.Id)">確認修改</button>
+                            </div>
                         </div>
                     </div>
-                    <div class="modal-footer">
-                        <input type="hidden" name="id" value="@item.Id" />                       
-                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">關閉</button>
-                        <button type="submit" class="btn btn-primary" id="btn@(item.Id)">確認修改</button>
-                    </div>
-                </div>
+                </form>
             </div>
-        </form>
-    </div>              
-         }
+        }
     </div>
 </div>
 
-    @section css {
+@section css {
     <style>
+        .color-box {
+            width: 20px;
+            height: 20px;
+            display: inline-block;
+            margin-right: 10px;
+        }
+
+        .instruction {
+            margin-right: 20px;
+        }
+
+        .color-box.red {
+            background-color: lightcoral;
+            opacity: 0.5;
+        }
+
+        .color-box.yellow {
+            background-color: gold;
+            opacity: 0.5;
+        }
+
+        .color-box.white {
+            background-color: white;
+            border: 1px solid gray;
+        }
+
         .row.searchBlock {
             margin-top: 20px;
             display: flex;
@@ -116,146 +148,238 @@
             margin-top: 8px;
             width: 120px;
         }
-        .roomResult:hover{
+
+        .roomResult:hover {
             cursor: pointer;
-            background-color:gainsboro;
+            background-color: gainsboro;
         }
+
         .roomResult.bg-danger:hover {
             cursor: pointer;
             background-color: lightcoral !important;
         }
+
+        .roomResult.bg-warning:hover {
+            cursor: pointer;
+            background-color: gold !important;
+        }
     </style>
-    }
+}
 
-    @section js {
-        <script>
-            $(function () {
-                initForm();
+@section js {
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+    <script>
+        $(function () {
+            initForm();
+        })
+
+        function initForm(branchId) {
+            var url = "/api/RoomsManageApi/GetBranches";
+
+            fetchJSON(url).then(function (jsonData) {
+                renderSelect(jsonData, "branchId");
             })
+        };
 
-            function initForm(branchId) {
-                var url = "/api/RoomsManageApi/GetBranches";
+        function fetchJSON(url) {
+            return fetch(url, {
+                method: "GET",
+                headers: {
+                    'Content-Type': 'application/json'
+                }
+            }).then(function (response) {
+                return response.json();
+            })
+        };
 
-                fetchJSON(url).then(function (jsonData) {
-                    renderSelect(jsonData, "branchId");
-                })
-            };
+        function renderSelect(jsonData, elementId) {
+            let targetSelect = document.getElementById(elementId);
+            let dataSource = jsonData.unshift({ id: 0, name: "請選擇分館" });
 
-            function fetchJSON(url) {
-                return fetch(url, {
-                    method: "GET",
-                    headers: {
-                        'Content-Type': 'application/json'
-                    }
-                }).then(function (response) {
-                    return response.json();
-                })
-            };
+            let options = jsonData.map(function (item) {
+                return `<option value="${item.id}">${item.name}</option>`;
+            });
 
-            function renderSelect(jsonData, elementId) {
-                let targetSelect = document.getElementById(elementId);
-                let dataSource = jsonData.unshift({ id: 0, name: "請選擇分館" });
+            targetSelect.innerHTML = options.join("");
+        };
+    </script>
+    <script>
+        $(function () {
+            document.querySelectorAll('.roomResult').forEach(function (item) {
+                item.addEventListener("click", function (event) {
+                    event.preventDefault();
+                    // 找到這個區塊的最外層, 以便取得 data-bs-roomtypeid
+                    let roomResult = event.currentTarget.closest(".roomResult");
 
-                let options = jsonData.map(function (item) {
-                    return `<option value="${item.id}">${item.name}</option>`;
-                });
+                    let branchId = event.currentTarget.getAttribute('data-bs-branchId');
+                    let roomId = event.currentTarget.getAttribute('data-bs-Id');
 
-                targetSelect.innerHTML = options.join("");
-            };
-        </script>
-        <script>
-            $(function () {
-                document.querySelectorAll('.roomResult').forEach(function (item) {
-                    item.addEventListener("click", function (event) {
-                        event.preventDefault();
-                        // 找到這個區塊的最外層, 以便取得 data-bs-roomtypeid
-                        let roomResult = event.currentTarget.closest(".roomResult");
+                    var UrlRoomType = "/api/RoomsManageApi/GetRoomTypes?branchId=" + branchId
 
-                        let branchId = event.currentTarget.getAttribute('data-bs-branchId');
-                        let roomId = event.currentTarget.getAttribute('data-bs-Id');
+                    fetchJSON(UrlRoomType).then(function (jsonData) {
+                        renderSelect(jsonData, "recipient-roomTypeName" + roomId);
 
-                        var UrlRoomType = "/api/RoomsManageApi/GetRoomTypes?branchId=" + branchId
+                        let roomTypeId = roomResult.getAttribute('data-bs-roomtypeid');
+                        document.querySelector("#recipient-roomTypeName" + roomId).value = roomTypeId;
 
-                        fetchJSON(UrlRoomType).then(function (jsonData) {
-                            renderSelect(jsonData, "recipient-roomTypeName" + roomId);
-
-                            let roomTypeId = roomResult.getAttribute('data-bs-roomtypeid');
-                            document.querySelector("#recipient-roomTypeName" + roomId).value = roomTypeId;
-
-                        })
-                        document.querySelector("#btn" + roomId).addEventListener("click", function (event) {
-                            event.preventDefault();                            
-
-                            //將編輯完的資料送到後端
-                            let editRoomTypeId = document.querySelector("#recipient-roomTypeName" + roomId).value;
-                            let editGuestNumberCapacity = document.querySelector("#recipient-guestNumberCapacity" + roomId).value;
-                            let editDescription = document.querySelector("#recipient-Description" + roomId).value;
-                            let editPrice = document.querySelector("#recipient-Price" + roomId).value;
-
-                            let roomManageVm = {
-                                Id: roomId,
-                                RoomTypeId: editRoomTypeId,
-                                GuestNumberCapacity: editGuestNumberCapacity,
-                                Description: editDescription,
-                                Price: editPrice
-                            };
-
-                            var UrlEditRoom = "/api/RoomsManageApi/EditRoom";
-
-                            fetch(UrlEditRoom, {
-                                method: "POST",
-                                headers: {
-                                    'Content-Type': 'application/json'
-                                },
-                                body: JSON.stringify(roomManageVm)
-                            }).then(function (response) {
-                                return response.json();
-                            }).then(function (jsonData) {
-                                if (jsonData.success) {
-                                    location.reload();
-                                }
-                                else {
-                                    alert("修改失敗");
-                                }
-                            })
-                        })                                              
-                     })
-                  });
-               })
-                function fetchJSON(url) {
-                    return fetch(url, {
-                        method: "GET",
-                        headers: {
-                            'Content-Type': 'application/json'
-                        }
-                    }).then(function (response) {
-                        return response.json();
                     })
-                };
+                    document.querySelector("#btn" + roomId).addEventListener("click", function (event) {
+                        event.preventDefault();
 
-                function renderSelect(jsonData, elementId) {
-                    let targetSelect = document.getElementById(elementId);
-                    let dataSource = jsonData.unshift({ id: 0, name: "請選擇" });
+                        //將編輯完的資料送到後端
+                        let editRoomTypeId = document.querySelector("#recipient-roomTypeName" + roomId).value;
+                        let editGuestNumberCapacity = document.querySelector("#recipient-guestNumberCapacity" + roomId).value;
+                        let editDescription = document.querySelector("#recipient-Description" + roomId).value;
+                        let editPrice = document.querySelector("#recipient-Price" + roomId).value;
 
-                    let options = jsonData.map(function (item) {
-                        return `<option value="${item.id}">${item.name}</option>`;
-                    });
+                        if (editRoomTypeId == 0) {
+                            swal({
+                                title: "請選擇房型",
+                                text: "請選擇房型",
+                                icon: "error",
+                                button: "OK!!"
+                            }).then(function (confirm) {
+                                if (confirm) {
+                                    document.querySelector("#recipient-roomTypeName" + roomId).value = roomResult.getAttribute('data-bs-roomtypeid');
+                                }
+                            });
+                            return;
+                        }
+                        if (editGuestNumberCapacity == "") {
+                            swal({
+                                title: "請輸入可容納人數",
+                                text: "請輸入可容納人數",
+                                icon: "error",
+                                button: "OK!!"
+                            }).then(function (confirm) {
+                                if (confirm) {
+                                    document.querySelector("#recipient-guestNumberCapacity" + roomId).value = roomResult.getAttribute('data-bs-guestNumberCapacity');
+                                }
+                            });
+                            return;
+                        }
+                        if (editGuestNumberCapacity < 1) {
+                            swal({
+                                title: "可容納人數錯誤",
+                                text: "可容納人數不可小於1",
+                                icon: "error",
+                                button: "OK!!"
+                            }).then(function (confirm) {
+                                if (confirm) {
+                                    document.querySelector("#recipient-guestNumberCapacity" + roomId).value = roomResult.getAttribute('data-bs-guestNumberCapacity');
+                                }
+                            });
+                            return;
+                        }
+                        if (editGuestNumberCapacity > 4) {
+                            swal({
+                                title: "可容納人數錯誤",
+                                text: "可容納人數不可大於4",
+                                icon: "error",
+                                button: "OK!!"
+                            }).then(function (confirm) {
+                                if (confirm) {
+                                    document.querySelector("#recipient-guestNumberCapacity" + roomId).value = roomResult.getAttribute('data-bs-guestNumberCapacity');
+                                }
+                            });
+                            return;
+                        }
+                        if (editPrice == "") {
+                            swal({
+                                title: "請輸入房間定價",
+                                text: "請輸入房間定價",
+                                icon: "error",
+                                button: "OK!!"
+                            }).then(function (confirm) {
+                                if (confirm) {
+                                    document.querySelector("#recipient-Price" + roomId).value = roomResult.getAttribute('data-bs-price');                                   
+                                }
+                            });
+                            return;
+                        }
 
-                    targetSelect.innerHTML = options.join("");
-                };
-        </script>
-        <script>
-            $(function () {
-                var cardElements = document.querySelectorAll('.roomResult');
 
-                cardElements.forEach(function (card) {
+                        let roomManageVm = {
+                            Id: roomId,
+                            RoomTypeId: editRoomTypeId,
+                            GuestNumberCapacity: editGuestNumberCapacity,
+                            Description: editDescription,
+                            Price: editPrice
+                        };
 
-                    var status = card.getAttribute('data-bs-status');
+                        var UrlEditRoom = "/api/RoomsManageApi/EditRoom";
 
-                    if (status === "True") {
-                        card.classList.add('bg-danger', 'bg-opacity-25');
-                    }
-                });
+                        fetch(UrlEditRoom, {
+                            method: "POST",
+                            headers: {
+                                'Content-Type': 'application/json'
+                            },
+                            body: JSON.stringify(roomManageVm)
+                        }).then(function (response) {
+                            return response.json();
+                        }).then(function (jsonData) {
+                            if (jsonData.success) {
+                                swal({
+                                    title: "修改成功",
+                                    text: "已成功修改房間資料",
+                                    icon: "success",
+                                    button: "OK!!"
+                                }).then(function (confirm) {
+                                    if (confirm) {
+                                        window.location.href = "/RoomsManage/Index";
+                                    }
+                                });
+                            }
+                            else {
+                                swal({
+                                    title: "修改失敗",
+                                    text: "請重新操作",
+                                    icon: "error",
+                                    button: "OK!!"
+                                });
+                            }
+                        })
+                    })
+                })
+            });
+        })
+        function fetchJSON(url) {
+            return fetch(url, {
+                method: "GET",
+                headers: {
+                    'Content-Type': 'application/json'
+                }
+            }).then(function (response) {
+                return response.json();
             })
-        </script>
-    }
+        };
+
+        function renderSelect(jsonData, elementId) {
+            let targetSelect = document.getElementById(elementId);
+            let dataSource = jsonData.unshift({ id: 0, name: "請選擇" });
+
+            let options = jsonData.map(function (item) {
+                return `<option value="${item.id}">${item.name}</option>`;
+            });
+
+            targetSelect.innerHTML = options.join("");
+        };
+    </script>
+    <script>
+        $(function () {
+            var cardElements = document.querySelectorAll('.roomResult');
+
+            cardElements.forEach(function (card) {
+
+                var status = card.getAttribute('data-bs-status');
+
+                if (status == "已入住") {
+                    card.classList.add('bg-danger', 'bg-opacity-25');
+                }
+                if (status == "已預訂") {
+                    card.classList.add('bg-warning', 'bg-opacity-25');
+                }
+            });
+        })
+    </script>
+}

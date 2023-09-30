@@ -16,13 +16,25 @@ namespace Final_ASP_04_back.Controllers
         {
             var service = new RoomService();
             var roomsVm = service.GetRooms(branchId, roomTypeName).Select(r => r.ToRoomManageVm()).ToList();
-
+           
             foreach (var room in roomsVm)
             {
 				room.Status = CheckIfRoomBooked(room.Id);
 			}
 
-            return View(roomsVm);
+            string branchName; 
+            if(branchId == 0)
+            {
+				branchName = "全部分館";
+			}
+            else
+            {
+				branchName = new BranchRepository().GetBranch(branchId).Name;
+			}
+
+            ViewBag.BranchName = branchName;
+
+			return View(roomsVm);
         }
 		private string CheckIfRoomBooked(int id)
 		{

@@ -176,6 +176,7 @@
     <Compile Include="Models\EFModels\RoomTypePicture.cs" />
     <Compile Include="Models\EFModels\sysdiagram.cs" />
     <Compile Include="Models\EFModels\User.cs" />
+    <Compile Include="Models\Repositories\BranchRepository.cs" />
     <Compile Include="Models\Repositories\GuestNumberRepository.cs" />
     <Compile Include="Models\Repositories\RoomRepository.cs" />
     <Compile Include="Models\Services\RoomService.cs" />

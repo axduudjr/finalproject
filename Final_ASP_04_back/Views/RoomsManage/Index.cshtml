@@ -2,6 +2,7 @@
 
 @{
     ViewBag.Title = "房間管理系統";
+    var currentBranchName = ViewBag.BranchName as string;
 }
 <div class="text-center">
     <h1>房間管理系統</h1>
@@ -28,7 +29,12 @@
         </div>
     </div>
 </div>
-<div class="ms-3 mt-2 mb-2">
+<div class="text-center mt-1">
+    <h4>
+        @currentBranchName
+    </h4>
+</div>
+<div class="ms-4 mt-2 mb-2">
     <div class="color-box red"></div><span class="instruction">已入住</span>
     <div class="color-box yellow"></div><span class="instruction">已預訂</span>
     <div class="color-box white"></div><span class="instruction">空房</span>
@@ -151,6 +157,11 @@
         .btn.search {
             margin-top: 8px;
             width: 120px;
+        }
+        @@media (max-width: 991px) {
+            .btn.search {
+                float: right;
+            }
         }
 
         .roomResult:hover {

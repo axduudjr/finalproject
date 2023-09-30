@@ -83,15 +83,15 @@
                                     @{
                                         if (item.Status == "已入住")
                                         {
-                                            <input type="text" class="form-control" id="recipient-Status@(item.Id)" placeholder="" value="已入住" readonly>
+                                            <input type="text" class="form-control readonly-input" id="recipient-Status@(item.Id)" placeholder="" value="已入住" readonly>
                                         }
                                         if (item.Status == "已預訂")
                                         {
-                                            <input type="text" class="form-control" id="recipient-Status@(item.Id)" placeholder="" value="已預訂" readonly>
+                                            <input type="text" class="form-control readonly-input" id="recipient-Status@(item.Id)" placeholder="" value="已預訂" readonly>
                                         }
                                         else
                                         {
-                                            <input type="text" class="form-control" id="recipient-Status@(item.Id)" placeholder="" value="空房" readonly>
+                                            <input type="text" class="form-control readonly-input" id="recipient-Status@(item.Id)" placeholder="" value="空房" readonly>
                                         }
                                     }
 
@@ -112,6 +112,10 @@
 
 @section css {
     <style>
+        .form-control.readonly-input {
+            background-color: #D0D0D0;
+            cursor: default;
+        }
         .color-box {
             width: 20px;
             height: 20px;

@@ -1,7 +1,7 @@
 ﻿@model IEnumerable<Final_ASP_04.Models.ViewModels.RoomTypeVm>
 @using Final_ASP_04.Models.ViewModels;
 @{
-    ViewBag.Title = "房型介紹";
+    ViewBag.Title = "房型一覽";
     var roomTypeVms = ViewBag.RoomTypeVms as List<RoomTypeVm>;
     var selectedBranchId = ViewBag.SelectedBranchId;
     var branches = ViewBag.Branches;
@@ -9,7 +9,7 @@
 
 <!-- 標題 -->
 <div class="container-fluid has-background-image" style="margin-top:51px;">
-    <h1 class="pageTitle">房型介紹</h1>
+    <h1 class="pageTitle">房型一覽</h1>
 </div>
 <!-- 麵包屑 -->
 <div class="container">
@@ -17,7 +17,7 @@
         <nav aria-label="breadcrumb">
             <ol class="breadcrumb">
                 <li class="breadcrumb-item"><a href="/">首頁</a></li>
-                <li class="breadcrumb-item active">房型介紹</li>
+                <li class="breadcrumb-item active">房型一覽</li>
             </ol>
         </nav>
     </div>
@@ -86,17 +86,21 @@
             border-radius: 10px;
             object-fit: cover;
         }
+
         .roomBlock:hover{
             transform: scale(1.02);
             transition: 0.3s;
         }
-        
+        .card {
+            width:100%;
+        }
 
         .card-title {
             font-size: 20px;
             font-weight: bold;
             margin-top: 10px;
         }
+       
     </style>
 }
 

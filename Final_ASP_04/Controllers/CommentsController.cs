@@ -30,6 +30,8 @@ namespace Final_ASP_04.Controllers
         {
             return PartialView(vms);
         }
+
+        [Authorize]
         public ActionResult CreateComment(int orderId)
         {
 			var vm = new CommentCreateVm
@@ -44,6 +46,8 @@ namespace Final_ASP_04.Controllers
 
 			return View(vm);
 		}
+
+        [Authorize]
         [HttpPost]
         public ActionResult CreateComment(CommentCreateVm vm)
         {
@@ -64,8 +68,12 @@ namespace Final_ASP_04.Controllers
             var dto = vm.ToCommentCreateDTO();
 
             service.CreateComment(dto);
+            ViewBag.SuccessMessage = "評價成功";
 
-            return RedirectToAction("ListRoomTypes", "Branches");
-        }
+            var originOrder = new OrderRepository().GetOrder(vm.OrderId);
+            ViewBag.Order = originOrder;
+
+			return View(vm);
+		}
     }
 }

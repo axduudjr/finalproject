@@ -76,6 +76,7 @@ namespace Final_ASP_04.Models.ViewModels
 		public string PaymentType { get; set; }
 		[Display(Name = "訂單狀態")]
 		public string Status { get; set; }
+		public string RoomPicFile { get; set; }
 
 	}
 }

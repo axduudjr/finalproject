@@ -1,7 +1,7 @@
 ﻿@model Final_ASP_04.Models.ViewModels.CheckoutVM
 
 @{
-    ViewBag.Title = "CheckoutStepOne";
+    ViewBag.Title = "確認訂單資料";
 }
 
 @using (Html.BeginForm())
@@ -94,7 +94,7 @@
         <div class="row">
             <div class="col-md-12 mt-3">
                 <a href="/Checkout/CheckoutStepTwo?cartId=@ViewBag.CartId">
-                    <input type="button" class="btn btn-primary" style="width:100%" name="" id="" value="確定提交，繼續選擇付款方式">
+                    <input type="button" class="btn btn-primary" style="width:100%" name="" id="confirmedbtn" value="確定提交，繼續選擇付款方式">
                 </a>
             </div>
         </div>
@@ -104,6 +104,23 @@
 
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            let edmcheckbox = document.getElementById("edm");
+            let confirmedbtn = document.getElementById("confirmedbtn");
+            confirmedbtn.addEventListener("click", function (event) {
+                if (!edmcheckbox.checked) {
+                    swal({
+                        title: "請勾選同意條款才能至下一步!",
+                        icon: "warning",
+                    });
+                    event.preventDefault();
+                    return;
+                }
+            })
+        })
+    </script>
 }
 
 @section css{

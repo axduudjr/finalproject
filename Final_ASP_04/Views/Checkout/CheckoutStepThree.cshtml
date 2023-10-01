@@ -1,6 +1,6 @@
 ﻿
 @{
-    ViewBag.Title = "CheckoutStepThree";
+    ViewBag.Title = "完成訂單";
 }
 
 @using (Html.BeginForm())
@@ -37,8 +37,7 @@
 
         <div class="row detail">
             <div class="col-md-6">
-                <img src="images/point3d-commercial-imaging-ltd-GUno-FetWJM-unsplash.jpg" alt=""
-                     style="width: 600px; border-radius: 10px;">
+                <img src="~/images/@Model.RoomPicFile" alt="圖片描述" class="resize-image">
             </div>
             <div class="col-md-6">
                 入住日期：@Html.Raw(Model.StartDate.ToString("yyyy-MM-dd"))
@@ -66,6 +65,14 @@
             padding: 10px;
             background-color: antiquewhite;
             border-radius: 10px;
+        }
+
+        .resize-image {
+            max-width: 100%;
+            max-height: 100%;
+            width: auto;
+            height: auto;
+            border-radius: 5px
         }
     </style>
 }

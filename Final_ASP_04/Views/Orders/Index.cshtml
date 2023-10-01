@@ -22,7 +22,7 @@
         @foreach (var order in orders)
         {
             ViewData["Link"] = Html.ActionLink("查看", "Edit", new { id = order.Id }, new { @class = "big-button" });
-            ViewData["CommentLink"] = Html.ActionLink("我要評論！", "CreateComment","Comments", new { id = order.Id }, new { @class = "big-button" });
+            ViewData["CommentLink"] = Html.ActionLink("我要評論！", "CreateComment","Comments", new { orderId = order.Id }, new { @class = "big-button" });
             Html.RenderPartial("_OrderPartial", order);
         }
     </div>

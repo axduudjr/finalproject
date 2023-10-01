@@ -141,9 +141,9 @@
             btn1.classList.remove("col-md-6")
             btn2.style.display = "none";
             btn1.classList.add("col-md-10")
-
         }
-        if (status == "已取消") {
+
+        if (status == "已取消" || status == "已入住") {
             editorder.style.display = "none";
             cancelorder.style.display = "none";
             start.classList.remove("datepicker")
@@ -161,6 +161,7 @@
 
 
 @section css{
+    <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
     <style>
         .order {
             background-color: #dfeff7;

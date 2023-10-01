@@ -49,6 +49,7 @@ namespace Final_ASP_04.Controllers
 		private void PreparePaymentTypeDataSource()
 		{
 			List<PaymentType> items = db.PaymentTypes.ToList();
+			items.Insert(0, new PaymentType { Id = 0, Name = "請選擇付款方式" });
 			var paymentTypeList = new SelectList(items, "Id", "Name");
 			ViewBag.PaymentTypes = paymentTypeList;
 
@@ -58,6 +59,7 @@ namespace Final_ASP_04.Controllers
 		{
 			var cartInDb = db.Carts.Find(vm.Id);
 			cartInDb.PaymentTypeId = vm.PaymentTypeId;
+
 			db.SaveChanges();
 
 			var newId = CreateOrder(cartInDb);
@@ -110,7 +112,8 @@ namespace Final_ASP_04.Controllers
 				EndDate = order.EndDateTime,
 				Price = order.Price,
 				PaymentType = order.PaymentType.Name,
-				Status = order.Status
+				Status = order.Status,
+				RoomPicFile = order.Room.RoomType.FileName
 			};
 			return View(vm);
 		}

@@ -66,14 +66,14 @@
                     </div>
                     <div class="form-group">
                         @Html.LabelFor(model => model.PaymentTypeId, htmlAttributes: new { @class = "control-label col-md-2" })
-                        @Html.DropDownListFor(model => model.PaymentTypeId, ViewBag.PaymentTypes as SelectList, "請選擇支付方式", new { @class = "form-control" })
+                        @Html.DropDownListFor(model => model.PaymentTypeId, ViewBag.PaymentTypes as SelectList, null, new { @class = "form-select" })
                         @Html.ValidationMessageFor(model => model.PaymentTypeId, "", new { @class = "text-danger" })
                     </div>
                 </div>
             </div>
 
             <div class="col-12 mt-3">
-                <input type="submit" value="確定付款方式，完成預定" class="btn btn-primary" style="width:100%" />
+                <input type="submit" value="確定付款方式，完成預定" class="btn btn-primary" style="width:100%" id="confirmedbtn" />
             </div>
         </div>
     </div>
@@ -82,7 +82,25 @@
 
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            let confirmedbtn = document.getElementById("confirmedbtn");
+            confirmedbtn.addEventListener("click", function (event) {
+                let paymentValue = document.getElementById("PaymentTypeId").value;
+                if (paymentValue==0) {
+                    swal({
+                        title: "請選擇付款方式!",
+                        icon: "warning",
+                    });
+                    event.preventDefault();
+                    return;
+                }
+            })
+        })
+    </script>
 }
+
 @section css{
     <style>
         .row-reverse {

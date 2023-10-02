@@ -145,6 +145,7 @@
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\MailsController.cs" />
     <Compile Include="Controllers\MembersController.cs" />
+    <Compile Include="Controllers\NewsController.cs" />
     <Compile Include="Controllers\OrdersController.cs" />
     <Compile Include="Controllers\RoomsManageApiController.cs" />
     <Compile Include="Controllers\RoomsManageController.cs" />
@@ -174,7 +175,7 @@
     <Compile Include="Models\EFModels\Room.cs" />
     <Compile Include="Models\EFModels\RoomType.cs" />
     <Compile Include="Models\EFModels\RoomTypePicture.cs" />
-    <Compile Include="Models\EFModels\sysdiagram.cs" />
+    <Compile Include="Models\EFModels\TrafficInfo.cs" />
     <Compile Include="Models\EFModels\User.cs" />
     <Compile Include="Models\Repositories\BranchRepository.cs" />
     <Compile Include="Models\Repositories\GuestNumberRepository.cs" />
@@ -184,6 +185,7 @@
     <Compile Include="Models\ViewModels\LoginVM.cs" />
     <Compile Include="Models\ViewModels\MailVM.cs" />
     <Compile Include="Models\ViewModels\MemberVM.cs" />
+    <Compile Include="Models\ViewModels\NewsVm.cs" />
     <Compile Include="Models\ViewModels\OrderListVM.cs" />
     <Compile Include="Models\ViewModels\RoomManageVm.cs" />
     <Compile Include="Models\ViewModels\RoomTypeVM.cs" />
@@ -255,6 +257,11 @@
     <Content Include="Views\Orders\Index.cshtml" />
     <Content Include="Views\RoomTypes\Create.cshtml" />
     <Content Include="Views\RoomTypes\Index.cshtml" />
+    <Content Include="Views\News\Create.cshtml" />
+    <Content Include="Views\News\Delete.cshtml" />
+    <Content Include="Views\News\Details.cshtml" />
+    <Content Include="Views\News\Edit.cshtml" />
+    <Content Include="Views\News\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

@@ -12,7 +12,6 @@ namespace Final_ASP_04_back.Models.EFModels
 
         public int BranchId { get; set; }
 
-        [Required]
         [StringLength(50)]
         public string FileName { get; set; }
 

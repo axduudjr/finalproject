@@ -21,6 +21,7 @@
             <div class="collapse navbar-collapse d-sm-inline-flex justify-content-between">
                 <ul class="navbar-nav flex-grow-1">
                     <li>@Html.ActionLink("維護FAQs", "Index", "FAQs", new { area = "" }, new { @class = "nav-link" })</li>
+                    <li>@Html.ActionLink("維護最新消息", "Index", "News", new { area = "" }, new { @class = "nav-link" })</li>
                     <li>@Html.ActionLink("維護會員", "Index", "Members", new { area = "" }, new { @class = "nav-link" })</li>
                     <li>@Html.ActionLink("維護訂單", "Index", "Orders", new { area = "" }, new { @class = "nav-link" })</li>
                     <li>@Html.ActionLink("維護房型", "Index", "RoomTypes", new { area = "" }, new { @class = "nav-link" })</li>
@@ -33,8 +34,8 @@
     <div class="container body-content">
         @RenderBody()
         <hr />
-        <footer>
-            <p>&copy; @DateTime.Now.Year - 我的 ASP.NET 應用程式</p>
+        <footer class="text-center">
+            <p>&copy; @DateTime.Now.Year - 住宿趣</p>
         </footer>
     </div>
 

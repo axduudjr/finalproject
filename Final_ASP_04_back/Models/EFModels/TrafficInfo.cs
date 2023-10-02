@@ -1,4 +1,4 @@
-namespace Final_ASP_04.Models.EFModels
+namespace Final_ASP_04_back.Models.EFModels
 {
     using System;
     using System.Collections.Generic;
@@ -6,25 +6,23 @@ namespace Final_ASP_04.Models.EFModels
     using System.ComponentModel.DataAnnotations.Schema;
     using System.Data.Entity.Spatial;
 
-    public partial class News
+    [Table("TrafficInfos")]
+    public partial class TrafficInfo
     {
-        public int Id { get; set; }
-
+        [Key]
+        [Column(Order = 0)]
+        [DatabaseGenerated(DatabaseGeneratedOption.None)]
         public int BranchId { get; set; }
 
-        [StringLength(50)]
-        public string FileName { get; set; }
-
-        [Required]
-        [StringLength(50)]
+        [Key]
+        [Column(Order = 1)]
+        [StringLength(30)]
         public string Title { get; set; }
 
-        [Required]
+        [Key]
+        [Column(Order = 2)]
+        [StringLength(50)]
         public string Description { get; set; }
-
-        public DateTime CreatedTime { get; set; }
-
-        public DateTime ModifiedTime { get; set; }
 
         public virtual Branch Branch { get; set; }
     }

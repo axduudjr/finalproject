@@ -90,7 +90,7 @@ namespace Final_ASP_04.Controllers
 		{
 			Session.Abandon();
 			FormsAuthentication.SignOut();
-			return Redirect("/Home/Index");
+			return Redirect("/Branches/ChooseBranch");
 		}
 
 		//會員資料維護

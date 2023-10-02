@@ -1,5 +1,5 @@
 ﻿@{
-    ViewBag.Title = "Home Page";
+    ViewBag.Title = "首頁";
 }
 
 <h2 style="text-align:center;">主選頁</h2>
@@ -23,6 +23,9 @@
         </div>
         <div class="col-12 mb-3">
             @Html.ActionLink("客人來信", "Index", "Mails", null, new { @class = "Homebtn" })
+        </div>
+        <div class="col-12 mb-3">
+            @Html.ActionLink("維護最新消息", "Index", "News", null, new { @class = "Homebtn" })
         </div>
     </div>
 </div>

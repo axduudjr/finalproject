@@ -1,0 +1,84 @@
+﻿@model Final_ASP_04_back.Models.EFModels.News
+
+@{
+    ViewBag.Title = "刪除最新消息";
+}
+
+<h3>確認要刪除這筆News?</h3>
+<div>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            分店店名
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Branch.Name)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Title)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Title)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Description)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Description)
+        </dd>
+    </dl>
+
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+        <div class="container">
+            <div class="row">
+                <div class="col-6">
+                    @Html.ActionLink("回到維護FAQs頁", "Index", null, new { @class = "back2News" })
+                </div>
+                <div class="col-6">
+                    <input type="submit" value="Delete" class="deletebtn" />
+                </div>
+            </div>
+        </div>
+    }
+</div>
+
+@section css{
+    <style>
+        .back2News {
+            text-align: center;
+            padding: 10px 20px;
+            width: 100%;
+            display: inline-block;
+            font-size: 16px;
+            background-color: darkgray;
+            color: #ffffff;
+            border: none;
+            text-decoration: none;
+            border-radius: 10px
+        }
+
+        .back2FAQs:hover {
+            color: white;
+        }
+
+        .deletebtn {
+            text-align: center;
+            padding: 10px 20px;
+            width: 100%;
+            display: inline-block;
+            font-size: 16px;
+            background-color: lightcoral;
+            color: #ffffff;
+            border: none;
+            text-decoration: none;
+            border-radius: 10px
+        }
+    </style>
+}

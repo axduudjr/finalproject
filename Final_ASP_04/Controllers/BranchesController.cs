@@ -21,15 +21,17 @@ namespace Final_ASP_04.Controllers
 		[HttpGet]
 		public ActionResult BranchMain(int branchId)
 		{
-			var Newsvm = GetNewsVM(branchId);
+			var newsvm = GetNewsVM(branchId);
 			var branchInfoVms = GetBranchInfoVm(branchId);
 			var branchPic = GetBranchPic(branchId);
+			var product = GetProductVm(branchId);
 
 			//todo 記得在頁面導入 picture
-			ViewBag.News = Newsvm;
+			ViewBag.News = newsvm;
 			ViewBag.BranchInfo = branchInfoVms;
 			ViewBag.BranchPic = branchPic;
 			ViewBag.BranchId = branchId;
+			ViewBag.Product = product;
 
 			return View();
 		}
@@ -177,6 +179,15 @@ namespace Final_ASP_04.Controllers
 			ViewBag.Branches = branches;
 
 			return View(roomTypeVms);
+		}
+		private List<RoomType> GetProductVm(int branchId)
+		{
+			var db = new AppDbContext();
+			var product = db.RoomTypes.Where(r => r.BranchId == branchId)
+										.OrderBy(r => r.DisplayOrder)
+										.Take(3)
+										.ToList();
+			return product;
 		}
 	}
 }

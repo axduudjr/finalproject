@@ -16,6 +16,7 @@ namespace Final_ASP_04_back.Controllers
 		private AppDbContext db = new AppDbContext();
 
 		// GET: FAQs
+		[Authorize]
 		public ActionResult Index()
 		{
 			var vm = db.FAQs.Select(o => new FaqVM

@@ -20,5 +20,7 @@ namespace Final_ASP_04_back.Models.ViewModels
 		public bool Enabled { get; set; }
 		[Display(Name = "是否驗證")]
 		public bool? IsConfirmed { get; set; }
+		public string IsConfirmedText => IsConfirmed.HasValue ? (IsConfirmed.Value ? "是" : "否") : "未知";
+		public string EnabledText => Enabled ? "正常" : "已停用";
 	}
 }

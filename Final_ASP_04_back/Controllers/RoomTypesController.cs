@@ -15,6 +15,7 @@ namespace Final_ASP_04_back.Controllers
 		private AppDbContext db = new AppDbContext();
 
 		// GET: RoomTypes
+		[Authorize]
 		public ActionResult Index()
 		{
 			var roomTypes = db.RoomTypes.Include(r => r.Branch);

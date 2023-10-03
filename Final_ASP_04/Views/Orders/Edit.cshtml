@@ -30,13 +30,13 @@
 
                 <div class="mb-3">
                     @Html.LabelFor(model => model.StartDate, htmlAttributes: new { @class = "form-label col-md-2" })
-                    @Html.EditorFor(model => model.StartDate, new { htmlAttributes = new { @class = "form-control datepicker" } })
+                    @Html.EditorFor(model => model.StartDate, new { htmlAttributes = new { @class = "form-control datepicker1" } })
                     @Html.ValidationMessageFor(model => model.StartDate, "", new { @class = "text-danger" })
                 </div>
 
                 <div class="mb-3">
                     @Html.LabelFor(model => model.EndDate, htmlAttributes: new { @class = "form-label col-md-2" })
-                    @Html.EditorFor(model => model.EndDate, new { htmlAttributes = new { @class = "form-control datepicker" } })
+                    @Html.EditorFor(model => model.EndDate, new { htmlAttributes = new { @class = "form-control datepicker2" } })
                     @Html.ValidationMessageFor(model => model.EndDate, "", new { @class = "text-danger" })
                 </div>
 
@@ -91,9 +91,51 @@
     <script src="https://code.jquery.com/ui/1.13.2/jquery-ui.js"></script>
     <script>
         $(function () {
-            $(".datepicker").datepicker({
-                dateFormat: 'yy-mm-dd' // 年-月-日
+            var tomorrow = new Date();
+            tomorrow.setDate(tomorrow.getDate() + 1);
+            var dayaftertomorrow = new Date();
+            dayaftertomorrow.setDate(dayaftertomorrow.getDate() + 2)
+
+            $(".datepicker1").datepicker({
+                dateFormat: 'yy-mm-dd',
+                minDate: tomorrow,
             });
+            $(".datepicker2").datepicker({
+                dateFormat: 'yy-mm-dd',
+                minDate: dayaftertomorrow,
+            });
+        });
+        var selectedDate1 = $('.datepicker1').val();
+        var selectedDate2 = $('.datepicker2').val();
+
+        var date1 = new Date(selectedDate1);
+        var date2 = new Date(selectedDate2);
+
+        var timeDiff = Math.abs(date2.getTime() - date1.getTime());
+        var dayDiff = Math.ceil(timeDiff / (1000 * 3600 * 24));
+
+        console.log(dayDiff)
+
+        $(".datepicker1").on("change", function () {
+
+            var startDateValue = $(this).datepicker("getDate");
+
+            if (startDateValue !== null) {
+                var endDateValue = new Date(startDateValue);
+                endDateValue.setDate(endDateValue.getDate() + dayDiff);
+                $(".datepicker2").datepicker("setDate", endDateValue);
+            }
+        });
+
+        $(".datepicker2").on("change", function () {
+
+            var endDateValue = $(this).datepicker("getDate");
+
+            if (endDateValue !== null) {
+                var startDateValue = new Date(endDateValue);
+                startDateValue.setDate(startDateValue.getDate() - dayDiff);
+                $(".datepicker1").datepicker("setDate", startDateValue);
+            }
         });
     </script>
 
@@ -110,7 +152,15 @@
                 }
             })
 
-            $(".datepicker").on("change", function () {
+            $(".datepicker1").on("change", function () {
+                let startDate = document.getElementById("StartDate").value;
+                let endDate = document.getElementById("EndDate").value;
+                if (startDate >= endDate) {
+                    alert("入住日期不能大於等於退房日期")
+                    return;
+                }
+            });
+            $(".datepicker2").on("change", function () {
                 let startDate = document.getElementById("StartDate").value;
                 let endDate = document.getElementById("EndDate").value;
                 if (startDate >= endDate) {
@@ -132,9 +182,9 @@
 
         if (status == "已修改") {
             editorder.style.display = "none";
-            start.classList.remove("datepicker")
+            start.classList.remove("datepicker1")
             start.setAttribute("readonly", "true");
-            end.classList.remove("datepicker")
+            end.classList.remove("datepicker2")
             end.setAttribute("readonly", "true");
             start.style.backgroundColor = "#D0D0D0";
             end.style.backgroundColor = "#D0D0D0";
@@ -146,9 +196,9 @@
         if (status == "已取消" || status == "已入住") {
             editorder.style.display = "none";
             cancelorder.style.display = "none";
-            start.classList.remove("datepicker")
+            start.classList.remove("datepicker1")
             start.setAttribute("readonly", "true");
-            end.classList.remove("datepicker")
+            end.classList.remove("datepicker2")
             end.setAttribute("readonly", "true");
             start.style.backgroundColor = "#D0D0D0";
             end.style.backgroundColor = "#D0D0D0";

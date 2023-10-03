@@ -11,8 +11,9 @@ namespace Final_ASP_04_back.Controllers
 {
     public class RoomsManageController : Controller
     {
-        // GET: RoomsManage
-        public ActionResult Index(string roomTypeName, int branchId=0)
+		// GET: RoomsManage
+		[Authorize]
+		public ActionResult Index(string roomTypeName, int branchId=0)
         {
             var service = new RoomService();
             var roomsVm = service.GetRooms(branchId, roomTypeName).Select(r => r.ToRoomManageVm()).ToList();

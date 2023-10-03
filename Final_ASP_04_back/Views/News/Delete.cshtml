@@ -1,4 +1,4 @@
-﻿@model Final_ASP_04_back.Models.EFModels.News
+﻿@model Final_ASP_04_back.Models.ViewModels.NewsVm
 
 @{
     ViewBag.Title = "刪除最新消息";
@@ -13,7 +13,7 @@
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.Branch.Name)
+            @Html.DisplayFor(model => model.BranchName)
         </dd>
 
         <dt>
@@ -39,10 +39,10 @@
         <div class="container">
             <div class="row">
                 <div class="col-6">
-                    @Html.ActionLink("回到維護FAQs頁", "Index", null, new { @class = "back2News" })
+                    @Html.ActionLink("回到維護News頁", "Index", null, new { @class = "back2News" })
                 </div>
                 <div class="col-6">
-                    <input type="submit" value="Delete" class="deletebtn" />
+                    <input type="submit" value="刪除" class="deletebtn" />
                 </div>
             </div>
         </div>

@@ -7,6 +7,7 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using Final_ASP_04_back.Models.EFModels;
+using Final_ASP_04_back.Models.ViewModels;
 
 namespace Final_ASP_04_back.Controllers
 {
@@ -15,15 +16,28 @@ namespace Final_ASP_04_back.Controllers
 		private AppDbContext db = new AppDbContext();
 
 		// GET: News
+		[Authorize]
 		public ActionResult Index()
 		{
-			var news = db.News.Include(n => n.Branch);
-			var branches = db.Branches
-							.Distinct()
-							.Select(b => new { Id = b.Id, Name = b.Name })
-							.ToList();
-			ViewBag.Branch = branches;
-			return View(news.ToList());
+			var news = db.News.Include(n => n.Branch).ToList();
+
+			List<NewsVm> vms = new List<NewsVm>();
+			foreach (var n in news)
+			{
+				var vm = new NewsVm
+				{
+					Id = n.Id,
+					BranchId = n.BranchId,
+					BranchName = n.Branch.Name,
+					Title = n.Title,
+					Description = n.Description,
+					CreatedTime = n.CreatedTime,
+					ModifiedTime = n.ModifiedTime,
+				};
+				vms.Add(vm);
+			}
+
+			return View(vms);
 		}
 
 		// GET: News/Create
@@ -61,13 +75,25 @@ namespace Final_ASP_04_back.Controllers
 			{
 				return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
 			}
-			News news = db.News.Find(id);
+			News news = db.News.FirstOrDefault(n => n.Id == id);
 			if (news == null)
 			{
 				return HttpNotFound();
 			}
+
+			var vm = new NewsVm
+			{
+				Id = news.Id,
+				BranchId = news.BranchId,
+				BranchName = news.Branch.Name,
+				Title = news.Title,
+				Description = news.Description,
+				CreatedTime = news.CreatedTime,
+				ModifiedTime = news.ModifiedTime,
+			};
+
 			ViewBag.BranchId = new SelectList(db.Branches, "Id", "Name", news.BranchId);
-			return View(news);
+			return View(vm);
 		}
 
 		// POST: News/Edit/5
@@ -100,12 +126,23 @@ namespace Final_ASP_04_back.Controllers
 			{
 				return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
 			}
-			News news = db.News.Find(id);
+			News news = db.News.FirstOrDefault(n => n.Id == id);
 			if (news == null)
 			{
 				return HttpNotFound();
 			}
-			return View(news);
+
+			var vm = new NewsVm
+			{
+				Id = news.Id,
+				BranchId = news.BranchId,
+				BranchName = news.Branch.Name,
+				Title = news.Title,
+				Description = news.Description,
+				CreatedTime = news.CreatedTime,
+				ModifiedTime = news.ModifiedTime,
+			};
+			return View(vm);
 		}
 
 		// POST: News/Delete/5

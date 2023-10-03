@@ -1,0 +1,29 @@
+﻿@model Final_ASP_04_back.Models.ViewModels.UserVm
+
+@{
+    ViewBag.Title = "後台登入";
+}
+
+<h2>後台登入</h2>
+<form action="/Users/Login/" method="post">
+    <div>
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+    </div>
+    <div class="row">
+        <div class="col-6">
+            <label for="Account">帳號:</label>
+            @Html.TextBox("Account", null, new { @class = "form-control form-control-sm me-3 mb-3 Account", style = "width:100%;display:inline-block" })
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-6">
+            <label for="Password">密碼:</label>
+            @Html.TextBox("Password", null, new { @class = "form-control form-control-sm me-3 mb-3 Password", style = "width:100%;display:inline-block" ,type="Password" })
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-6 mt-4 text-end">
+            <input type="submit" value="登入" class="btn btn-sm" style="width: 30%; height: 40px;background-color: deepskyblue;color:white" />
+        </div>
+    </div>
+</form>

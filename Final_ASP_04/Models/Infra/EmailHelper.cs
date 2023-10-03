@@ -31,7 +31,7 @@ namespace Final_ASP_04.Models.Infra
 			var subject = "[新會員確認信]";
 			var body = $@"您好 {name},
 <br />
-請點擊此[<a href='{url}' target='_blank'>連結</a>,已提出重設密碼, 若沒有提出申請, 請忽略本信, 謝謝]";
+請點擊此[<a href='{url}' target='_blank'>連結</a>,來驗證信箱, 若沒有提出申請, 請忽略本信, 謝謝]";
 
 			var from = senderEmail;
 			var to = email;

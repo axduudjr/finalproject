@@ -14,6 +14,7 @@ namespace Final_ASP_04_back.Controllers
 		private AppDbContext db = new AppDbContext();
 
 		// GET: Members
+		[Authorize]
 		public ActionResult Index(string memberName = "", string phoneNumber = "", string email = "")
 		{
 			IQueryable<Member> members = db.Members;

@@ -15,6 +15,7 @@ namespace Final_ASP_04_back.Controllers
 		private AppDbContext db = new AppDbContext();
 
 		// GET: Mails
+		[Authorize]
 		public ActionResult Index(string memberName = "")
 		{
 			IQueryable<Mail> mails = db.Mails.Include(p => p.Member).OrderByDescending(o => o.CreatedTime);

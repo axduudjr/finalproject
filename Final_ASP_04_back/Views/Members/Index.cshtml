@@ -69,10 +69,10 @@
                 @Html.DisplayFor(modelItem => item.Email)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.Enabled)
+                @Html.DisplayFor(modelItem => item.EnabledText)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.IsConfirmed)
+                @Html.DisplayFor(modelItem => item.IsConfirmedText)
             </td>
             <td>
                 @Html.ActionLink("變更會員狀態", "Edit", new { id = item.Id }, new { @class = "MemberEditBtn" })

@@ -113,6 +113,18 @@ namespace Final_ASP_04.Controllers
 				{
 					return View(vm);
 				}
+
+				bool isOverlap = db.Orders.Any(o =>
+									o.RoomId == orderInDb.RoomId &&
+									o.BranchId == orderInDb.BranchId &&
+									o.StartDateTime < vm.EndDate && o.EndDateTime > vm.StartDate);
+
+				if (isOverlap)
+				{
+					ModelState.AddModelError("", "該時段已被預訂，請選擇其他日期");
+					return View(vm);
+				}
+
 				orderInDb.StartDateTime = vm.StartDate;
 				orderInDb.EndDateTime = vm.EndDate;
 				orderInDb.Status = "已修改";

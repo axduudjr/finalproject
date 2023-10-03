@@ -15,6 +15,7 @@ namespace Final_ASP_04_back.Controllers
 		private AppDbContext db = new AppDbContext();
 
 		// GET: Orders
+		[Authorize]
 		public ActionResult Index(int branchId = 0, string memberName = "", DateTime? startDateTime = null)
 		{
 			var orders = db.Orders.Include(o => o.Branch)

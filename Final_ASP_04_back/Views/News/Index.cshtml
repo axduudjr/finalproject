@@ -1,4 +1,4 @@
-﻿@model IEnumerable<Final_ASP_04_back.Models.EFModels.News>
+﻿@model IEnumerable<Final_ASP_04_back.Models.ViewModels.NewsVm>
 
 @{
     ViewBag.Title = "維護最新消息";
@@ -20,10 +20,10 @@
                 @{
                     foreach (var item in Model)
                     {
-                        if (!id.Contains(@item.Branch.Id))
+                        if (!id.Contains(@item.BranchId))
                         {
-                            <option value="@item.Branch.Id">@item.Branch.Name</option>
-                            id.Add(@item.Branch.Id);
+                            <option value="@item.BranchId">@item.BranchName</option>
+                            id.Add(@item.BranchId);
                         }
                     }
                 }
@@ -56,7 +56,7 @@
     {
         <tr class="news" data-id="@item.BranchId">
             <td>
-                @Html.DisplayFor(modelItem => item.Branch.Name)
+                @Html.DisplayFor(modelItem => item.BranchName)
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.Title)

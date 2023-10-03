@@ -150,6 +150,7 @@
     <Compile Include="Controllers\RoomsManageApiController.cs" />
     <Compile Include="Controllers\RoomsManageController.cs" />
     <Compile Include="Controllers\RoomTypesController.cs" />
+    <Compile Include="Controllers\UsersController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -189,6 +190,7 @@
     <Compile Include="Models\ViewModels\OrderListVM.cs" />
     <Compile Include="Models\ViewModels\RoomManageVm.cs" />
     <Compile Include="Models\ViewModels\RoomTypeVM.cs" />
+    <Compile Include="Models\ViewModels\UserVm.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -259,9 +261,9 @@
     <Content Include="Views\RoomTypes\Index.cshtml" />
     <Content Include="Views\News\Create.cshtml" />
     <Content Include="Views\News\Delete.cshtml" />
-    <Content Include="Views\News\Details.cshtml" />
     <Content Include="Views\News\Edit.cshtml" />
     <Content Include="Views\News\Index.cshtml" />
+    <Content Include="Views\Users\Login.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

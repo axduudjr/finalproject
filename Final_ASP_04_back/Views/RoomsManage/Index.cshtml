@@ -95,7 +95,7 @@
                                         {
                                             <input type="text" class="form-control readonly-input" id="recipient-Status@(item.Id)" placeholder="" value="已預訂" readonly>
                                         }
-                                        else
+                                        if (item.Status == "空房" || item.Status == "已取消")
                                         {
                                             <input type="text" class="form-control readonly-input" id="recipient-Status@(item.Id)" placeholder="" value="空房" readonly>
                                         }
@@ -381,6 +381,7 @@
         };
     </script>
     <script>
+        //標記各房間狀態的顏色
         $(function () {
             var cardElements = document.querySelectorAll('.roomResult');
 

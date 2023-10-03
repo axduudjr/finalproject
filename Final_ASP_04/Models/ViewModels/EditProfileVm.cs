@@ -13,7 +13,6 @@ namespace Final_ASP_04.Models.ViewModels
 		public int Id { get; set; }
 
 		[Display(Name = "帳號")]
-		[Required(ErrorMessage = DAHelper.Required)]
 		[StringLength(50)]
 		public string Account { get; set; }
 

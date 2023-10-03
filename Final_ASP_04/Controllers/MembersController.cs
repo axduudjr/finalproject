@@ -364,12 +364,8 @@ namespace Final_ASP_04.Controllers
 		{
 			var db = new AppDbContext();
 			var memberInDb = db.Members.FirstOrDefault(m => m.Id == vm.Id);
-			var validAccount = db.Members.Count(m => m.Account == vm.Account);
+			var validAccount = db.Members.Count(m => m.Account == user);
 
-			if (memberInDb.Account != user)
-			{
-				throw new Exception("你沒有修改他人資料的權限");
-			}
 			//if (vm.Account != user && validAccount > 0)
 			//{
 			//	throw new Exception("此帳號已被使用");

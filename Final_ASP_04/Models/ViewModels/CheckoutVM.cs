@@ -25,6 +25,7 @@ namespace Final_ASP_04.Models.ViewModels
 		public int Price { get; set; }
 		public DateTime StartDateTime { get; set; }
 		public DateTime EndDateTime { get; set; }
+		[Display(Name = "付款方式")]
 		public int? PaymentTypeId { get; set; }		
 	}
 }

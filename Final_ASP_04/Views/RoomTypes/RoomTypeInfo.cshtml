@@ -7,6 +7,15 @@
     var selectedRoomTypeId = ViewBag.selectedRoomTypeId;
     var roomTypePictures = ViewBag.RoomTypePictures;
     var allComments = ViewBag.AllComments as List<CommentListVm>;
+
+    var fiveStarCount = allComments.Where(x => x.Rank == 5).Count();
+    var fourStarCount = allComments.Where(x => x.Rank == 4).Count();
+    var threeStarCount = allComments.Where(x => x.Rank == 3).Count();
+    var twoStarCount = allComments.Where(x => x.Rank == 2).Count();
+    var oneStarCount = allComments.Where(x => x.Rank == 1).Count();
+
+    var averageRank = Math.Round(allComments.Average(x => x.Rank),1 ,MidpointRounding.AwayFromZero);
+    var totalCommentCount = allComments.Count();
 }
 <!-- 標題 -->
 <div class="container-fluid has-background-image" style="margin-top:51px;">
@@ -80,9 +89,23 @@
             </div>
         </div>
         <!-- 評論 -->
-        <div class="row"> 
-            <h3 class="fw-bolder mb-2">本館評價</h3>          
-            <div class="col-12 text-end">
+        <div class="row">
+            <h3 class="fw-bolder mb-2">本館評價</h3>
+            <div class="col-lg-8 ps-4">
+                <div class="d-flex flex-column">
+                    <div class="row" style="display: flex; justify-content:flex-start">
+                        <div class="col-lg-6 col-sm-12" style="max-width:350px">
+                            <canvas id="myChart"></canvas>
+                        </div>
+                        
+                        <div class="col-lg-6 col-sm-12 text-start ps-3">
+                            <h4>平均：@(averageRank)分</h4>
+                            <h5>評價總數：@(totalCommentCount)筆評價</h5>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-4 text-end">
                 <!-- Button trigger modal -->
                 <button type="button" class="btn btn-link" style="font-size: 18px" data-bs-toggle="modal" data-bs-target="#exampleModal">
                     查看全部
@@ -96,11 +119,11 @@
                                 <h5 class="modal-title" id="exampleModalLabel">本館全部評價</h5>
                                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                             </div>
-                            <div class="modal-body">                                
-                                @Html.Action("ListAllComments", "Comments", new{vms = allComments})
+                            <div class="modal-body">
+                                @Html.Action("ListAllComments", "Comments", new { vms = allComments })
                             </div>
                             <div class="modal-footer">
-                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">關閉</button>                              
+                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">關閉</button>
                             </div>
                         </div>
                     </div>
@@ -111,7 +134,7 @@
                     @{
                         Html.RenderAction("ListComments", "Comments", new { branchId = selectedBranchId });
                     }
-                </div>              
+                </div>
             </div>
         </div>
         <!-- 其他房間 -->
@@ -122,126 +145,170 @@
             </table>
         </div>
     </div>
-        </div>
+</div>
 
-        @section css{
-            <style>
-                .has-background-image {
-                    background-image: url(/images/TitleImg.jpg);
-                    height: 200px;
-                }
-
-                @@media screen and (min-width: 1200px) {
-                    .body-content {
-                        padding: 5px;
-                        margin: 0px;
-                        max-width: none;
-                    }
-                }
-
-                .pageTitle {
-                    box-sizing: border-box;
-                    color: black;
-                    font-size: 50px;
-                    font-weight: bold;
-                    padding-top: 60px;
-                    padding-left: 15%;
-                }
-
-                h3 {
-                    background-color: rgb(226, 252, 252);
-                }
-
-                .otherProduct {
-                    max-width: 250px;
-                    height: 100%;
-                    object-fit: cover;
-                }
-                @@media (max-width: 575px){
-                .otherProduct {
-                        max-width: 180px;
-                        height: 100%;
-                        object-fit: cover;
-                    }
-                }
-
-                .otherProducts h6 {
-                    font-weight: 700;
-                    color: #333;
-                    margin-bottom: 15px;
-                    font-size: 1.3rem;
-                }
-
-                .breadcrumb {
-                    background-color: transparent;
-                    font-size: 18px;
-                }
-
-                .product-info { /*內含left , right 二個div*/
-                    width: 100%;
-                    display: flex;
-                    justify-content: center;
-                    align-items: start;
-                    /* border: 1px solid #ccc; */
-                }
-
-                    .product-info .left {
-                        height: 450px;
-                        padding-bottom: 20px;
-                        display: flex;
-                        flex-direction: column;
-                        justify-content: center;
-                        align-items: start;
-                        /* border: 1px solid #ccc; */
-                    }
-
-                    .product-info .right {
-                        padding-top: 20px;
-                    }
-
-                .productPhoto {
-                    padding-bottom: 25px;
-                    object-fit: cover; /*contain 符合指定的寬高比例*/
-                    height: 320px;
-                }
-
-                .product-info .images {
-                    width: 100%;
-                    height: 70px;
-                    display: flex;
-                    flex-direction: column;
-                    justify-content: center;
-                    align-items: start;
-                    overflow-y: hidden;
-                    overflow-x: auto;
-                    border: 1px solid #ccc;
-                }
-
-                .product-info li img {
-                    width: 65px;
-                    margin-left: 2px;
-                }
-
-                .product-info .images ul {
-                    list-style: none; /* 不顯示項目符號 */
-                    width: 100%;
-                    display: flex;
-                    justify-content: center;
-                    align-items: center;
-                    cursor: pointer;
-                    border: 1px solid #ccc;
-                }
-            </style>
+@section css{
+    <style>
+        .has-background-image {
+            background-image: url(/images/TitleImg.jpg);
+            height: 200px;
         }
 
-        @section js {
-            <script>
-                $(function () {
-                    $('.product-info ul li img').click(function () {
-                        let imgSrc = $(this).attr('src');
-                        $('.productPhoto').attr('src', imgSrc);
-                    })
-                })
-            </script>
+        @@media screen and (min-width: 1200px) {
+            .body-content {
+                padding: 5px;
+                margin: 0px;
+                max-width: none;
+            }
         }
+
+        .pageTitle {
+            box-sizing: border-box;
+            color: black;
+            font-size: 50px;
+            font-weight: bold;
+            padding-top: 60px;
+            padding-left: 15%;
+        }
+
+        h3 {
+            background-color: rgb(226, 252, 252);
+        }
+
+        .otherProduct {
+            max-width: 250px;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        @@media (max-width: 575px) {
+            .otherProduct {
+                max-width: 180px;
+                height: 100%;
+                object-fit: cover;
+            }
+        }
+
+        .otherProducts h6 {
+            font-weight: 700;
+            color: #333;
+            margin-bottom: 15px;
+            font-size: 1.3rem;
+        }
+
+        .breadcrumb {
+            background-color: transparent;
+            font-size: 18px;
+        }
+
+        .product-info { /*內含left , right 二個div*/
+            width: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: start;
+            /* border: 1px solid #ccc; */
+        }
+
+            .product-info .left {
+                height: 450px;
+                padding-bottom: 20px;
+                display: flex;
+                flex-direction: column;
+                justify-content: center;
+                align-items: start;
+                /* border: 1px solid #ccc; */
+            }
+
+            .product-info .right {
+                padding-top: 20px;
+            }
+
+        .productPhoto {
+            padding-bottom: 25px;
+            object-fit: cover; /*contain 符合指定的寬高比例*/
+            height: 320px;
+        }
+
+        .product-info .images {
+            width: 100%;
+            height: 70px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: start;
+            overflow-y: hidden;
+            overflow-x: auto;
+            border: 1px solid #ccc;
+        }
+
+        .product-info li img {
+            width: 65px;
+            margin-left: 2px;
+        }
+
+        .product-info .images ul {
+            list-style: none; /* 不顯示項目符號 */
+            width: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            cursor: pointer;
+            border: 1px solid #ccc;
+        }
+    </style>
+}
+
+@section js {
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script>
+        $(function () {
+
+            // 切換房間圖片
+            $('.product-info ul li img').click(function () {
+                let imgSrc = $(this).attr('src');
+                $('.productPhoto').attr('src', imgSrc);
+            })
+
+            //評價長條圖
+            const ctx = $("#myChart");
+
+            new Chart(ctx, {
+                type: 'bar',
+                data: {
+                    labels: ['5分', '4分', '3分', '2分', '1分'],
+                    datasets: [{
+                        label: '評價數量',
+                        data: [@fiveStarCount, @fourStarCount, @threeStarCount, @twoStarCount, @oneStarCount],
+                        backgroundColor: [
+                            'rgba(255, 99, 132, 0.2)',
+                            'rgba(255, 159, 64, 0.2)',
+                            'rgba(255, 205, 86, 0.2)',
+                            'rgba(75, 192, 192, 0.2)',
+                            'rgba(54, 162, 235, 0.2)'
+                        ],
+                        borderColor: [
+                            'rgb(255, 99, 132)',
+                            'rgb(255, 159, 64)',
+                            'rgb(255, 205, 86)',
+                            'rgb(75, 192, 192)',
+                            'rgb(54, 162, 235)'
+                        ],
+                        borderWidth: 1
+                    }]
+                },
+                options: {
+                    responsive: false,
+                    scales: {
+                        y: {                          
+                            beginAtZero: true,
+                                ticks: {
+                                stepSize: 1
+                            }
+                        }
+                    }
+                }
+            })
+        });                  
+    </script>
+}
 

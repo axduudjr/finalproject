@@ -46,7 +46,7 @@ namespace Final_ASP_04.Controllers
 				OrderTime = o.OrderTime,
 				Price = o.Price,
 				Status = o.Status,
-				RoomPicFile = o.Room.RoomType.FileName,
+				RoomPicFile = o.Room.FileName,
 				IsCommented = db.Comments.Any(c => c.OrderId == o.Id)
 			}).ToList();
 
@@ -117,7 +117,9 @@ namespace Final_ASP_04.Controllers
 				bool isOverlap = db.Orders.Any(o =>
 									o.RoomId == orderInDb.RoomId &&
 									o.BranchId == orderInDb.BranchId &&
-									o.StartDateTime < vm.EndDate && o.EndDateTime > vm.StartDate);
+									o.StartDateTime < vm.EndDate && o.EndDateTime > vm.StartDate &&
+									o.Status != "已取消"
+									);
 
 				if (isOverlap)
 				{

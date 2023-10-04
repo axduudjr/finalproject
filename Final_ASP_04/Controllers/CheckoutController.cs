@@ -113,7 +113,7 @@ namespace Final_ASP_04.Controllers
 				Price = order.Price,
 				PaymentType = order.PaymentType.Name,
 				Status = order.Status,
-				RoomPicFile = order.Room.RoomType.FileName
+				RoomPicFile = order.Room.FileName
 			};
 			return View(vm);
 		}

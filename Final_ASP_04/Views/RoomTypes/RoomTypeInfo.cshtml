@@ -47,12 +47,15 @@
                 <div class="left">
                     <img src="/images/@Html.DisplayFor(model => model.FileName)" width="100%" class="productPhoto" alt="">
                     <div class="images">
-                        <ul>
-                            <li><img src="/images/@Model.FileName" alt=""></li>
-                            <li><img src="/images/@roomTypePictures[0].FileName" alt=""></li>
-                            <li><img src="/images/@roomTypePictures[1].FileName" alt=""></li>
-                            <li><img src="/images/@roomTypePictures[2].FileName" alt=""></li>
-                        </ul>
+                        @if (roomTypePictures.Count > 0)
+                        {
+                            <ul>
+                                <li><img src="/images/@Model.FileName" alt=""></li>
+                                <li><img src="/images/@roomTypePictures[0].FileName" alt=""></li>
+                                <li><img src="/images/@roomTypePictures[1].FileName" alt=""></li>
+                                <li><img src="/images/@roomTypePictures[2].FileName" alt=""></li>
+                            </ul>
+                        }
                     </div>
                 </div>
             </div>

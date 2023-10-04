@@ -32,7 +32,7 @@ namespace Final_ASP_04.Models.Repositories
 		{
 			var db = new AppDbContext();
 
-			var orders = db.Orders.Where(x => x.RoomId == roomId && x.StartDateTime <= checkOut && x.EndDateTime >= checkIn).ToList();
+			var orders = db.Orders.Where(x => x.RoomId == roomId && x.StartDateTime <= checkOut && x.EndDateTime >= checkIn && x.Status != "已取消").ToList();
 
 			return orders;
 		}

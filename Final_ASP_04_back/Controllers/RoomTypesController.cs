@@ -7,6 +7,7 @@ using System.Web;
 using System.Web.Mvc;
 using System.Data.Entity;
 using Final_ASP_04_back.Models.ViewModels;
+using System.IO;
 
 namespace Final_ASP_04_back.Controllers
 {
@@ -62,17 +63,17 @@ namespace Final_ASP_04_back.Controllers
 			{
 				fileName = UploadFileHelper.Save(myfile, path, validators);
 
-				//// copy一份到前台網站的資料夾
-				//string sourceFullPath = Path.Combine(path, fileName);
+				// copy一份到前台網站的資料夾
+				string sourceFullPath = Path.Combine(path, fileName);
 
-				//// string dest = @"c:\MyFiles\";
-				//string dest = System.Configuration
-				//    .ConfigurationManager
-				//    .AppSettings["frontSiteRootPath"];
+				// string dest = @"c:\MyFiles\";
+				string dest = System.Configuration
+					.ConfigurationManager
+					.AppSettings["frontSiteRootPath"];
 
-				//string destFullPath = Path.Combine(dest, fileName);
+				string destFullPath = Path.Combine(dest, fileName);
 
-				//System.IO.File.Copy(sourceFullPath, destFullPath, true);
+				System.IO.File.Copy(sourceFullPath, destFullPath, true);
 
 			}
 			catch (Exception ex)
